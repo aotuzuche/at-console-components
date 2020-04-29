@@ -1,15 +1,16 @@
-import './style.scss'
+import './style'
 import React from 'react'
 import cn from 'classname'
-import { Layout, Menu, Icon, message } from 'antd'
-import { findMenuInfo, findMenuPathIds } from '../../utils/menuHandles'
-import { isFalse } from '../../utils/arraryHelp'
+import { Layout, Menu, message } from 'antd'
+
+import { findMenuInfo, findMenuPathIds } from '../utils/menuHandles'
+import { isFalse } from '../utils/arraryHelp'
 
 const { Sider } = Layout
 const { SubMenu } = Menu
 
 class AsideView extends React.PureComponent {
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(nextProps: any, prevState: any) {
     const { defaultMenu, list } = nextProps
     if (list && (defaultMenu !== prevState.defaultMenu || list !== prevState.list)) {
       const currentMenu = findMenuInfo(defaultMenu, list, 'url')

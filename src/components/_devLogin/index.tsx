@@ -1,5 +1,5 @@
 import './style.scss'
-import React from 'react'
+import * as React from 'react'
 import { Input, Form, Button, message, Spin } from 'antd'
 import { httpConsole, setConsoleToken } from 'auto-libs'
 
@@ -11,56 +11,58 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 12 },
 }
 
-class View extends React.PureComponent {
-  constructor(props) {
+interface IProps {
+  form: any
+  history: any
+}
+
+interface IState {
+  loading: boolean
+}
+
+class View extends React.PureComponent<IProps, IState> {
+  constructor(props: IProps) {
     super(props)
 
     this.state = {
       loading: false,
     }
   }
-  onSubmit = e => {
-    e.preventDefault()
 
-    this.props.form.validateFields(async (err, values) => {
-      try {
-        this.setState({
-          loading: true,
-        })
-        if (err) {
-          message.error('系统异常')
-          return
-        }
-        const { username, password } = values
+  onSubmit = async (values: any) => {
+    try {
+      this.setState({
+        loading: true,
+      })
+      const { username, password } = values
 
-        const res = await httpConsole({
-          url: '/casService/login',
-          method: 'POST',
-          data: {
-            username,
-            password,
-          },
-        })
+      const res: any = await httpConsole({
+        url: '/casService/login',
+        method: 'POST',
+        data: {
+          username,
+          password,
+        },
+      })
 
-        const { token, ...userInfo } = res
+      const { token, ...userInfo } = res
 
-        setConsoleToken(token)
-        localStorage['_app_console_userinfo_'] = JSON.stringify(userInfo)
+      setConsoleToken(token)
+      localStorage['_app_console_userinfo_'] = JSON.stringify(userInfo)
 
-        // 兼容老的
-        localStorage['auto_system_token'] = token // 兼容老的项目token
-        localStorage['auto_system_userData'] = JSON.stringify(userInfo)
+      // 兼容老的
+      localStorage['auto_system_token'] = token // 兼容老的项目token
+      localStorage['auto_system_userData'] = JSON.stringify(userInfo)
 
-        this.props.history.replace('/')
-        window.location.reload()
-      } catch (e) {
-        message.error(e.message || '系统异常')
-      } finally {
-        this.setState({
-          loading: false,
-        })
-      }
-    })
+      this.props.history.replace('/')
+      window.location.reload()
+    } catch (e) {
+      message.error(e.message || '系统异常')
+    } finally {
+      this.setState({
+        loading: false,
+      })
+    }
   }
   render() {
     const { getFieldDecorator } = this.props.form
@@ -76,7 +78,7 @@ class View extends React.PureComponent {
           {...layout}
           className="devlogin-form"
           initialValues={{ remember: true }}
-          onSubmit={this.onSubmit}
+          onFinish={this.onSubmit}
         >
           <Form.Item label="Username" name="username">
             {getFieldDecorator('username', {
@@ -101,4 +103,4 @@ class View extends React.PureComponent {
   }
 }
 
-export default Form.create()(View)
+export default View

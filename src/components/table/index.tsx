@@ -3,7 +3,7 @@ import _ from 'lodash'
 import { httpConsole } from 'auto-libs'
 import { Table, message } from 'antd'
 import qs from 'qs'
-import ignore from '../../utils/ignoreProps'
+import ignore from '../utils/ignoreProps'
 import './style'
 
 /**

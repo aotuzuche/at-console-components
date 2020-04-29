@@ -1,4 +1,4 @@
-import _DevLogin_ from './src/components/_devLogin'
+import DevLogin from './src/components/_devLogin'
 import AliyunOSSUpload from './src/components/aliyunOSSUpload'
 import Aside from './src/components/aside'
 import Fetch from './src/components/fetch'
@@ -9,4 +9,4 @@ import SearchBar from './src/components/searchBar'
 import Table from './src/components/table'
 import Upload from './src/components/upload'
 
-export { _DevLogin_, AliyunOSSUpload, Aside, Fetch, Footer, Form, Header, SearchBar, Table, Upload }
+export { DevLogin, AliyunOSSUpload, Aside, Fetch, Footer, Form, Header, SearchBar, Table, Upload }

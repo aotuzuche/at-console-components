@@ -1,6 +1,17 @@
 import React from 'react'
-import { Upload, message, Button, Icon } from 'antd'
+import { Upload, message, Button } from 'antd'
+import { UploadOutlined } from '@ant-design/icons'
 import { httpConsole } from 'auto-libs'
+
+interface IProps {
+  ticket: any
+  value: any
+  onChange: (params: any) => void
+}
+
+interface IState {
+  OSSData: any
+}
 
 /**
  * Aliyun OSS 上传组件
@@ -23,7 +34,7 @@ import { httpConsole } from 'auto-libs'
       signature: 'ZGFob25nc2hhbw==',
     }
  */
-export default class AliyunOSSUpload extends React.Component {
+export default class AliyunOSSUpload extends React.Component<IProps, IState> {
   state = {
     OSSData: {},
   }
@@ -45,47 +56,48 @@ export default class AliyunOSSUpload extends React.Component {
     }
   }
 
-  onChange = ({ fileList }) => {
+  onChange = (obj: any) => {
     const { onChange } = this.props
+    const { fileList } = obj
     if (onChange) {
       onChange([...fileList])
     }
   }
 
-  onRemove = file => {
+  onRemove = (file: any) => {
     const { value, onChange } = this.props
 
-    const files = value.filter(v => v.url !== file.url)
+    const files = value.filter((v: any) => v.url !== file.url)
 
     if (onChange) {
       onChange(files)
     }
   }
 
-  transformFile = file => {
+  transformFile = (file: any) => {
     const { OSSData } = this.state
 
     const suffix = file.name.slice(file.name.lastIndexOf('.'))
     const filename = Date.now() + suffix
-    file.url = OSSData.dir + filename
+    file.url = (OSSData as any).dir + filename
 
     return file
   }
 
-  getExtraData = file => {
+  getExtraData = (file: any) => {
     const { OSSData } = this.state
 
     return {
       key: file.url,
-      OSSAccessKeyId: OSSData.accessId,
-      policy: OSSData.policy,
-      Signature: OSSData.signature,
+      OSSAccessKeyId: (OSSData as any).accessId,
+      policy: (OSSData as any).policy,
+      Signature: (OSSData as any).signature,
     }
   }
 
   beforeUpload = async () => {
     const { OSSData } = this.state
-    const expire = OSSData.expire * 1000
+    const expire = (OSSData as any).expire * 1000
 
     if (expire < Date.now()) {
       await this.init()
@@ -94,26 +106,28 @@ export default class AliyunOSSUpload extends React.Component {
   }
 
   render() {
-    const { value, onChange, ticket, children, ...otherProps } = this.props
-    const props = {
-      name: 'file',
-      fileList: value,
-      action: this.state.OSSData.host,
-      onChange: this.onChange,
-      onRemove: this.onRemove,
-      transformFile: this.transformFile,
-      data: this.getExtraData,
-      beforeUpload: this.beforeUpload,
-      ...otherProps,
-    }
-    return (
-      <Upload {...props}>
-        {children || (
-          <Button>
-            <Icon type="upload" /> 上传
-          </Button>
-        )}
-      </Upload>
-    )
+    // const { value, onChange, ticket, children, ...otherProps } = this.props
+    // const { OSSData } = this.state
+    // const props = {
+    //   name: 'file',
+    //   fileList: value,
+    //   action: (OSSData as any).host,
+    //   onChange: this.onChange,
+    //   onRemove: this.onRemove,
+    //   transformFile: this.transformFile,
+    //   data: this.getExtraData,
+    //   beforeUpload: this.beforeUpload,
+    //   ...otherProps,
+    // }
+    // return (
+    //   <Upload {...props}>
+    //     {children || (
+    //       <Button>
+    //         <UploadOutlined /> 上传
+    //       </Button>
+    //     )}
+    //   </Upload>
+    // )
+    return null
   }
 }
