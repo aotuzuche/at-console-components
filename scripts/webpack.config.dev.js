@@ -62,6 +62,17 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.jsx', '.js', '.scss', '.css', '.mass'],
   },
   devServer: {
+    historyApiFallback: true,
+    proxy: {
+      '/casService': {
+        target: 'http://test1-web.autozuche.com/',
+        // pathRewrite: {
+        //   '^/casService/': '/casService/',
+        // },
+        changeOrigin: true,
+        secure: false,
+      },
+    },
     port: 3001,
   },
 }

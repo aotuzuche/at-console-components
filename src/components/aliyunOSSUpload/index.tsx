@@ -1,6 +1,6 @@
 import React from 'react'
 import { Upload, message, Button } from 'antd'
-import { UploadOutlined } from '@ant-design/icons'
+import { Icon } from '@ant-design/compatible'
 import { httpConsole } from 'auto-libs'
 
 interface IProps {
@@ -35,7 +35,7 @@ interface IState {
     }
  */
 export default class AliyunOSSUpload extends React.Component<IProps, IState> {
-  state = {
+  state: IState = {
     OSSData: {},
   }
 
@@ -79,7 +79,7 @@ export default class AliyunOSSUpload extends React.Component<IProps, IState> {
 
     const suffix = file.name.slice(file.name.lastIndexOf('.'))
     const filename = Date.now() + suffix
-    file.url = (OSSData as any).dir + filename
+    file.url = OSSData.dir + filename
 
     return file
   }
@@ -89,45 +89,43 @@ export default class AliyunOSSUpload extends React.Component<IProps, IState> {
 
     return {
       key: file.url,
-      OSSAccessKeyId: (OSSData as any).accessId,
-      policy: (OSSData as any).policy,
-      Signature: (OSSData as any).signature,
+      OSSAccessKeyId: OSSData.accessId,
+      policy: OSSData.policy,
+      Signature: OSSData.signature,
     }
   }
 
   beforeUpload = async () => {
     const { OSSData } = this.state
-    const expire = (OSSData as any).expire * 1000
+    const expire = OSSData.expire * 1000
 
     if (expire < Date.now()) {
       await this.init()
     }
-    return true
   }
 
   render() {
-    // const { value, onChange, ticket, children, ...otherProps } = this.props
-    // const { OSSData } = this.state
-    // const props = {
-    //   name: 'file',
-    //   fileList: value,
-    //   action: (OSSData as any).host,
-    //   onChange: this.onChange,
-    //   onRemove: this.onRemove,
-    //   transformFile: this.transformFile,
-    //   data: this.getExtraData,
-    //   beforeUpload: this.beforeUpload,
-    //   ...otherProps,
-    // }
-    // return (
-    //   <Upload {...props}>
-    //     {children || (
-    //       <Button>
-    //         <UploadOutlined /> 上传
-    //       </Button>
-    //     )}
-    //   </Upload>
-    // )
-    return null
+    const { value, onChange, ticket, children, ...otherProps } = this.props
+    const { OSSData } = this.state
+    const props = {
+      name: 'file',
+      fileList: value,
+      action: OSSData.host,
+      onChange: this.onChange,
+      onRemove: this.onRemove,
+      transformFile: this.transformFile,
+      data: this.getExtraData,
+      beforeUpload: this.beforeUpload,
+      ...otherProps,
+    }
+    return (
+      <Upload {...props}>
+        {children || (
+          <Button>
+            <Icon type="upload" /> 上传
+          </Button>
+        )}
+      </Upload>
+    )
   }
 }

@@ -12,7 +12,6 @@ const tailLayout = {
 }
 
 interface IProps {
-  form: any
   history: any
 }
 
@@ -65,7 +64,6 @@ class View extends React.PureComponent<IProps, IState> {
     }
   }
   render() {
-    const { getFieldDecorator } = this.props.form
     const { loading } = this.state
     return (
       <div className="devlogin-page">
@@ -80,16 +78,20 @@ class View extends React.PureComponent<IProps, IState> {
           initialValues={{ remember: true }}
           onFinish={this.onSubmit}
         >
-          <Form.Item label="Username" name="username">
-            {getFieldDecorator('username', {
-              rules: [{ required: true, message: 'Please input your username!' }],
-            })(<Input />)}
+          <Form.Item
+            label="Username"
+            name="username"
+            rules={[{ required: true, message: 'Please input your username!' }]}
+          >
+            <Input />
           </Form.Item>
 
-          <Form.Item label="Password" name="password">
-            {getFieldDecorator('password', {
-              rules: [{ required: true, message: 'Please input your password!' }],
-            })(<Input.Password />)}
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[{ required: true, message: 'Please input your password!' }]}
+          >
+            <Input.Password />
           </Form.Item>
 
           <Form.Item {...tailLayout}>

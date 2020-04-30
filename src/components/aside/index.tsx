@@ -1,15 +1,33 @@
 import './style'
 import React from 'react'
-import cn from 'classname'
+import cn from 'classnames'
 import { Layout, Menu, message } from 'antd'
 
-import { findMenuInfo, findMenuPathIds } from '../utils/menuHandles'
-import { isFalse } from '../utils/arraryHelp'
+import { findMenuInfo, findMenuPathIds } from '../_utils/menuHandles'
+import { isFalse } from '../_utils/arraryHelp'
 
 const { Sider } = Layout
 const { SubMenu } = Menu
 
-class AsideView extends React.PureComponent {
+interface IState {
+  selectedKeys: Array<string>
+  openKeys: Array<string>
+  list: any
+  defaultMenu: any
+}
+
+interface IProps {
+  breakpoint: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+  collapsed: boolean
+  screens: any
+  title: string
+  fixedAside: any
+  onMaskerClick: (collapsed: boolean, fixedAside: boolean) => void
+  onMenuHandle: (url: string) => void
+  onCollapse: (collapsed: boolean) => void
+}
+
+class AsideView extends React.PureComponent<IProps, IState> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {
     const { defaultMenu, list } = nextProps
     if (list && (defaultMenu !== prevState.defaultMenu || list !== prevState.list)) {
@@ -45,7 +63,9 @@ class AsideView extends React.PureComponent {
     return null
   }
 
-  constructor(props) {
+  maskerRef = null
+
+  constructor(props: IProps) {
     super(props)
 
     this.state = {
@@ -61,7 +81,7 @@ class AsideView extends React.PureComponent {
   componentDidMount() {
     this.maskerRef.current.addEventListener(
       'touchmove',
-      e => {
+      (e: any) => {
         e.preventDefault()
       },
       { passive: false },
@@ -74,7 +94,7 @@ class AsideView extends React.PureComponent {
   }
 
   // 菜单点击事件
-  onMenuHandle = e => {
+  onMenuHandle = (e: any) => {
     try {
       const _current = findMenuInfo(e.key, this.state.list)
       if (_current) {
@@ -86,7 +106,7 @@ class AsideView extends React.PureComponent {
   }
 
   // 菜单选中
-  onMenuSelect = e => {
+  onMenuSelect = (e: any) => {
     const selectedKeys = e.selectedKeys
     this.setState({
       selectedKeys,
@@ -94,12 +114,12 @@ class AsideView extends React.PureComponent {
   }
 
   // 自动监测收起或者关闭菜单
-  onCollapse = collapsed => {
+  onCollapse = (collapsed: boolean) => {
     this.props.onCollapse(collapsed)
   }
 
   // 递归菜单
-  recursionMenu = obj => {
+  recursionMenu = (obj: any) => {
     if (!(obj instanceof Array)) {
       return null
     }
@@ -109,7 +129,7 @@ class AsideView extends React.PureComponent {
       if (item.children instanceof Array) {
         // 如果所有的子菜单都是隐藏形式的话
         // 就认为该菜单没有子菜单
-        hasSub = item.children.some(res => !isFalse(res.icon))
+        hasSub = item.children.some((res: any) => !isFalse(res.icon))
       }
 
       if (hasSub) {
@@ -118,7 +138,7 @@ class AsideView extends React.PureComponent {
             key={item.id}
             title={
               <span>
-                {item.icon ? <Icon type={item.icon} /> : <Icon type="folder" />}
+                {/* {item.icon ? <Icon type={item.icon} /> : <Icon type="folder" />} */}
                 <span>{item.name}</span>
               </span>
             }
@@ -135,7 +155,7 @@ class AsideView extends React.PureComponent {
 
       return (
         <Menu.Item key={item.id}>
-          {item.icon ? <Icon type={item.icon} /> : <Icon type="file" />}
+          {/* {item.icon ? <Icon type={item.icon} /> : <Icon type="file" />} */}
           <span>{item.name}</span>
         </Menu.Item>
       )
@@ -143,8 +163,8 @@ class AsideView extends React.PureComponent {
   }
 
   render() {
-    const { breakpoint = 'lg', collapsed, screens, fixedAside } = this.props
-    const { list } = this.state
+    const { breakpoint = 'lg', collapsed, screens, fixedAside, title } = this.props
+    const { list, openKeys, selectedKeys } = this.state
     const siderClassName = cn('auto-sider-wrapper', {
       breakpoint: !screens.md,
       fixedAside: !screens.md && fixedAside,
@@ -165,12 +185,12 @@ class AsideView extends React.PureComponent {
           onCollapse={this.onCollapse}
         >
           <div className="auto-logo">
-            <img src="//carphoto.aotuzuche.com/web/images/webSystem/icon_logo.png" alt="logo" />
-            <h1>{this.props.title}</h1>
+            <img src="https://cdn.atzuche.com/static/images/icon-logo-green.png" alt="logo" />
+            <h1>{title}</h1>
           </div>
           <Menu
-            openKeys={this.state.openKeys}
-            selectedKeys={this.state.selectedKeys}
+            openKeys={openKeys}
+            selectedKeys={selectedKeys}
             mode="inline"
             theme="dark"
             onClick={this.onMenuHandle}
