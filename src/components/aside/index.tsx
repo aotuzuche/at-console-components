@@ -2,7 +2,7 @@ import './style'
 import React from 'react'
 import cn from 'classnames'
 import { Layout, Menu, message } from 'antd'
-
+import { Icon } from '@ant-design/compatible'
 import { findMenuInfo, findMenuPathIds } from '../_utils/menuHandles'
 import { isFalse } from '../_utils/arraryHelp'
 
@@ -17,11 +17,13 @@ interface IState {
 }
 
 interface IProps {
-  breakpoint: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+  breakpoint?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
   collapsed: boolean
   screens: any
-  title: string
+  title?: string
   fixedAside: any
+  defaultMenu: string
+  list: Array<any>
   onMaskerClick: (collapsed: boolean, fixedAside: boolean) => void
   onMenuHandle: (url: string) => void
   onCollapse: (collapsed: boolean) => void
@@ -97,6 +99,7 @@ class AsideView extends React.PureComponent<IProps, IState> {
   onMenuHandle = (e: any) => {
     try {
       const _current = findMenuInfo(e.key, this.state.list)
+      console.log(e.key, this.state)
       if (_current) {
         this.props.onMenuHandle(_current.url)
       }
@@ -138,7 +141,7 @@ class AsideView extends React.PureComponent<IProps, IState> {
             key={item.id}
             title={
               <span>
-                {/* {item.icon ? <Icon type={item.icon} /> : <Icon type="folder" />} */}
+                {item.icon ? <Icon type={item.icon} /> : <Icon type="folder" />}
                 <span>{item.name}</span>
               </span>
             }
@@ -155,7 +158,7 @@ class AsideView extends React.PureComponent<IProps, IState> {
 
       return (
         <Menu.Item key={item.id}>
-          {/* {item.icon ? <Icon type={item.icon} /> : <Icon type="file" />} */}
+          {item.icon ? <Icon type={item.icon} /> : <Icon type="file" />}
           <span>{item.name}</span>
         </Menu.Item>
       )

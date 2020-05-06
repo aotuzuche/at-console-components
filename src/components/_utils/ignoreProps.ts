@@ -1,11 +1,11 @@
-function isType(target, type) {
+function isType(target: any, type: any) {
   let targetType = {}.toString.call(target).toLowerCase()
   type = `[object ${type}]`.toLowerCase()
 
   return targetType === type
 }
 
-function ignore(target, rule) {
+function ignore(target: any, rule: any) {
   if (!target) {
     throw new TypeError('"target" is null or not defined.')
   } else if (!rule) {
