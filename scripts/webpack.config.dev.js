@@ -8,6 +8,10 @@ const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-web
 module.exports = {
   entry: path.join(__dirname, '../examples/src/index.tsx'),
   mode: 'development',
+  output: {
+    filename: 'js/main.js',
+    publicPath: '/',
+  },
   module: {
     rules: [
       {
@@ -66,13 +70,11 @@ module.exports = {
     proxy: {
       '/casService': {
         target: 'http://test1-web.autozuche.com/',
-        // pathRewrite: {
-        //   '^/casService/': '/casService/',
-        // },
-        changeOrigin: true,
-        secure: false,
       },
     },
+    open: true,
     port: 3001,
+    contentBase: './dist',
+    publicPath: '/',
   },
 }

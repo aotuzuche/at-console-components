@@ -3,8 +3,8 @@ import React from 'react'
 import cn from 'classnames'
 import { Layout, Menu, message } from 'antd'
 import { Icon } from '@ant-design/compatible'
-import { findMenuInfo, findMenuPathIds } from '../_utils/menuHandles'
-import { isFalse } from '../_utils/arraryHelp'
+import { findMenuInfo, findMenuPathIds } from '../utils/menuHandles'
+import { isFalse } from '../utils/arraryHelp'
 
 const { Sider } = Layout
 const { SubMenu } = Menu
@@ -13,7 +13,7 @@ interface IState {
   selectedKeys: Array<string>
   openKeys: Array<string>
   list: any
-  defaultMenu: any
+  defaultMenu?: any
 }
 
 interface IProps {
@@ -168,26 +168,26 @@ class AsideView extends React.PureComponent<IProps, IState> {
   render() {
     const { breakpoint = 'lg', collapsed, screens, fixedAside, title } = this.props
     const { list, openKeys, selectedKeys } = this.state
-    const siderClassName = cn('auto-sider-wrapper', {
+    const siderClassName = cn('at-sider-wrapper', {
       breakpoint: !screens.md,
       fixedAside: !screens.md && fixedAside,
     })
     return (
       <div className={siderClassName}>
         <div
-          className="auto-sider-wrapper-masker"
+          className="at-sider-wrapper-masker"
           onClick={this.onAsideMaskerClick}
           ref={this.maskerRef}
         />
         <Sider
-          className="auto-sider"
+          className="at-sider"
           width="256"
           collapsedWidth="80"
           breakpoint={breakpoint}
           collapsed={collapsed}
           onCollapse={this.onCollapse}
         >
-          <div className="auto-logo">
+          <div className="at-logo">
             <img src="https://cdn.atzuche.com/static/images/icon-logo-green.png" alt="logo" />
             <h1>{title}</h1>
           </div>

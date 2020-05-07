@@ -3,7 +3,7 @@ import { Button } from 'antd'
 import { ButtonProps } from 'antd/lib/button/button'
 interface IProps {
   children: any
-  onClick: () => void
+  onClick?: () => void
 }
 
 export default function ATButton(props: IProps & ButtonProps) {

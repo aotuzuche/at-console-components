@@ -103,22 +103,18 @@ class HeaderView extends React.PureComponent<IProps, IState> {
   render() {
     const { state, props } = this
     const { breakpoint } = props
-    const className = cn('auto-header-bar', {
+    const className = cn('at-header-bar', {
       breakpoint: breakpoint,
     })
     return (
       <Layout.Header className={className}>
         {breakpoint && (
-          <div className="auto-header-logo">
+          <div className="at-header-logo">
             <img src="https://cdn.atzuche.com/static/images/icon-logo-green.png" alt="logo" />
           </div>
         )}
-        <Icon
-          type={'menu-' + state.triggerIcon}
-          onClick={this.onTrigger}
-          className="auto-trigger"
-        />
-        <div className="auto-userInfo">
+        <Icon type={'menu-' + state.triggerIcon} onClick={this.onTrigger} className="at-trigger" />
+        <div className="at-userInfo">
           <p>
             {this.state.hello}
             <strong>{this.state.loginName}</strong>

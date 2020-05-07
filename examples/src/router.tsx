@@ -13,15 +13,11 @@ interface IRConfig {
 const RoutersConfig: Array<IRConfig> = [
   {
     url: '/',
-    component: React.lazy(() => import('./pages/index/')),
+    component: React.lazy(() => import('./pages/home/')),
   },
   {
-    url: '/devLogin',
+    url: '/system/login',
     component: React.lazy(() => import('./pages/devLogin/')),
-  },
-  {
-    url: '/aliyunOSSUpload',
-    component: React.lazy(() => import('./pages/upload/')),
   },
 ]
 

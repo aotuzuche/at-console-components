@@ -3,8 +3,11 @@ import React from 'react'
 import { Layout } from 'antd'
 import ResponsiveObserve from 'antd/lib/_util/responsiveObserve'
 import Aside from '../../../../src/components/aside'
-import AtButton from '../../../../src/components/button'
 import AtFooter from '../../../../src/components/footer'
+import AtHeader from '../../../../src/components/header'
+import Routes from '../../router'
+
+const { Content } = Layout
 
 interface IState {
   collapsed: boolean
@@ -13,7 +16,7 @@ interface IState {
   screens: any
 }
 
-export default class PageDemo extends React.PureComponent<any, IState> {
+class PageDemo extends React.PureComponent<any, IState> {
   mediascreen = null
 
   constructor(props: any) {
@@ -48,16 +51,15 @@ export default class PageDemo extends React.PureComponent<any, IState> {
 
   // 菜单点击回调
   onMenuHandle = (path: string) => {
-    console.log(1)
     this.props.history.push(path)
     // this.updateBreadcrumb(path)
   }
 
   // 侧边栏回调
-  onCollapse = (e: boolean) => {
+  onCollapse = (e: boolean, breakpoint?: boolean) => {
     this.setState({
       collapsed: e,
-      // fixedAside: breakpoint && !e,
+      fixedAside: breakpoint && !e,
     })
   }
 
@@ -99,24 +101,21 @@ export default class PageDemo extends React.PureComponent<any, IState> {
           onMenuHandle={this.onMenuHandle}
           collapsed={collapsed}
           onCollapse={this.onCollapse}
-          defaultMenu={this.props.location.pathname}
+          defaultMenu={window.location.pathname}
           screens={screens}
           fixedAside={fixedAside}
           onMaskerClick={this.onAsideMaskerClick}
         />
         <Layout>
-          <AtButton
-            size="small"
-            style={{ width: '100px' }}
-            ghost={true}
-            type="primary"
-            onClick={this.onBtnClick}
-          >
-            1234
-          </AtButton>
+          <AtHeader breakpoint={!screens.md} collapsed={collapsed} onCollapse={this.onCollapse} />
+          <Content style={{ padding: '20px' }}>
+            <Routes />
+          </Content>
           <AtFooter />
         </Layout>
       </Layout>
     )
   }
 }
+
+export default PageDemo
