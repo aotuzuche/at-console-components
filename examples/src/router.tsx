@@ -1,42 +1,16 @@
 import React from 'react'
-import { ConfigProvider } from 'antd'
-import { BrowserRouter, Switch, Route, Redirect, Router } from 'react-router-dom'
-import zh_CN from 'antd/lib/locale-provider/zh_CN'
-import { createBrowserHistory } from 'history'
-import PageIndex from './pages/index/index'
-
-interface IRConfig {
-  url: string
-  component: any
-}
-
-const RoutersConfig: Array<IRConfig> = [
-  {
-    url: '/',
-    component: React.lazy(() => import('./pages/home/')),
-  },
-  {
-    url: '/system/login',
-    component: React.lazy(() => import('./pages/devLogin/')),
-  },
-]
+import { Switch, Route, Redirect } from 'react-router-dom'
+import PageHome from './pages/home/'
+import PageList from './pages/list/'
+import PageLogin from './pages/devLogin/'
 
 export default () => {
   return (
-    <BrowserRouter>
-      <ConfigProvider locale={zh_CN}>
-        <Router history={createBrowserHistory()}>
-          <React.Suspense fallback={() => <div />}>
-            <Switch>
-              {RoutersConfig.map((item: IRConfig, index: number) => {
-                return <Route path={item.url} exact={true} key={index} component={item.component} />
-              })}
-              <Route path="/" exact={true} component={PageIndex} />
-              <Redirect to="/" />
-            </Switch>
-          </React.Suspense>
-        </Router>
-      </ConfigProvider>
-    </BrowserRouter>
+    <Switch>
+      <Route path="/" exact={true} component={PageHome} />
+      <Route path="/list" exact={true} component={PageList} />
+      <Route path="/system/login" exact={true} component={PageLogin} />
+      <Redirect to="/" />
+    </Switch>
   )
 }

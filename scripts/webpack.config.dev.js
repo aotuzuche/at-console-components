@@ -4,11 +4,14 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin')
-
+function resolve(dir) {
+  return path.join(__dirname, '..', dir)
+}
 module.exports = {
   entry: path.join(__dirname, '../examples/src/index.tsx'),
   mode: 'development',
   output: {
+    path: path.resolve(__dirname, 'dist'),
     filename: 'js/main.js',
     publicPath: '/',
   },
@@ -64,6 +67,9 @@ module.exports = {
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js', '.scss', '.css', '.mass'],
+    alias: {
+      'at-console-components': resolve('components'),
+    },
   },
   devServer: {
     historyApiFallback: true,

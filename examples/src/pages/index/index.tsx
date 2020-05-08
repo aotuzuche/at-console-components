@@ -2,9 +2,9 @@ import './style'
 import React from 'react'
 import { Layout } from 'antd'
 import ResponsiveObserve from 'antd/lib/_util/responsiveObserve'
-import Aside from '../../../../src/components/aside'
-import AtFooter from '../../../../src/components/footer'
-import AtHeader from '../../../../src/components/header'
+import Aside from '../../../../components/aside'
+import AtFooter from '../../../../components/footer'
+import AtHeader from '../../../../components/header'
 import Routes from '../../router'
 
 const { Content } = Layout
@@ -17,7 +17,7 @@ interface IState {
 }
 
 class PageDemo extends React.PureComponent<any, IState> {
-  mediascreen = null
+  mediascreen: any = null
 
   constructor(props: any) {
     super(props)
@@ -51,6 +51,7 @@ class PageDemo extends React.PureComponent<any, IState> {
 
   // 菜单点击回调
   onMenuHandle = (path: string) => {
+    console.log(this.props)
     this.props.history.push(path)
     // this.updateBreadcrumb(path)
   }
@@ -59,7 +60,7 @@ class PageDemo extends React.PureComponent<any, IState> {
   onCollapse = (e: boolean, breakpoint?: boolean) => {
     this.setState({
       collapsed: e,
-      fixedAside: breakpoint && !e,
+      fixedAside: !!breakpoint && !e,
     })
   }
 

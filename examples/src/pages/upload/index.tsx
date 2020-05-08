@@ -1,6 +1,6 @@
 import './style'
 import React from 'react'
-import Upload from '../../../../src/components/aliyunOSSUpload'
+import Upload from '../../../../components/aliyunOSSUpload'
 const Page = () => {
   return (
     <div className="page">

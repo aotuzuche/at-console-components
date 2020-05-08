@@ -1,4 +1,16 @@
 {
   "presets": ["atzuche", "@babel/typescript"],
-  "plugins": ["transform-class-properties"]
+  "plugins": [
+    "transform-class-properties",
+    ["import", { "libraryName": "antd" }, "antd"],
+    [
+      "import",
+      {
+        "libraryName": "lodash",
+        "libraryDirectory": "",
+        "camel2DashComponentName": false
+      },
+      "lodash"
+    ]
+  ]
 }
