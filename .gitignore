@@ -9,5 +9,5 @@ dist
 <%= prodPath %>
 .eslintcache
 yarn.lock
-/lib
-/es
+lib
+es
