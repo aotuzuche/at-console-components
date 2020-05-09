@@ -2,9 +2,9 @@ import './style'
 import React from 'react'
 import { Layout } from 'antd'
 import ResponsiveObserve from 'antd/lib/_util/responsiveObserve'
-import Aside from '../../../../components/aside'
-import AtFooter from '../../../../components/footer'
-import AtHeader from '../../../../components/header'
+import Aside from '../../components/aside'
+import AtFooter from '../../components/footer'
+import AtHeader from '../../components/header'
 import Routes from '../../router'
 
 const { Content } = Layout

@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
-import Table from '../../../../components/table'
+import Table from '../../components/table'
 import { DatePicker } from 'antd'
 import { mock } from 'mockjs'
-import { TableColumnsType, TableRef } from '../../../../components/table/'
+import { TableColumnsType, TableRef } from '../../components/table/'
 
 interface User {
   key: number

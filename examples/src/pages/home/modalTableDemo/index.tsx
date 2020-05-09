@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
-import { ModalTable } from 'at-console-components'
+import { ModalTable } from '../../../components'
 
 interface User {
   key: number

@@ -1,0 +1,11 @@
+$prefix: at-operator;
+
+.#{$prefix} {
+  color: #1890ff;
+  display: inline-flex;
+  padding: 0 10px;
+  > * {
+    cursor: pointer;
+    margin-right: 10px;
+  }
+}

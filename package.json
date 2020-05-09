@@ -8,7 +8,6 @@
   "author": "lixuingyun2010@gmail.com",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env webpack-dev-server --host 0.0.0.0 --config scripts/webpack.config.dev.js",
     "build": "yarn clean && yarn build:lib && yarn build:es",
     "build:es": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ./.babelrc components --out-dir es --ignore **/*.test.tsx,**/demo/* --extensions \".ts,.tsx\" && tsc -p tsconfig.json --outDir es",
     "build:lib": "cross-env NODE_ENV=production babel --config-file ./.babelrc components --out-dir lib --ignore **/*.test.tsx,**/demo/* --extensions \".ts,.tsx\" && tsc -p tsconfig.json --outDir lib",

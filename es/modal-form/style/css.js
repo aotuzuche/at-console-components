@@ -1,5 +1,5 @@
-'use strict'
+"use strict";
 
-require('antd/lib/modal/style/css')
+require("antd/lib/modal/style/css");
 
-require('../../form/style/css')
+require("../../form/style/css");

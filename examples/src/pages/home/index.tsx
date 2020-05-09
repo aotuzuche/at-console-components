@@ -1,7 +1,7 @@
 import React from 'react'
 import ModalTable from './modalTableDemo'
 import ModalForm from './modalFormDemo'
-import AsyncButton from '../../../../components/button'
+import AsyncButton from '../../components/button'
 
 const page = () => {
   const aysncButton = async () => {

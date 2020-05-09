@@ -1,0 +1,4 @@
+{
+  "presets": ["atzuche", "@babel/typescript"],
+  "plugins": ["transform-class-properties"]
+}

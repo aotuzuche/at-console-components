@@ -16,9 +16,8 @@
     "skipLibCheck": true,
     "typeRoots": ["./typings"],
     "declaration": true,
-    "rootDir": "./",
+    "rootDir": "./components",
     "emitDeclarationOnly": true
   },
-  "exclude": ["node_modules", "lib", "es", "examples"],
-  "include": ["components", "types"]
+  "exclude": ["node_modules", "lib", "es", "examples"]
 }
