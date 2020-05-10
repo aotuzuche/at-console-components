@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
-import Table from '../../components/table'
 import { DatePicker } from 'antd'
 import { mock } from 'mockjs'
-import { TableColumnsType, TableRef } from '../../components/table/'
+import { Table } from 'at-console-components'
+import { TableColumnsType, TableRef } from '../../../../components/table'
 
 interface User {
   key: number
@@ -16,10 +16,12 @@ interface User {
 export default function BaseDemo() {
   const table = useRef<TableRef>(null)
   const columns: TableColumnsType<User>[] = [
+    // const table: any = null
+    // const columns: any = [
     {
       title: '序号',
       dataIndex: 'index',
-      render: (text, record, index) => index + 1,
+      render: (text: any, record: any, index: number) => index + 1,
     },
     {
       title: '姓名',
@@ -79,7 +81,7 @@ export default function BaseDemo() {
           }, 1000),
         )
       }
-      onChange={(p, f, s) => {
+      onChange={(p: any, f: any, s: any) => {
         // eslint-disable-next-line no-console
         console.log(p, f, s)
       }}

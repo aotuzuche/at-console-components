@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button, DatePicker, Switch } from 'antd'
-import ModalForm from '../../../components/modal-form/index'
+import { ModalForm } from '../../../../../components/index'
 
 export default function ModalFormDemo() {
   const [isShow, setShow] = useState(false)

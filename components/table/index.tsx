@@ -24,7 +24,7 @@ import {
   ColumnType,
 } from 'antd/lib/table/interface'
 import Form, { FormProps } from '../form'
-import AsyncButton from '../button'
+import { Button } from 'at-console-components'
 import { isFunc } from '../utils/is'
 import showPlaceHolder from '../utils/showPlaceholder'
 // import useWindowSize from './useWindowSize'
@@ -265,11 +265,11 @@ function Table<RecordType extends object>(
         >
           <Row justify="end">
             <Space>
-              <AsyncButton onClick={onClickSearch} type="primary" icon={<SearchOutlined />}>
+              <Button onClick={onClickSearch} type="primary" icon={<SearchOutlined />}>
                 搜索
-              </AsyncButton>
-              <AsyncButton onClick={onTableReset}>重置</AsyncButton>
-              <AsyncButton
+              </Button>
+              <Button onClick={onTableReset}>重置</Button>
+              <Button
                 type="link"
                 style={{
                   padding: '0 0 0 4px',
@@ -282,7 +282,7 @@ function Table<RecordType extends object>(
               >
                 {state.isExpand ? '收起' : '展开'}
                 <DownOutlined rotate={state.isExpand ? 180 : 0} />
-              </AsyncButton>
+              </Button>
             </Space>
           </Row>
         </Form>

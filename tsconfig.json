@@ -7,16 +7,16 @@
     "jsx": "react",
     "esModuleInterop": true,
     "sourceMap": true,
-    "baseUrl": "./",
+    "baseUrl": "./components",
     "strict": true,
+    "rootDir": "./components",
     "paths": {
-      "at-console-components": ["components/index.tsx"]
+      "at-console-components": ["./index.tsx"]
     },
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "typeRoots": ["./typings"],
     "declaration": true,
-    "rootDir": "./components",
     "emitDeclarationOnly": true
   },
   "exclude": ["node_modules", "lib", "es", "examples"]

@@ -1,4 +1,3 @@
-import './style'
 import React from 'react'
 import { clearConsoleToken } from 'auto-libs'
 import { Layout } from 'antd'

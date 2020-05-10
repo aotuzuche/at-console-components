@@ -1,11 +1,9 @@
-import './style'
 import React from 'react'
 import cn from 'classnames'
 import { Layout, Menu, message } from 'antd'
 import { Icon } from '@ant-design/compatible'
 import { findMenuInfo, findMenuPathIds } from '../utils/menuHandles'
 import { isFalse } from '../utils/arraryHelp'
-
 const { Sider } = Layout
 const { SubMenu } = Menu
 

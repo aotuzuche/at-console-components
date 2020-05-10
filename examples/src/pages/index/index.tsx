@@ -2,9 +2,8 @@ import './style'
 import React from 'react'
 import { Layout } from 'antd'
 import ResponsiveObserve from 'antd/lib/_util/responsiveObserve'
-import Aside from '../../components/aside'
-import AtFooter from '../../components/footer'
-import AtHeader from '../../components/header'
+import { Aside, Footer, Header } from 'at-console-components'
+
 import Routes from '../../router'
 
 const { Content } = Layout
@@ -108,11 +107,11 @@ class PageDemo extends React.PureComponent<any, IState> {
           onMaskerClick={this.onAsideMaskerClick}
         />
         <Layout>
-          <AtHeader breakpoint={!screens.md} collapsed={collapsed} onCollapse={this.onCollapse} />
+          <Header breakpoint={!screens.md} collapsed={collapsed} onCollapse={this.onCollapse} />
           <Content style={{ padding: '20px' }}>
             <Routes />
           </Content>
-          <AtFooter />
+          <Footer />
         </Layout>
       </Layout>
     )

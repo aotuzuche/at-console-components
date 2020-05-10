@@ -1,7 +1,6 @@
-import './style'
+import './style.scss'
 import React from 'react'
-// import { DevLogin } from 'at-console-components'
-import DevLogin from '../../components/_devLogin'
+import { DevLogin } from 'at-console-components'
 import { withRouter } from 'react-router-dom'
 const Page = (props: any) => {
   return (

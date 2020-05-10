@@ -1,5 +1,4 @@
 import React from 'react'
-import './style.scss'
 import { DownOutlined } from '@ant-design/icons'
 import { Dropdown, Menu } from 'antd'
 

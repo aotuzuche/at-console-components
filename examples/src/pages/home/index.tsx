@@ -1,7 +1,7 @@
 import React from 'react'
 import ModalTable from './modalTableDemo'
 import ModalForm from './modalFormDemo'
-import AsyncButton from '../../components/button'
+import { Button } from '../../../../components/index'
 
 const page = () => {
   const aysncButton = async () => {
@@ -19,7 +19,7 @@ const page = () => {
       </div>
 
       <div style={{ margin: '20px' }}>
-        <AsyncButton onClick={aysncButton}>异步按钮</AsyncButton>
+        <Button onClick={aysncButton}>异步按钮</Button>
       </div>
     </div>
   )
