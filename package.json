@@ -15,8 +15,11 @@
     "clean": "rimraf es && rimraf lib",
     "lint": "yarn lint:eslint && yarn lint:tsc",
     "lint:eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:tsc": "tsc --noEmit"
-
+    "lint:tsc": "tsc --noEmit",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "docs": "gh-pages -d demo",
+    "commit": "git-cz",
+    "np": "np --yolo --no-yarn"
   },
   "files": [
     "lib",
@@ -28,11 +31,16 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx}": [
+    "*.{js,jsx,ts,tsx}": [
       "prettier --write",
       "eslint --fix",
       "git add"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "peerDependencies": {
     "react": "^16.13.1"
@@ -71,6 +79,7 @@
     "babel-preset-atzuche": "^0.1.0",
     "cross-env": "^7.0.2",
     "css-loader": "^3.5.3",
+    "cz-conventional-changelog": "^3.2.0",
     "eslint": "^6.7.2",
     "eslint-config-atzuche": "^0.0.15",
     "eslint-plugin-react": "^7.18.3",
@@ -91,6 +100,7 @@
     "minimist": "^1.2.0",
     "mockjs": "^1.1.0",
     "node-sass": "^4.14.0",
+    "np": "^6.2.3",
     "plugin-error": "^1.0.1",
     "prettier": "^1.18.2",
     "qs": "^6.7.0",
