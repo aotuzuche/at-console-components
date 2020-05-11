@@ -1,6 +1,6 @@
 {
   "name": "at-console-components",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./lib/index",
   "module": "./es/index",
   "typings": "lib/index.d.ts",
