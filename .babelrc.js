@@ -13,9 +13,7 @@ module.exports = {
     ['@babel/preset-typescript', { isTSX: true, allExtensions: true }],
   ],
   plugins: [
-    'transform-class-properties',
-    ['import', { libraryName: 'antd', style: true }, 'antd'],
-    ['import', { libraryName: 'at-console-components', style: true }, 'at-console-components'],
+    ['import', { libraryName: 'antd' }, 'antd'],
     [
       'import',
       {
