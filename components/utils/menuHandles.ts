@@ -4,6 +4,7 @@ const findMenuInfo = (value: any, menuTree: any, key = 'id'): any => {
     return null
   }
   let result = null
+  // eslint-disable-next-line no-restricted-syntax
   for (const item of menuTree) {
     if (item[key] && item[key].toString() === value.toString()) {
       result = item
@@ -15,6 +16,7 @@ const findMenuInfo = (value: any, menuTree: any, key = 'id'): any => {
       if (result) {
         break
       }
+      // eslint-disable-next-line no-continue
       continue
     }
   }
@@ -24,7 +26,7 @@ const findMenuInfo = (value: any, menuTree: any, key = 'id'): any => {
 
 // 获取所有父集节点
 const getMenuPathInfos = (ids = [], menuTree: any) => {
-  const menuPathInfos = ids.map(id => {
+  const menuPathInfos = ids.map((id) => {
     return findMenuInfo(id, menuTree)
   })
   return menuPathInfos

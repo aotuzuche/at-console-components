@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/member-delimiter-style */
 import { useEffect } from 'react'
 import useRafState from './useRafState'
 

@@ -1,5 +1,23 @@
-import React, { ReactElement, FC, ReactNode, useEffect, useState } from 'react'
-import { Form as AntdForm, Input, Row, Col, Skeleton, Popover, Card, Spin } from 'antd'
+import React, {
+  ReactElement,
+  FC,
+  ReactNode,
+  useEffect,
+  useState,
+  FormEvent,
+  isValidElement,
+  cloneElement,
+} from 'react'
+import {
+  Form as AntdForm,
+  Input,
+  Row,
+  Col,
+  Skeleton,
+  Popover,
+  Card,
+  Spin,
+} from 'antd'
 import {
   FormProps as AntdFormProps,
   FormItemProps as AntdFormItemProps,
@@ -41,15 +59,25 @@ interface FormCommonProps {
   layoutCol?: ColProps
 }
 
-export interface FormItemProps extends Omit<AntdFormItemProps, 'children'>, FormCommonProps {
+export interface FormItemProps
+  extends Omit<AntdFormItemProps, 'children'>,
+    FormCommonProps {
   /**
    * @example () => <Input />
    */
-  render?: (fieldValue: StoreValue, fieldsValue: Store, form: FormInstance) => ReactElement
+  render?: (
+    fieldValue: StoreValue,
+    fieldsValue: Store,
+    form: FormInstance
+  ) => ReactElement
   /**
    * @example (fieldValue) => fieldValue + 1
    */
-  renderView?: (fieldValue: StoreValue, fieldsValue: Store, form: FormInstance) => ReactNode
+  renderView?: (
+    fieldValue: StoreValue,
+    fieldsValue: Store,
+    form: FormInstance
+  ) => ReactNode
   /**
    * Format initial or onFinish value
    * Like Switch component value onFinish maybe Number(true | false)
@@ -61,8 +89,15 @@ export interface FormItemProps extends Omit<AntdFormItemProps, 'children'>, Form
    * @example (fieldValue) => !!fieldValue
    */
   isHidden?: (fieldValue: StoreValue, fieldsValue: Store) => boolean
-  tip?: ReactNode | ((fieldValue: StoreValue, fieldsValue: Store, form: FormInstance) => ReactNode)
+  tip?:
+    | ReactNode
+    | ((
+        fieldValue: StoreValue,
+        fieldsValue: Store,
+        form: FormInstance
+      ) => ReactNode)
   extra?: ReactNode | ((fieldsValue: Store) => ReactNode)
+  suffix?: ReactNode | ((fieldsValue: Store) => ReactNode)
 }
 
 export interface FormProps extends AntdFormProps, FormCommonProps {
@@ -77,12 +112,26 @@ export interface FormProps extends AntdFormProps, FormCommonProps {
   onFinish?: (values: Store) => void | Promise<unknown>
 }
 
+const RenderChild: FC<Pick<FormItemProps, 'suffix'>> = ({
+  suffix,
+  children,
+  ...props
+}) => {
+  return (
+    <>
+      {isValidElement(children) ? cloneElement(children, props) : children}
+      {suffix}
+    </>
+  )
+}
+
 const { Item, useForm, List, Provider } = AntdForm
 
 const InternalForm: FC<FormProps> = ({
   items,
   children,
   onFinish: onFinishInternal,
+  onReset: onResetInternal,
   isView = false,
   form,
   layoutCol = { span: 24 },
@@ -111,7 +160,9 @@ const InternalForm: FC<FormProps> = ({
     try {
       values = await (initialValuesInternal as () => Promise<Store>)()
       items
-        .filter(({ pipeline }) => Array.isArray(pipeline) && pipeline.length === 2)
+        .filter(
+          ({ pipeline }) => Array.isArray(pipeline) && pipeline.length === 2
+        )
         .forEach(({ pipeline, name }) => {
           const inputer = (pipeline as [InputPipeline, OutputPipeline])[0]
           update(values, name as string, inputer)
@@ -121,6 +172,8 @@ const InternalForm: FC<FormProps> = ({
         isLoadinginitialValues: false,
         initialValues: values,
       })
+      // Fix if Form instance destory but useForm from external.
+      formInsatce.resetFields()
     }
   }
 
@@ -132,8 +185,12 @@ const InternalForm: FC<FormProps> = ({
       // Todo: Initial value cannot get when first mount
       forceUpdate()
     }
-    // Fix if Form instance destory but useForm from external.
-    return () => formInsatce.resetFields()
+    return () => {
+      // Todo: getInitialValues mayby remove formInsatce.resetFields()?
+      if (form) {
+        formInsatce.resetFields()
+      }
+    }
   }, [])
 
   // If promise initialValues update need rerenader?
@@ -143,9 +200,14 @@ const InternalForm: FC<FormProps> = ({
   }, [initialStates])
 
   useEffect(() => {
-    if (!isLoadinginitialValues && !isEqual(prevFormInitialValues, initialValuesInternal)) {
+    if (
+      !isLoadinginitialValues &&
+      !isEqual(prevFormInitialValues, initialValuesInternal)
+    ) {
       formInsatce.setFieldsValue(initialValuesInternal as Store)
-      forceUpdate()
+      setInitialStates({
+        initialValues: initialValuesInternal,
+      })
     }
   }, [initialValuesInternal])
 
@@ -162,7 +224,9 @@ const InternalForm: FC<FormProps> = ({
       setLoading(true)
       items
         .filter(
-          ({ pipeline }) => isFunc(pipeline) || (Array.isArray(pipeline) && pipeline.length === 2),
+          ({ pipeline }) =>
+            isFunc(pipeline) ||
+            (Array.isArray(pipeline) && pipeline.length === 2)
         )
         .forEach(({ pipeline, name }) => {
           const outputer = isFunc(pipeline)
@@ -179,6 +243,11 @@ const InternalForm: FC<FormProps> = ({
     }
   }
 
+  const onReset = (e: FormEvent<HTMLFormElement>) => {
+    formInsatce.resetFields()
+    isFunc(onResetInternal) && onResetInternal(e)
+  }
+
   const renderItems = (
     {
       render,
@@ -190,12 +259,13 @@ const InternalForm: FC<FormProps> = ({
       tip,
       placeholder = placeholderInternal,
       extra,
+      suffix,
+      name,
       ...itemProps
     }: FormItemProps,
-    index: number,
+    index: number
   ) => {
     let Comp: ReactNode
-    const { name } = itemProps
     const { getFieldsValue } = formInsatce
     const fieldsValue = {
       ...initialValuesInternal,
@@ -213,7 +283,11 @@ const InternalForm: FC<FormProps> = ({
     const LabelWrap = tip ? (
       <>
         {label}
-        <Popover content={isFunc(tip) ? () => tip(fieldValue, fieldsValue, formInsatce) : tip}>
+        <Popover
+          content={
+            isFunc(tip) ? () => tip(fieldValue, fieldsValue, formInsatce) : tip
+          }
+        >
           <QuestionCircleOutlined
             style={{
               marginLeft: 4,
@@ -230,14 +304,14 @@ const InternalForm: FC<FormProps> = ({
         renderView && isFunc(renderView)
           ? renderView(fieldValue, fieldsValue, formInsatce)
           : fieldValue,
-        placeholder,
+        name ? placeholder : undefined
       )
     } else {
       Comp =
         render && isFunc(render) ? (
           render(fieldValue, fieldsValue, formInsatce)
         ) : (
-          <Input allowClear />
+          <Input allowClear placeholder={`请输入${label}`} />
         )
     }
 
@@ -247,9 +321,15 @@ const InternalForm: FC<FormProps> = ({
           key={key}
           label={LabelWrap}
           extra={isFunc(extra) ? extra(fieldsValue) : extra}
+          name={isItemView ? undefined : name}
           {...itemProps}
         >
-          {Comp}
+          <RenderChild
+            {...(isValidElement(Comp) ? Comp.props : {})}
+            suffix={isFunc(suffix) ? suffix(fieldsValue) : suffix}
+          >
+            {Comp}
+          </RenderChild>
         </Item>
       </Col>
     )
@@ -257,7 +337,8 @@ const InternalForm: FC<FormProps> = ({
 
   const onValuesChange = (changeValues: Store, values: Store) => {
     forceUpdate()
-    isFunc(onValuesChangeInternal) && onValuesChangeInternal(changeValues, values)
+    isFunc(onValuesChangeInternal) &&
+      onValuesChangeInternal(changeValues, values)
   }
 
   const FormChildren = (
@@ -283,6 +364,7 @@ const InternalForm: FC<FormProps> = ({
       <AntdForm
         form={formInsatce}
         onFinish={onFinish}
+        onReset={onReset}
         onValuesChange={onValuesChange}
         initialValues={initialStates.initialValues}
         {...props}
@@ -306,7 +388,8 @@ const InternalForm: FC<FormProps> = ({
 
 type InternalForm = typeof InternalForm
 
-type Form = InternalForm & Pick<typeof AntdForm, 'Item' | 'List' | 'useForm' | 'Provider'>
+type Form = InternalForm &
+  Pick<typeof AntdForm, 'Item' | 'List' | 'useForm' | 'Provider'>
 
 const Form: Form = InternalForm as Form
 

@@ -1,28 +1,16 @@
-import React from 'react'
+import React, { FC, ReactNode } from 'react'
 import { DownOutlined } from '@ant-design/icons'
-import { Dropdown, Menu } from 'antd'
+import { Dropdown, Menu, Space } from 'antd'
+import toArray from 'rc-util/lib/Children/toArray'
 
-/**
- * 对操作栏的二次封装
- *
- * 用法
- * <Operator>
- *   <span>操作1</span>
- *   <span>操作2</span>
- *   <span>操作3</span>
- * </Operator>
- *
- * 1. 字体颜色（可点击）
- * 2. 间隔
- * 3. 超过三个操作进行折叠
- *
- * @param {*} props
- * @returns
- */
-function Operator({ len = 2, ...props }) {
-  const { children } = props
+export interface OperatorProps {
+  len?: number
+}
 
-  let composition: any = [].concat(children)
+const Operator: FC<OperatorProps> = (props) => {
+  const { len = 2, children } = props
+
+  let composition: ReactNode[] = toArray(children)
 
   if (composition.length > len) {
     const overlay = (
@@ -32,9 +20,10 @@ function Operator({ len = 2, ...props }) {
           const childClick = child?.props?.onClick
 
           return (
+            // eslint-disable-next-line react/no-array-index-key
             <Menu.Item onClick={childClick} key={index}>
               {React.cloneElement(child, {
-                onClick: () => {},
+                onClick: null,
               })}
             </Menu.Item>
           )
@@ -52,7 +41,7 @@ function Operator({ len = 2, ...props }) {
     ]
   }
 
-  return <div className="at-operator">{composition}</div>
+  return <Space>{composition}</Space>
 }
 
 export default Operator

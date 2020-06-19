@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import React from 'react'
 import { Upload, message, Button } from 'antd'
 import { Icon } from '@ant-design/compatible'
@@ -35,8 +36,11 @@ interface IState {
     }
  */
 export default class AliyunOSSUpload extends React.Component<IProps, IState> {
-  state: IState = {
-    OSSData: {},
+  constructor(props: IProps) {
+    super(props)
+    this.state = {
+      OSSData: {},
+    }
   }
 
   async componentDidMount() {
@@ -105,6 +109,7 @@ export default class AliyunOSSUpload extends React.Component<IProps, IState> {
   }
 
   render() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { value, onChange, ticket, children, ...otherProps } = this.props
     const { OSSData } = this.state
     const props = {

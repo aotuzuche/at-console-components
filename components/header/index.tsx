@@ -1,7 +1,8 @@
+/* eslint-disable prefer-template,react/destructuring-assignment */
 import React from 'react'
 import { clearConsoleToken } from 'auto-libs'
 import { Layout } from 'antd'
-import { Icon } from '@ant-design/compatible'
+import Icon from '@ant-design/compatible/lib/icon'
 import cn from 'classnames'
 
 interface IProps {
@@ -43,8 +44,8 @@ class HeaderView extends React.PureComponent<IProps, IState> {
 
   componentDidMount() {
     try {
-      this.userInfo = localStorage['auto_system_userData']
-        ? JSON.parse(localStorage['auto_system_userData'])
+      this.userInfo = localStorage.auto_system_userData
+        ? JSON.parse(localStorage.auto_system_userData)
         : {}
     } catch (e) {
       this.userInfo = {}
@@ -103,16 +104,23 @@ class HeaderView extends React.PureComponent<IProps, IState> {
     const { state, props } = this
     const { breakpoint } = props
     const className = cn('at-header-bar', {
-      breakpoint: breakpoint,
+      breakpoint,
     })
     return (
       <Layout.Header className={className}>
         {breakpoint && (
           <div className="at-header-logo">
-            <img src="https://cdn.atzuche.com/static/images/icon-logo-green.png" alt="logo" />
+            <img
+              src="https://cdn.atzuche.com/static/images/icon-logo-green.png"
+              alt="logo"
+            />
           </div>
         )}
-        <Icon type={'menu-' + state.triggerIcon} onClick={this.onTrigger} className="at-trigger" />
+        <Icon
+          type={'menu-' + state.triggerIcon}
+          onClick={this.onTrigger}
+          className="at-trigger"
+        />
         <div className="at-userInfo">
           <p>
             {this.state.hello}

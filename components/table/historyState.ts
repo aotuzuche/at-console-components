@@ -5,29 +5,36 @@ import moment from 'moment'
 const key = '_query'
 const { history, location } = window
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const handler = (values: any, isSet?: boolean): any => {
-  return mapValues(values, (value: any) => {
+  return mapValues(values, (value) => {
     if (value && value._isAMomentObject) {
-      const v = {
-        _isAMomentObject: true,
-        value: value.format(),
-      }
-      return !isSet ? moment(value.value) : v
+      return isSet
+        ? {
+            _isAMomentObject: true,
+            value: value.format(),
+          }
+        : moment(value.value)
     }
     if (
       Array.isArray(value) &&
       value.length === 2 &&
       (value[0]._isAMomentObject || value[1]._isAMomentObject)
     ) {
-      const v0 = {
-        _isAMomentObject: true,
-        value: value[0]?.format(),
-      }
-      const v1 = {
-        _isAMomentObject: true,
-        value: value[1]?.format(),
-      }
-      return [isSet ? v0 : moment(value[0]?.value), isSet ? v1 : moment(value[1]?.value)]
+      return [
+        isSet
+          ? {
+              _isAMomentObject: true,
+              value: value[0]?.format(),
+            }
+          : moment(value[0]?.value),
+        isSet
+          ? {
+              _isAMomentObject: true,
+              value: value[1]?.format(),
+            }
+          : moment(value[1]?.value),
+      ]
     }
 
     if (isPlainObject(value)) {
@@ -40,7 +47,7 @@ const handler = (values: any, isSet?: boolean): any => {
 export function getHistoryState() {
   const { state = {} } = history
 
-  if (!state[key] || !isPlainObject(state[key])) {
+  if (!state || !state[key] || !isPlainObject(state[key])) {
     return {}
   }
 
@@ -61,6 +68,6 @@ export function setHistoryState(query: { [key: string]: any }) {
       [key]: handler(query, true),
     },
     '',
-    pathname + search,
+    pathname + search
   )
 }

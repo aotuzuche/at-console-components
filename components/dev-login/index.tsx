@@ -1,10 +1,10 @@
 import React from 'react'
+import { Input, Form, Button, message, Spin } from 'antd'
+import { httpConsole, setConsoleToken } from 'auto-libs'
+
 interface IProps {
   history: any
 }
-
-import { Input, Form, Button, message, Spin } from 'antd'
-import { httpConsole, setConsoleToken } from 'auto-libs'
 
 const layout = {
   labelCol: { span: 8 },
@@ -50,12 +50,14 @@ class View extends React.PureComponent<IProps, IState> {
       const { token, ...userInfo } = res
 
       setConsoleToken(token)
-      localStorage['_app_console_userinfo_'] = JSON.stringify(userInfo)
+      // eslint-disable-next-line no-underscore-dangle
+      localStorage._app_console_userinfo_ = JSON.stringify(userInfo)
 
       // 兼容老的
-      localStorage['auto_system_token'] = token // 兼容老的项目token
-      localStorage['auto_system_userData'] = JSON.stringify(userInfo)
+      localStorage.auto_system_token = token // 兼容老的项目token
+      localStorage.auto_system_userData = JSON.stringify(userInfo)
 
+      // eslint-disable-next-line react/destructuring-assignment
       this.props.history.replace('/')
       window.location.reload()
     } catch (e) {
@@ -66,6 +68,7 @@ class View extends React.PureComponent<IProps, IState> {
       })
     }
   }
+
   render() {
     const { loading } = this.state
     return (

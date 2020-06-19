@@ -1,9 +1,11 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react'
 import cn from 'classnames'
 import { Layout, Menu, message } from 'antd'
 import { Icon } from '@ant-design/compatible'
 import { findMenuInfo, findMenuPathIds } from '../utils/menuHandles'
 import { isFalse } from '../utils/arraryHelp'
+
 const { Sider } = Layout
 const { SubMenu } = Menu
 
@@ -30,7 +32,10 @@ interface IProps {
 class AsideView extends React.PureComponent<IProps, IState> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {
     const { defaultMenu, list } = nextProps
-    if (list && (defaultMenu !== prevState.defaultMenu || list !== prevState.list)) {
+    if (
+      list &&
+      (defaultMenu !== prevState.defaultMenu || list !== prevState.list)
+    ) {
       const currentMenu = findMenuInfo(defaultMenu, list, 'url')
 
       let selectedKeys = list[0] ? [list[0].id.toString()] : []
@@ -38,10 +43,10 @@ class AsideView extends React.PureComponent<IProps, IState> {
 
       // 如果找到当前菜单，定位当前菜单，然后展开相关的菜单
       if (currentMenu) {
-        let url = currentMenu.url
+        const { url } = currentMenu
         const ids = findMenuPathIds(url, list)
         let find = false
-        openKeys = ids.reverse().map(id => {
+        openKeys = ids.reverse().map((id) => {
           const menu = findMenuInfo(id, list)
           if (!find && !isFalse(menu.icon)) {
             selectedKeys = [menu.id.toString()]
@@ -54,8 +59,8 @@ class AsideView extends React.PureComponent<IProps, IState> {
       return {
         list,
         defaultMenu,
-        openKeys: openKeys,
-        selectedKeys: selectedKeys,
+        openKeys,
+        selectedKeys,
       }
     }
 
@@ -84,7 +89,7 @@ class AsideView extends React.PureComponent<IProps, IState> {
       (e: any) => {
         e.preventDefault()
       },
-      { passive: false },
+      { passive: false }
     )
   }
 
@@ -96,20 +101,20 @@ class AsideView extends React.PureComponent<IProps, IState> {
   // 菜单点击事件
   onMenuHandle = (e: any) => {
     try {
+      // eslint-disable-next-line no-underscore-dangle
       const _current = findMenuInfo(e.key, this.state.list)
-      console.log(e.key, this.state)
       if (_current) {
+        // eslint-disable-next-line react/destructuring-assignment
         this.props.onMenuHandle(_current.url)
       }
-    } catch (e) {
-      console.log(e)
-      message.error(e.msg || '系统异常')
+    } catch (err) {
+      message.error(err.msg || '系统异常')
     }
   }
 
   // 菜单选中
   onMenuSelect = (e: any) => {
-    const selectedKeys = e.selectedKeys
+    const { selectedKeys } = e
     this.setState({
       selectedKeys,
     })
@@ -125,7 +130,7 @@ class AsideView extends React.PureComponent<IProps, IState> {
     if (!(obj instanceof Array)) {
       return null
     }
-    return obj.map(item => {
+    return obj.map((item) => {
       // 判断是否有子菜单
       let hasSub = false
       if (item.children instanceof Array) {
@@ -165,7 +170,13 @@ class AsideView extends React.PureComponent<IProps, IState> {
   }
 
   render() {
-    const { breakpoint = 'lg', collapsed, screens, fixedAside, title } = this.props
+    const {
+      breakpoint = 'lg',
+      collapsed,
+      screens,
+      fixedAside,
+      title,
+    } = this.props
     const { list, openKeys, selectedKeys } = this.state
     const siderClassName = cn('at-sider-wrapper', {
       breakpoint: !screens.md,
@@ -187,7 +198,10 @@ class AsideView extends React.PureComponent<IProps, IState> {
           onCollapse={this.onCollapse}
         >
           <div className="at-logo">
-            <img src="https://cdn.atzuche.com/static/images/icon-logo-green.png" alt="logo" />
+            <img
+              src="https://cdn.atzuche.com/static/images/icon-logo-green.png"
+              alt="logo"
+            />
             <h1>{title}</h1>
           </div>
           <Menu
@@ -197,7 +211,7 @@ class AsideView extends React.PureComponent<IProps, IState> {
             theme="dark"
             onClick={this.onMenuHandle}
             onSelect={this.onMenuSelect}
-            onOpenChange={e => {
+            onOpenChange={(e) => {
               this.setState({
                 openKeys: e,
               })

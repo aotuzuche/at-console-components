@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/indent */
 import React, {
   useEffect,
   forwardRef,
@@ -7,13 +6,24 @@ import React, {
   useImperativeHandle,
   ReactNode,
 } from 'react'
-import { Table as AntdTable, Space, Row, Divider, Form as AntdForm, Col, Tooltip } from 'antd'
+import {
+  Table as AntdTable,
+  Space,
+  Row,
+  Divider,
+  Form as AntdForm,
+  Col,
+  Tooltip,
+  Button,
+} from 'antd'
 import { TableProps as AntdTableProps } from 'antd/lib/table'
 import SearchOutlined from '@ant-design/icons/SearchOutlined'
 import DownOutlined from '@ant-design/icons/DownOutlined'
 import RedoOutlined from '@ant-design/icons/RedoOutlined'
 import get from 'lodash/get'
-import { PaginationConfig } from 'antd/lib/pagination'
+import pickBy from 'lodash/pickBy'
+import cloneDeep from 'lodash/cloneDeep'
+import mapValues from 'lodash/mapValues'
 import { Store } from 'antd/lib/form/interface'
 import {
   SorterResult,
@@ -22,12 +32,13 @@ import {
   ColumnsType,
   ColumnGroupType,
   ColumnType,
+  TablePaginationConfig,
 } from 'antd/lib/table/interface'
 import Form, { FormProps } from '../form'
-import { Button } from 'at-console-components'
+import AsyncButton from '../async-button'
 import { isFunc } from '../utils/is'
 import showPlaceHolder from '../utils/showPlaceholder'
-// import useWindowSize from './useWindowSize'
+import useWindowSize from './useWindowSize'
 import useStates from '../hooks/useStates'
 import { getHistoryState, setHistoryState } from './historyState'
 
@@ -47,6 +58,10 @@ export interface TableSearchProps extends FormProps {
    * @default 3
    */
   initialCount?: number
+  /**
+   * Support search form string value trim
+   */
+  allowTrim?: boolean
 }
 
 interface TablePaginationName {
@@ -88,7 +103,7 @@ export type TableColumnsType<RecordType> = TableCommonProps &
   (ColumnGroupType<RecordType> | ColumnType<RecordType>)
 
 export interface TableOnSearchChangeState<RecordType> {
-  paginationConfig?: PaginationConfig
+  paginationConfig?: TablePaginationConfig
   filters?: Record<string, Key[] | null>
   sorter?: SorterResult<RecordType> | SorterResult<RecordType>[]
   extra?: TableCurrentDataSource<RecordType>
@@ -99,10 +114,12 @@ export interface TableProps<RecordType>
     TablePaginationName,
     TableCommonProps {
   searchProps?: TableSearchProps
-  onSearch: (
-    params: Store,
-    changeState?: TableOnSearchChangeState<RecordType>,
-  ) => TableData<RecordType> | Promise<TableData<RecordType>>
+  onSearch?:
+    | RecordType[]
+    | ((
+        params: Store,
+        changeState?: TableOnSearchChangeState<RecordType>
+      ) => TableData<RecordType> | Promise<TableData<RecordType>>)
   columns?: TableColumnsType<RecordType>[]
   /**
    * Show Table quick tools (refresh ...)
@@ -119,6 +136,7 @@ export interface TableRef {
   refresh: () => Promise<unknown>
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 function Table<RecordType extends object>(
   {
     searchProps: tableSearchProps,
@@ -139,45 +157,68 @@ function Table<RecordType extends object>(
     isKeepAlive = false,
     ...props
   }: TableProps<RecordType>,
-  ref: Ref<TableRef>,
+  ref: Ref<TableRef>
 ) {
-  const [form] = useForm()
-  // const { height } = useWindowSize()
+  const [form] = useForm(tableSearchProps?.form)
+  const { height } = useWindowSize()
   const [state, setState] = useStates<{
     loading: boolean
     isExpand: boolean
     data: TableData<RecordType>
     pageNum: number
+    pageSize: number
   }>({
     loading: false,
     isExpand: false,
     data: { data: [] },
     pageNum,
+    pageSize,
   })
   const isShowTableTitle = !!(title || showTools)
 
   // get data source
-  const onSearch = async (params?: Store, changeState?: TableOnSearchChangeState<RecordType>) => {
+  const onSearch = async (
+    params: Store = {},
+    changeState: TableOnSearchChangeState<RecordType> = {}
+  ) => {
     try {
+      if (!isFunc(onTableSearch)) {
+        return
+      }
       setState({
         loading: true,
       })
-      const searchValues = form.getFieldsValue()
+      const searchValues = await form.validateFields()
 
-      const searchParams = {
-        ...(pagination === false
-          ? {}
-          : {
-              [pageNumName]: state.pageNum,
-              [pageSizeName]: pageSize,
-            }),
-        ...params,
-        ...searchValues,
-      }
-      const result = await onTableSearch(searchParams, changeState)
+      const searchParams = pickBy(
+        {
+          ...(pagination === false
+            ? {}
+            : {
+                [pageNumName]: state.pageNum,
+                [pageSizeName]: pageSize,
+              }),
+          ...params,
+          ...searchValues,
+        },
+        (param) => param !== '' && param !== undefined && param !== null
+      )
+
+      const cloneTableSearchParams = cloneDeep(searchParams)
+
+      const result = await onTableSearch(
+        tableSearchProps?.allowTrim
+          ? mapValues(cloneTableSearchParams, (value) =>
+              typeof value === 'string' ? value.trim() : value
+            )
+          : cloneTableSearchParams,
+        changeState
+      )
+
       setState({
         data: result,
       })
+
       isKeepAlive && setHistoryState(searchParams)
     } finally {
       setState({
@@ -197,11 +238,10 @@ function Table<RecordType extends object>(
     })
   }
 
-  const onTableReset = () => {
+  const onReset = () => {
     setState({
       pageNum: 1,
     })
-    form.resetFields()
     isKeepAlive && setHistoryState({})
     onSearch({
       [pageNumName]: 1,
@@ -209,25 +249,27 @@ function Table<RecordType extends object>(
   }
 
   const onChange = (
-    paginationConfig: PaginationConfig,
+    paginationConfig: TablePaginationConfig,
     filters: Record<string, Key[] | null>,
     sorter: SorterResult<RecordType> | SorterResult<RecordType>[],
-    extra: TableCurrentDataSource<RecordType>,
+    extra: TableCurrentDataSource<RecordType>
   ) => {
     setState({
       pageNum: paginationConfig.current,
+      pageSize: paginationConfig.pageSize,
     })
 
     onSearch(
       {
         [pageNumName]: paginationConfig.current,
+        [pageSizeName]: paginationConfig.pageSize,
       },
       {
         paginationConfig,
         filters,
         sorter,
         extra,
-      },
+      }
     )
 
     if (isFunc(onTableChange)) {
@@ -236,17 +278,19 @@ function Table<RecordType extends object>(
   }
 
   const renderColumns: () => ColumnsType<RecordType> | undefined = () => {
-    return columns?.map(({ placeholder = tablePlaceholder, render, ...columnProps }) => ({
-      ...columnProps,
-      render: (text, record, index) => {
-        if (isFunc(render)) {
-          const result = render(text, record, index)
-          return showPlaceHolder(result, placeholder)
-        }
+    return columns?.map(
+      ({ placeholder = tablePlaceholder, render, ...columnProps }) => ({
+        ...columnProps,
+        render: (text, record, index) => {
+          if (isFunc(render)) {
+            const result = render(text, record, index)
+            return showPlaceHolder(result, placeholder)
+          }
 
-        return showPlaceHolder(text, placeholder)
-      },
-    }))
+          return showPlaceHolder(text, placeholder)
+        },
+      })
+    )
   }
 
   const renderSearchColumns = () => {
@@ -261,30 +305,39 @@ function Table<RecordType extends object>(
           items={state.isExpand ? items : items.slice(0, initialCount)}
           form={form}
           layoutCol={{ span: 6 }}
+          onReset={onReset}
           {...searchProps}
         >
-          <Row justify="end">
-            <Space>
-              <Button onClick={onClickSearch} type="primary" icon={<SearchOutlined />}>
-                搜索
-              </Button>
-              <Button onClick={onTableReset}>重置</Button>
-              <Button
-                type="link"
-                style={{
-                  padding: '0 0 0 4px',
-                }}
-                onClick={() => {
-                  setState({
-                    isExpand: !state.isExpand,
-                  })
-                }}
-              >
-                {state.isExpand ? '收起' : '展开'}
-                <DownOutlined rotate={state.isExpand ? 180 : 0} />
-              </Button>
-            </Space>
-          </Row>
+          <Form.Item>
+            <Row justify="end">
+              <Space>
+                <AsyncButton
+                  onClick={onClickSearch}
+                  type="primary"
+                  icon={<SearchOutlined />}
+                >
+                  搜索
+                </AsyncButton>
+                <Button htmlType="reset">重置</Button>
+                {items.length > initialCount && (
+                  <Button
+                    type="link"
+                    style={{
+                      padding: '0 0 0 4px',
+                    }}
+                    onClick={() => {
+                      setState({
+                        isExpand: !state.isExpand,
+                      })
+                    }}
+                  >
+                    {state.isExpand ? '收起' : '展开'}
+                    <DownOutlined rotate={state.isExpand ? 180 : 0} />
+                  </Button>
+                )}
+              </Space>
+            </Row>
+          </Form.Item>
         </Form>
         {isShowTableTitle && <Divider style={{ margin: 0 }} />}
       </>
@@ -328,7 +381,7 @@ function Table<RecordType extends object>(
       },
       {
         isInit: true,
-      },
+      }
     )
   }
 
@@ -349,33 +402,33 @@ function Table<RecordType extends object>(
         scroll={{
           scrollToFirstRowOnChange: true,
           x: 'max-content',
-          y: 'max-content',
+          y: height,
           ...scroll,
         }}
         columns={renderColumns()}
         onChange={onChange}
         loading={state.loading}
-        dataSource={get(state.data, dataName)}
+        dataSource={
+          isFunc(onTableSearch) ? get(state.data, dataName) : onTableSearch
+        }
         pagination={
           pagination === false
             ? pagination
             : {
-                // Hide if single page
-                hideOnSinglePage: true,
-                showSizeChanger: false,
-                showTotal: total => `共 ${total} 条`,
+                showTotal: (total) => `共 ${total} 条`,
                 total: get(state.data, totalName),
                 current: state.pageNum,
-                pageSize,
+                pageSize: state.pageSize,
                 ...pagination,
               }
         }
-        title={isShowTableTitle ? renderTitle : void 0}
+        title={isShowTableTitle ? renderTitle : undefined}
       />
     </div>
   )
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export default forwardRef(Table) as <RecordType extends object>(
-  p: TableProps<RecordType> & { ref?: Ref<TableRef> },
+  p: TableProps<RecordType> & { ref?: Ref<TableRef> }
 ) => ReactElement

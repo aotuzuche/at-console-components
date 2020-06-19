@@ -13,7 +13,12 @@ export interface ModalFormProps extends ModalProps {
   onCancel?: () => void
 }
 
-const ModalForm: FC<ModalFormProps> = ({ formProps, onOk, visible, ...props }) => {
+const ModalForm: FC<ModalFormProps> = ({
+  formProps,
+  onOk,
+  visible,
+  ...props
+}) => {
   const [form] = useForm()
   const [loading, setLoading] = useState(false)
 
@@ -43,7 +48,13 @@ const ModalForm: FC<ModalFormProps> = ({ formProps, onOk, visible, ...props }) =
   }
 
   return (
-    <Modal onOk={onModalOk} confirmLoading={loading} visible={visible} destroyOnClose {...props}>
+    <Modal
+      onOk={onModalOk}
+      confirmLoading={loading}
+      visible={visible}
+      destroyOnClose
+      {...props}
+    >
       <Form {...formProps} form={form} onFinish={onModalFormFinish} />
     </Modal>
   )

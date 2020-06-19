@@ -1,5 +1,6 @@
+/* eslint-disable no-param-reassign */
 function isType(target: any, type: any) {
-  let targetType = {}.toString.call(target).toLowerCase()
+  const targetType = {}.toString.call(target).toLowerCase()
   type = `[object ${type}]`.toLowerCase()
 
   return targetType === type
@@ -26,8 +27,9 @@ function ignore(target: any, rule: any) {
 
   const resObject: any = {}
 
-  Object.entries(target).forEach(function(item) {
+  Object.entries(target).forEach((item) => {
     if (rule.indexOf(item[0]) === -1) {
+      // eslint-disable-next-line prefer-destructuring
       resObject[item[0]] = item[1]
     }
   })
