@@ -28,7 +28,6 @@ import { ColProps } from 'antd/lib/col'
 import { CardProps } from 'antd/lib/card'
 import get from 'lodash/get'
 import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined'
-import update from 'lodash/update'
 import isEqual from 'lodash/isEqual'
 import { isFunc } from '../utils/is'
 import useForceUpdate from '../hooks/useForceUpdate'
@@ -78,12 +77,6 @@ export interface FormItemProps
     fieldsValue: Store,
     form: FormInstance
   ) => ReactNode
-  /**
-   * Format initial or onFinish value
-   * Like Switch component value onFinish maybe Number(true | false)
-   * @example (date) => date.format()
-   */
-  pipeline?: OutputPipeline | [InputPipeline, OutputPipeline]
   /**
    * Hide Form item by condition
    * @example (fieldValue) => !!fieldValue
@@ -159,14 +152,6 @@ const InternalForm: FC<FormProps> = ({
     let values: Store = {}
     try {
       values = await (initialValuesInternal as () => Promise<Store>)()
-      items
-        .filter(
-          ({ pipeline }) => Array.isArray(pipeline) && pipeline.length === 2
-        )
-        .forEach(({ pipeline, name }) => {
-          const inputer = (pipeline as [InputPipeline, OutputPipeline])[0]
-          update(values, name as string, inputer)
-        })
     } finally {
       setInitialStates({
         isLoadinginitialValues: false,
@@ -222,19 +207,6 @@ const InternalForm: FC<FormProps> = ({
   const onFinish = async (values: Store) => {
     try {
       setLoading(true)
-      items
-        .filter(
-          ({ pipeline }) =>
-            isFunc(pipeline) ||
-            (Array.isArray(pipeline) && pipeline.length === 2)
-        )
-        .forEach(({ pipeline, name }) => {
-          const outputer = isFunc(pipeline)
-            ? pipeline
-            : (pipeline as [InputPipeline, OutputPipeline])[1]
-
-          update(values, name as string, outputer as OutputPipeline)
-        })
       if (onFinishInternal) {
         await onFinishInternal(values)
       }
