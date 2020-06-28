@@ -167,6 +167,10 @@ const InternalForm: FC<FormProps> = ({
     if (initialStates.isLoadinginitialValues) {
       getInitialValues()
     } else {
+      // Fix if external form instance save Store
+      if (form) {
+        formInsatce.resetFields()
+      }
       // Todo: Initial value cannot get when first mount
       forceUpdate()
     }
