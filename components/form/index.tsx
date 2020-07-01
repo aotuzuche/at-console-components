@@ -260,7 +260,7 @@ const InternalForm: FC<FormProps> = ({
     }
     const fieldValue: StoreValue = get(fieldsValue, name as string)
     const itemLlayoutColCombination =
-      itemLlayoutCol ?? type ? { span: 24 } : layoutCol
+      itemLlayoutCol ?? (type ? { span: 24 } : layoutCol)
 
     if (isFunc(isHidden) && isHidden(fieldValue, fieldsValue)) {
       return null
