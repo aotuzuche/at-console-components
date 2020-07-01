@@ -49,6 +49,12 @@ group:
 
 <code src="./demo/cardMode.tsx" />
 
+#### Type 模式
+
+##### Divider
+
+<code src="./demo/typeByDivider.tsx" />
+
 ### 参数
 
 | 属性          | 描述                                                         | 类型                                                | 默认值         |

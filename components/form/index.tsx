@@ -17,6 +17,7 @@ import {
   Popover,
   Card,
   Spin,
+  Divider,
 } from 'antd'
 import {
   FormProps as AntdFormProps,
@@ -91,6 +92,9 @@ export interface FormItemProps
       ) => ReactNode)
   extra?: ReactNode | ((fieldsValue: Store) => ReactNode)
   suffix?: ReactNode | ((fieldsValue: Store) => ReactNode)
+
+  // Default render
+  type?: 'divider'
 }
 
 export interface FormProps extends AntdFormProps, FormCommonProps {
@@ -105,12 +109,16 @@ export interface FormProps extends AntdFormProps, FormCommonProps {
   onFinish?: (values: Store) => void | Promise<unknown>
 }
 
-const RenderChild: FC<Pick<FormItemProps, 'suffix'>> = ({
+const RenderChild: FC<Pick<FormItemProps, 'suffix' | 'type' | 'label'>> = ({
   suffix,
   children,
+  type,
+  label,
   ...props
 }) => {
-  return (
+  return type === 'divider' ? (
+    <Divider orientation="left">{label}</Divider>
+  ) : (
     <>
       {isValidElement(children) ? cloneElement(children, props) : children}
       {suffix}
@@ -230,13 +238,15 @@ const InternalForm: FC<FormProps> = ({
       renderView,
       isView: isItemView = isView,
       isHidden,
-      layoutCol: itemLlayoutCol = layoutCol,
+      layoutCol: itemLlayoutCol,
       label,
       tip,
       placeholder = placeholderInternal,
       extra,
       suffix,
       name,
+      type,
+      noStyle = !!type,
       ...itemProps
     }: FormItemProps,
     index: number
@@ -249,6 +259,8 @@ const InternalForm: FC<FormProps> = ({
       ...getFieldsValue(),
     }
     const fieldValue: StoreValue = get(fieldsValue, name as string)
+    const itemLlayoutColCombination =
+      itemLlayoutCol ?? type ? { span: 24 } : layoutCol
 
     if (isFunc(isHidden) && isHidden(fieldValue, fieldsValue)) {
       return null
@@ -292,17 +304,20 @@ const InternalForm: FC<FormProps> = ({
     }
 
     return (
-      <Col {...itemLlayoutCol}>
+      <Col {...itemLlayoutColCombination}>
         <Item
           key={key}
-          label={LabelWrap}
+          label={type ? undefined : LabelWrap}
           extra={isFunc(extra) ? extra(fieldsValue) : extra}
           name={isItemView ? undefined : name}
+          noStyle={noStyle}
           {...itemProps}
         >
           <RenderChild
             {...(isValidElement(Comp) ? Comp.props : {})}
             suffix={isFunc(suffix) ? suffix(fieldsValue) : suffix}
+            type={type}
+            label={LabelWrap}
           >
             {Comp}
           </RenderChild>
