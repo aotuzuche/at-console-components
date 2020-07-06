@@ -9,8 +9,14 @@ const { useForm } = AntdForm
 
 export interface ModalFormProps extends ModalProps {
   formProps: FormProps
+  /**
+   * Trigger after form finish, return false can prevent Modal cancel
+   */
   onOk?: (values: Store) => Promise<unknown> | false | void
   onCancel?: () => void
+  /**
+   * Trigger before form finish, return reject can prevent form finish
+   */
   onBeforeOk?: (values: Store) => Promise<unknown> | void
 }
 
