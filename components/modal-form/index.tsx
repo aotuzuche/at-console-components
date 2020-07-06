@@ -11,7 +11,7 @@ export interface ModalFormProps extends ModalProps {
   formProps: FormProps
   onOk?: (values: Store) => Promise<unknown> | false | void
   onCancel?: () => void
-  onBeforeOk?: () => Promise<unknown> | void
+  onBeforeOk?: (values: Store) => Promise<unknown> | void
 }
 
 const ModalForm: FC<ModalFormProps> = ({
@@ -25,19 +25,15 @@ const ModalForm: FC<ModalFormProps> = ({
   const [loading, setLoading] = useState(false)
 
   const onModalOk: MouseEventHandler = async () => {
-    try {
-      if (isFunc(onBeforeOk)) {
-        await onBeforeOk()
-      }
-      form.submit()
-    } catch (e) {
-      return Promise.reject(e)
-    }
+    form.submit()
   }
 
   const onModalFormFinish = async (values: Store) => {
     try {
       setLoading(true)
+      if (isFunc(onBeforeOk)) {
+        await onBeforeOk(values)
+      }
       let isNeedCloseWhenOnFinish = true
       const { onCancel } = props
       if (isFunc(formProps.onFinish)) {
