@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "name": "at-console-components",
   "builds": [
     {
-      "src": "package.json",
-      "use": "@now/static-build",
+      "src": "*",
+      "use": "@vercel/static",
       "config": { "distDir": "site" }
     }
   ],
