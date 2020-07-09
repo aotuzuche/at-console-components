@@ -24,3 +24,6 @@ export { default as Operator } from './operator'
 
 export { default as Table } from './table'
 export * from './table'
+
+export { default as Wrapper } from './wrapper'
+export * from './wrapper'

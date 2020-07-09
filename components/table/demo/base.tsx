@@ -90,7 +90,6 @@ export default function BaseDemo() {
         items,
       }}
       ref={table}
-      showTools
       isKeepAlive
     />
   )

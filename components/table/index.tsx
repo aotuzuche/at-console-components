@@ -308,7 +308,7 @@ function Table<RecordType extends object>(
           onReset={onReset}
           {...searchProps}
         >
-          <Form.Item>
+          <Form.Item noStyle>
             <Row justify="end">
               <Space>
                 <AsyncButton

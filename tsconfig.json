@@ -10,7 +10,8 @@
     "baseUrl": "./",
     "strict": true,
     "paths": {
-      "at-console-components": ["components/index.tsx"]
+      "at-console-components": ["components/index.tsx"],
+      "at-console-components/lib": ["components/**"]
     },
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true
