@@ -20,10 +20,13 @@
     "start": "dumi dev",
     "test": "umi-test",
     "test:coverage": "umi-test --coverage",
-    "prepublishOnly": "yarn lint && yarn build && np --no-cleanup --yolo --no-publish"
+    "prepublishOnly": "yarn lint && yarn build && np --no-cleanup --yolo --no-publish",
+    "commit": "git-cz",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
   "husky": {
     "hooks": {
+      "commit-msg": "node scripts/verify-commit-msg.js",
       "pre-commit": "lint-staged"
     }
   },
@@ -86,8 +89,12 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-import": "^1.13.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "commitizen": "^4.1.2",
+    "conventional-changelog": "^3.1.21",
+    "conventional-changelog-cli": "^2.0.34",
     "cpy-cli": "^3.1.1",
     "cross-env": "^7.0.2",
+    "cz-conventional-changelog": "^3.2.0",
     "dumi": "^1.0.18",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
@@ -104,6 +111,7 @@
     "eslint-plugin-react-hooks": "^4.0.0",
     "eslint-plugin-unicorn": "^20.0.0",
     "father-build": "^1.18.0",
+    "git-cz": "^4.7.0",
     "husky": "^4.2.5",
     "less": "^3.11.1",
     "lint-staged": "^10.2.4",
@@ -125,5 +133,10 @@
     "Firefox ESR",
     "> 1%",
     "ie >= 11"
-  ]
+  ],
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  }
 }

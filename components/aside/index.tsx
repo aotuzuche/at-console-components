@@ -18,6 +18,8 @@ interface IState {
 
 interface IProps {
   breakpoint?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+  mode?: 'vertical' | 'horizontal' | 'inline'
+  theme?: 'light' | 'dark'
   collapsed: boolean
   screens: any
   title?: string
@@ -176,6 +178,8 @@ class AsideView extends React.PureComponent<IProps, IState> {
       screens,
       fixedAside,
       title,
+      mode = 'inline',
+      theme = 'dark',
     } = this.props
     const { list, openKeys, selectedKeys } = this.state
     const siderClassName = cn('at-sider-wrapper', {
@@ -207,8 +211,8 @@ class AsideView extends React.PureComponent<IProps, IState> {
           <Menu
             openKeys={openKeys}
             selectedKeys={selectedKeys}
-            mode="inline"
-            theme="dark"
+            mode={mode}
+            theme={theme}
             onClick={this.onMenuHandle}
             onSelect={this.onMenuSelect}
             onOpenChange={(e) => {
