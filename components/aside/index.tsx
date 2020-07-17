@@ -29,6 +29,8 @@ interface IProps {
   onMaskerClick: (collapsed: boolean, fixedAside: boolean) => void
   onMenuHandle: (url: string) => void
   onCollapse: (collapsed: boolean) => void
+  addonAfter?: React.ReactNode
+  addonBefore?: React.ReactNode
 }
 
 class AsideView extends React.PureComponent<IProps, IState> {
@@ -180,12 +182,19 @@ class AsideView extends React.PureComponent<IProps, IState> {
       title,
       mode = 'inline',
       theme = 'dark',
+      addonAfter,
+      addonBefore,
     } = this.props
     const { list, openKeys, selectedKeys } = this.state
-    const siderClassName = cn('at-sider-wrapper', {
-      breakpoint: !screens.md,
-      fixedAside: !screens.md && fixedAside,
-    })
+    const siderClassName = cn(
+      'at-sider-wrapper',
+      `at-sider-wrapper--${theme}`,
+      {
+        breakpoint: !screens.md,
+        fixedAside: !screens.md && fixedAside,
+        'at-sider-wrapper--collapsed': collapsed,
+      }
+    )
     return (
       <div className={siderClassName}>
         <div
@@ -193,6 +202,7 @@ class AsideView extends React.PureComponent<IProps, IState> {
           onClick={this.onAsideMaskerClick}
           ref={this.maskerRef}
         />
+
         <Sider
           className="at-sider"
           width="256"
@@ -200,6 +210,7 @@ class AsideView extends React.PureComponent<IProps, IState> {
           breakpoint={breakpoint}
           collapsed={collapsed}
           onCollapse={this.onCollapse}
+          theme={theme}
         >
           <div className="at-logo">
             <img
@@ -208,21 +219,31 @@ class AsideView extends React.PureComponent<IProps, IState> {
             />
             <h1>{title}</h1>
           </div>
-          <Menu
-            openKeys={openKeys}
-            selectedKeys={selectedKeys}
-            mode={mode}
-            theme={theme}
-            onClick={this.onMenuHandle}
-            onSelect={this.onMenuSelect}
-            onOpenChange={(e) => {
-              this.setState({
-                openKeys: e,
-              })
-            }}
-          >
-            {this.recursionMenu(list)}
-          </Menu>
+          {addonBefore ? (
+            <div className="at-sider__addonBefore">{addonBefore}</div>
+          ) : null}
+
+          <div className="at-sider__inner">
+            <Menu
+              openKeys={openKeys}
+              selectedKeys={selectedKeys}
+              mode={mode}
+              theme={theme}
+              onClick={this.onMenuHandle}
+              onSelect={this.onMenuSelect}
+              onOpenChange={(e: any) => {
+                this.setState({
+                  openKeys: e,
+                })
+              }}
+            >
+              {this.recursionMenu(list)}
+            </Menu>
+          </div>
+
+          {addonAfter ? (
+            <div className="at-sider__addonAfter">{addonAfter}</div>
+          ) : null}
         </Sider>
       </div>
     )

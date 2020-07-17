@@ -55,7 +55,7 @@
     "@ant-design/icons": "^4.0.6",
     "auto-libs": "^0.3.0",
     "classnames": "^2.2.6",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.19"
   },
   "peerDependencies": {
     "antd": ">=4.0.0",
