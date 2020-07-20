@@ -1,16 +1,17 @@
 /* eslint-disable no-param-reassign */
 import React from 'react'
 import { Upload as AntUpload, message, Button } from 'antd'
-import { Icon } from '@ant-design/compatible'
 import { httpConsole } from 'auto-libs'
+import { UploadOutlined } from '@ant-design/icons'
 
-interface IProps {
-  ticket: any
-  value: any
-  onChange: (params: any) => void
+interface UploadProps {
+  ticket: string
+  value?: any
+  onChange?: (params: any) => void
+  max?: number
 }
 
-interface IState {
+interface UploadState {
   OSSData: any
 }
 
@@ -35,8 +36,8 @@ interface IState {
       signature: 'ZGFob25nc2hhbw==',
     }
  */
-export default class Upload extends React.Component<IProps, IState> {
-  constructor(props: IProps) {
+export default class Upload extends React.Component<UploadProps, UploadState> {
+  constructor(props: UploadProps) {
     super(props)
     this.state = {
       OSSData: {},
@@ -109,8 +110,16 @@ export default class Upload extends React.Component<IProps, IState> {
   }
 
   render() {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { value, onChange, ticket, children, ...otherProps } = this.props
+    const {
+      value,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      onChange,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      ticket,
+      children,
+      max = -1,
+      ...otherProps
+    } = this.props
     const { OSSData } = this.state
     const props = {
       name: 'file',
@@ -125,11 +134,13 @@ export default class Upload extends React.Component<IProps, IState> {
     }
     return (
       <AntUpload {...props}>
-        {children || (
-          <Button>
-            <Icon type="upload" /> 上传
-          </Button>
-        )}
+        {value?.length === max
+          ? null
+          : children || (
+              <Button>
+                <UploadOutlined /> 上传
+              </Button>
+            )}
       </AntUpload>
     )
   }
