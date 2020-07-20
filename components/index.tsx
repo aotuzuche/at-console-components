@@ -1,6 +1,6 @@
 export { default as DevLogin } from './dev-login'
 
-export { default as Upload } from './aliyunOSSUpload'
+export { default as Upload } from './upload'
 
 export { default as Aside } from './aside'
 
