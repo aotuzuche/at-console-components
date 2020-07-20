@@ -108,6 +108,7 @@ const Wrapper: FC<WrapperProps> = ({
               overflow-y: scroll;
               overflow-x: hidden;
               padding: 0px ${styles.padding} ${styles.padding} 32px;
+              min-width: 575px;
             `}
           >
             {state.breadcrumbs?.length !== 0 && (

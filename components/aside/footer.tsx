@@ -51,7 +51,7 @@ const Footer: FC<{
               color: #fff;
             `}
           >
-            Ad
+            Adewrfo efr
           </span>
         </Tooltip>
         {!collapsed && (

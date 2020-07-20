@@ -61,7 +61,7 @@ const Border: FC<{
           position: absolute;
           width: 24px;
           height: 24px;
-          top: 15px;
+          top: 20px;
           right: 10px;
           cursor: pointer;
           transition: transform 0.3s;
@@ -74,8 +74,9 @@ const Border: FC<{
       >
         <LeftCircleOutlined
           className={css`
-            font-size: 24px;
+            font-size: 20px;
             background-color: #fff;
+            color: #6b778c;
             > svg {
               transition: transform 0.3s ${styles.cubicClose} 0s;
             }
