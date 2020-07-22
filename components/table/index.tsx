@@ -304,7 +304,14 @@ function Table<RecordType extends object>(
         <Form
           items={state.isExpand ? items : items.slice(0, initialCount)}
           form={form}
-          layoutCol={{ span: 6 }}
+          layoutCol={{
+            span: 6,
+            xs: 12,
+            sm: 12,
+            md: 12,
+            lg: 8,
+            xl: 6,
+          }}
           onReset={onReset}
           {...searchProps}
         >

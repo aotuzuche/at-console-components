@@ -26,11 +26,8 @@ const Aside = () => {
   }, [screens])
 
   const renderMenusTree = useMemo(() => {
-    const isSubmenu = (menu: IMenu) => {
-      return (
-        menu.children?.length &&
-        menu.children.every((cMenu) => !isHiddenedMenu(cMenu))
-      )
+    const isSubmenu = (menu?: IMenu[]) => {
+      return menu?.length && menu.every(({ icon }) => !isHiddenedMenu(icon))
     }
 
     const flatChildren = (childrenMenes?: IMenu[]) => {
@@ -39,23 +36,23 @@ const Aside = () => {
       }
 
       return childrenMenes
-        .map((menu) => {
-          if (isHiddenedMenu(menu)) return null
+        .map(({ icon, name, id, url, children }) => {
+          if (isHiddenedMenu(icon)) return null
 
-          return isSubmenu(menu) ? (
+          return isSubmenu(children) ? (
             <Menu.SubMenu
-              title={menu.name}
-              key={menu.id}
-              icon={menu.icon ? <Icon type={menu.icon} /> : <FolderOutlined />}
+              title={name}
+              key={id}
+              icon={icon ? <Icon type={icon} /> : <FolderOutlined />}
             >
-              {flatChildren(menu.children)}
+              {flatChildren(children)}
             </Menu.SubMenu>
           ) : (
             <Menu.Item
-              key={menu.id}
-              icon={menu.icon ? <Icon type={menu.icon} /> : <FileOutlined />}
+              key={id}
+              icon={icon ? <Icon type={icon} /> : <FileOutlined />}
             >
-              {menu.url ? <Link to={menu.url}>{menu.name}</Link> : menu.name}
+              {url ? <Link to={url}>{name}</Link> : name}
             </Menu.Item>
           )
         })

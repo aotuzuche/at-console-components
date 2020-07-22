@@ -47,6 +47,6 @@ export function getMenusTree(menus: IMenu[]) {
   return transformToMenusTree(gruopMenus[0], gruopMenus)
 }
 
-export function isHiddenedMenu(menu: IMenu) {
-  return ['false', false, 0, '0'].includes(menu?.icon as string)
+export function isHiddenedMenu(icon: any) {
+  return ['false', false, 0, '0'].includes(icon as string)
 }
