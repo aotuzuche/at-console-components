@@ -13,7 +13,7 @@ const iconClassname = css`
 const Footer: FC<{
   collapsed: boolean
 }> = ({ collapsed }) => {
-  const { loginName = 'unkonw' } = useMemo(getLoginInfo, [])
+  const { loginName = 'unknow' } = useMemo(getLoginInfo, [])
   return (
     <div
       className={css`
