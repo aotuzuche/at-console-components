@@ -1,8 +1,9 @@
-import React, { FC } from 'react'
+import React, { FC, useMemo } from 'react'
 import { Popconfirm, Tooltip, Space } from 'antd'
 import { PoweroffOutlined, AppstoreOutlined } from '@ant-design/icons'
 import { css } from 'linaria'
 import styles from '../styles'
+import getLoginInfo from '../utils/getLoginInfo'
 
 const iconClassname = css`
   font-size: 18px;
@@ -12,6 +13,7 @@ const iconClassname = css`
 const Footer: FC<{
   collapsed: boolean
 }> = ({ collapsed }) => {
+  const { loginName = 'unkonw' } = useMemo(getLoginInfo, [])
   return (
     <div
       className={css`
@@ -37,7 +39,7 @@ const Footer: FC<{
           border-top: 1px solid ${styles.aside.borderColor};
         `}
       >
-        <Tooltip title="Admin" placement="right">
+        <Tooltip title={loginName} placement="right">
           <span
             className={css`
               width: 32px;
@@ -49,9 +51,10 @@ const Footer: FC<{
               overflow: hidden;
               background-color: ${styles.color};
               color: #fff;
+              font-size: 12px;
             `}
           >
-            Adewrfo efr
+            {loginName.substr(-2)}
           </span>
         </Tooltip>
         {!collapsed && (
