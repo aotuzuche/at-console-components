@@ -1,6 +1,7 @@
 import React, { FC, useMemo } from 'react'
 import { Popconfirm, Tooltip, Space } from 'antd'
 import { PoweroffOutlined, AppstoreOutlined } from '@ant-design/icons'
+import { toConsoleLogin } from 'auto-libs'
 import { css } from 'linaria'
 import styles from '../styles'
 import getLoginInfo from '../utils/getLoginInfo'
@@ -59,10 +60,15 @@ const Footer: FC<{
         </Tooltip>
         {!collapsed && (
           <Space size="middle">
-            <Popconfirm title="确认要回到主页么？">
+            <Popconfirm
+              title="确认要回到主页么？"
+              onConfirm={() => {
+                window.location.href = '/system'
+              }}
+            >
               <AppstoreOutlined className={iconClassname} />
             </Popconfirm>
-            <Popconfirm title="确认要注销么？">
+            <Popconfirm title="确认要注销么？" onConfirm={toConsoleLogin}>
               <PoweroffOutlined className={iconClassname} />
             </Popconfirm>
           </Space>

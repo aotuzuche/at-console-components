@@ -30,7 +30,7 @@ const Aside = () => {
       return menu?.length && menu.every(({ icon }) => !isHiddenedMenu(icon))
     }
 
-    const flatChildren = (childrenMenes?: IMenu[]) => {
+    const flatChildren = (childrenMenes?: IMenu[], isChildren?: boolean) => {
       if (!childrenMenes) {
         return null
       }
@@ -39,19 +39,19 @@ const Aside = () => {
         .map(({ icon, name, id, url, children }) => {
           if (isHiddenedMenu(icon)) return null
 
+          const subMenuIcon = icon ? <Icon type={icon} /> : <FolderOutlined />
+          const menuIcon = icon ? <Icon type={icon} /> : <FileOutlined />
+
           return isSubmenu(children) ? (
             <Menu.SubMenu
               title={name}
               key={id}
-              icon={icon ? <Icon type={icon} /> : <FolderOutlined />}
+              icon={isChildren ? undefined : subMenuIcon}
             >
-              {flatChildren(children)}
+              {flatChildren(children, true)}
             </Menu.SubMenu>
           ) : (
-            <Menu.Item
-              key={id}
-              icon={icon ? <Icon type={icon} /> : <FileOutlined />}
-            >
+            <Menu.Item key={id} icon={isChildren ? undefined : menuIcon}>
               {url ? <Link to={url}>{name}</Link> : name}
             </Menu.Item>
           )
