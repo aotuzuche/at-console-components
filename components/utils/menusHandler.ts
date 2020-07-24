@@ -50,3 +50,32 @@ export function getMenusTree(menus: IMenu[]) {
 export function isHiddenedMenu(icon: any) {
   return ['false', false, 0, '0'].includes(icon as string)
 }
+
+/**
+ * [ IMenu, IMenu, { children: [ IMenu, IMenu, { children: IMenu[] } ] } ]
+ *
+ * ->>>>>>>>
+ *
+ * [ IMenu, IMenu, IMenu ]
+ *
+ */
+export function getMenuPaths(menu: IMenu, menus: IMenu[]): IMenu[] {
+  let result: IMenu[] = []
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const iMenu of menus) {
+    if (iMenu.id === menu.id) {
+      result = [iMenu]
+      break
+    }
+    if (iMenu.children) {
+      const findChildMenu = getMenuPaths(menu, iMenu.children)
+
+      if (findChildMenu.length) {
+        result = [iMenu].concat(findChildMenu)
+      }
+    }
+  }
+
+  return result
+}

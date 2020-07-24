@@ -2,10 +2,10 @@ import React, { FC, useEffect } from 'react'
 import { Spin, message, Breadcrumb } from 'antd'
 import { httpConsole } from 'auto-libs'
 import { css } from 'linaria'
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation, Link, matchPath } from 'react-router-dom'
 import Aside from '../aside'
 import useStates from '../hooks/useStates'
-import { IMenu, getMenusTree } from '../utils/menusHandler'
+import { IMenu, getMenusTree, getMenuPaths } from '../utils/menusHandler'
 import WrapperContext from './wrapperContext'
 import styles from '../styles'
 
@@ -29,12 +29,14 @@ const Wrapper: FC<WrapperProps> = ({
     loading: boolean
     collapsed: boolean
     menus: IMenu[]
+    initialMenus: IMenu[]
     breadcrumbs: IMenu[]
   }>({
     loading: true,
     collapsed: false,
     menus: [],
     breadcrumbs: [],
+    initialMenus: [],
   })
   const localtion = useLocation()
 
@@ -47,6 +49,7 @@ const Wrapper: FC<WrapperProps> = ({
       if (Array.isArray(systemCode)) {
         setState({
           menus: getMenusTree(systemCode),
+          initialMenus: systemCode,
         })
       } else {
         const result: any = await httpConsole.get(
@@ -55,6 +58,7 @@ const Wrapper: FC<WrapperProps> = ({
 
         setState({
           menus: getMenusTree(result?.list),
+          initialMenus: result?.list,
         })
       }
     } catch (error) {
@@ -67,9 +71,19 @@ const Wrapper: FC<WrapperProps> = ({
   }
 
   const getBreadcrumbs = () => {
-    setState({
-      breadcrumbs: state.menus,
-    })
+    const matchMenu = state.initialMenus.find(
+      (menus) =>
+        menus.url &&
+        matchPath('/dispatch/ordinary/:orderNo', {
+          path: menus.url,
+          exact: true,
+        })
+    )
+    if (matchMenu) {
+      setState({
+        breadcrumbs: getMenuPaths(matchMenu, state.menus),
+      })
+    }
   }
 
   useEffect(() => {
