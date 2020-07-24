@@ -74,7 +74,7 @@ const Wrapper: FC<WrapperProps> = ({
     const matchMenu = state.initialMenus.find(
       (menus) =>
         menus.url &&
-        matchPath('/dispatch/ordinary/:orderNo', {
+        matchPath(localtion.pathname, {
           path: menus.url,
           exact: true,
         })

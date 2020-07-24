@@ -142,5 +142,72 @@ describe('MenusHandler', () => {
         { id: 7, icon: 'false', systemId: 0, name: '', pid: 0, url: '' },
       ])
     })
+
+    it('level 3 - 1', () => {
+      const menus = [
+        { id: 1, icon: 'false', systemId: 0, name: '', pid: 0, url: '' },
+        {
+          id: 2,
+          icon: 'false',
+          systemId: 0,
+          name: '',
+          pid: 0,
+          url: '',
+          children: [
+            {
+              id: 3,
+              icon: 'false',
+              systemId: 0,
+              name: '',
+              pid: 0,
+              url: '',
+            },
+            {
+              id: 4,
+              icon: 'false',
+              systemId: 0,
+              name: '',
+              pid: 0,
+              url: '',
+              children: [
+                {
+                  id: 5,
+                  icon: 'false',
+                  systemId: 0,
+                  name: '',
+                  pid: 0,
+                  url: '',
+                },
+                {
+                  id: 6,
+                  icon: 'false',
+                  systemId: 0,
+                  name: '',
+                  pid: 0,
+                  url: '',
+                },
+                {
+                  id: 7,
+                  icon: 'false',
+                  systemId: 0,
+                  name: '',
+                  pid: 0,
+                  url: '',
+                },
+              ],
+            },
+          ],
+        },
+      ]
+      expect(
+        getMenuPaths(
+          { id: 3, icon: 'false', systemId: 0, name: '', pid: 0, url: '' },
+          menus
+        )
+      ).toEqual([
+        menus[1],
+        { id: 3, icon: 'false', systemId: 0, name: '', pid: 0, url: '' },
+      ])
+    })
   })
 })
