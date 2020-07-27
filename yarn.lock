@@ -10,9 +10,9 @@
     tinycolor2 "^1.4.1"
 
 "@ant-design/compatible@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@ant-design/compatible/-/compatible-1.0.2.tgz#d64fede2dd374451eb5045dec711ea529c3f78da"
-  integrity sha512-zflK4SV7ZnJNBqyxLG2wka+bCV7Fo9S750WPu/osmciMcXH/Z719NfuzDnoRM7y3lPRtJw6s3X3zAfulpmShhQ==
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@ant-design/compatible/-/compatible-1.0.4.tgz#99c8b5dbc5b05b934c986024547a8cf72c78be87"
+  integrity sha512-2mXit0KcpYbIUpjnORR993JMJzwaWhVWKU91LniaQrIvBahlZ+MNmbsS0ods2iM/U36Zu09QP/4Yq3GACSJBwQ==
   dependencies:
     "@ant-design/icons" "^4.0.0"
     classnames "^2.2.6"
@@ -15448,18 +15448,7 @@ rc-upload@~3.1.0:
   dependencies:
     classnames "^2.2.5"
 
-rc-util@4.x, rc-util@^4.0.4, rc-util@^4.15.3, rc-util@^4.4.0, rc-util@^4.8.0:
-  version "4.20.7"
-  resolved "https://registry.yarnpkg.com/rc-util/-/rc-util-4.20.7.tgz#8c19f3a489744ec00c9871ffe3701cdb7ff4a38e"
-  integrity sha512-wzL7bGTimuUK/SgXlUIxcXYdQ27eAaBd8PTuiKz7ZI/Mbm5R6ZcRTWpeIGG56t+/79oi++kobfKbJrPxMTkKIw==
-  dependencies:
-    add-dom-event-listener "^1.1.0"
-    prop-types "^15.5.10"
-    react-is "^16.12.0"
-    react-lifecycles-compat "^3.0.4"
-    shallowequal "^1.1.0"
-
-rc-util@^4.10.0:
+rc-util@4.x, rc-util@^4.0.4, rc-util@^4.10.0, rc-util@^4.15.3, rc-util@^4.4.0, rc-util@^4.8.0:
   version "4.21.1"
   resolved "https://registry.yarnpkg.com/rc-util/-/rc-util-4.21.1.tgz#88602d0c3185020aa1053d9a1e70eac161becb05"
   integrity sha512-Z+vlkSQVc1l8O2UjR3WQ+XdWlhj5q9BMQNLk2iOBch75CqPfrJyGtcWMcnhRlNuDu0Ndtt4kLVO8JI8BrABobg==
