@@ -54,7 +54,7 @@ $asidePrefix: $prefix + '-aside';
         opacity: 1;
       }
       cursor: col-resize;
-      color: #1890ff;
+      color: $color;
     }
     &::before {
       content: '';
@@ -64,7 +64,7 @@ $asidePrefix: $prefix + '-aside';
       left: 0;
       bottom: 0;
       opacity: 0;
-      background: #1890ff;
+      background: $color;
       transition: opacity 0.2s ease 0s;
     }
     &::after {
@@ -101,7 +101,6 @@ $asidePrefix: $prefix + '-aside';
       &-icon {
         font-size: 20px;
         background-color: #fff;
-        color: #6b778c;
         > svg {
           transition: transform 0.3s linear 0s;
         }
@@ -137,7 +136,7 @@ $asidePrefix: $prefix + '-aside';
       line-height: 32px;
       border-radius: 50%;
       overflow: hidden;
-      background-color: #1890ff;
+      background-color: $color;
       color: #fff;
       font-size: 12px;
     }
