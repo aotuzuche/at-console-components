@@ -2,6 +2,14 @@
 # yarn lockfile v1
 
 
+"@ahooksjs/use-request@^2.0.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@ahooksjs/use-request/-/use-request-2.3.0.tgz#3c775089df27248fb2601d9dbbdd8af557a70a7c"
+  integrity sha512-fsSOAgPplEdxxiDGLEa2PRr2AgGdQRqXFKvKAf2QXA1b9cH+gVo8GP9sR3tPTZ9tbORqg+WrjY8lOqLGhmy02Q==
+  dependencies:
+    lodash.debounce "^4.0.8"
+    lodash.throttle "^4.1.1"
+
 "@ant-design/colors@^3.1.0":
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/@ant-design/colors/-/colors-3.2.2.tgz#5ad43d619e911f3488ebac303d606e66a8423903"
@@ -2356,6 +2364,11 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
+"@qixian.cs/path-to-regexp@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@qixian.cs/path-to-regexp/-/path-to-regexp-6.1.0.tgz#6b84ad01596332aba95fa29d2e70104698cd5c45"
+  integrity sha512-2jIiLiVZB1jnY7IIRQKtoV8Gnr7XIhk4mC88ONGunZE3hYt5IHUG4BE/6+JiTBjjEWQLBeWnZB8hGpppkufiVw==
+
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@samverschueren/stream-to-observable/-/stream-to-observable-0.3.0.tgz#ecdf48d532c58ea477acfcab80348424f8d0662f"
@@ -3663,23 +3676,23 @@
   resolved "https://registry.yarnpkg.com/@umijs/plugin-analytics/-/plugin-analytics-0.2.2.tgz#575fd231d4327ea13413217aa1b5fc6bdd89465e"
   integrity sha512-dVDzUfgIdEwdCC6a5IsMYpIPI+bEZjBEqIhAvw9dic6Vk77w9RxQxyRfW11dDmdXLAwWphp22NntQNt1ejZPtg==
 
-"@umijs/plugin-antd@0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-antd/-/plugin-antd-0.6.0.tgz#a55f80ec9f717d4e7bc87773e380e1e6a028c899"
-  integrity sha512-kztIKEO2NP/mNEw3jdGzMcDLg/YGbaKBod8oWxAcfnqpxlTNYj9AsdwpAX1V4Sf8ZzzdpalvteTLLC+Aisap3Q==
+"@umijs/plugin-antd@0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-antd/-/plugin-antd-0.7.0.tgz#c9bbfd9f29bd1f6be7cc36d7226ffa5fbde1b9cc"
+  integrity sha512-IK580GohCnOInlZVsmG868sZnLxJxpI0w8h7jDlse6S6j+nNOQ8XQHsHYC+W6SBHjoQ0l6JY8uRgqnotLVcL5A==
   dependencies:
     antd "^4.1.3"
     antd-mobile "^2.3.1"
 
-"@umijs/plugin-crossorigin@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-crossorigin/-/plugin-crossorigin-1.1.0.tgz#369a594812276458aa0a9284681349179b73662d"
-  integrity sha512-ObkR0fEA19xxvKkzMJlLum3mxzNuXz9TiV/xHSh9L6xZUQYssACgwnKGYJrVyc959k3zhCkROgIUHsXxKGE6uQ==
+"@umijs/plugin-crossorigin@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-crossorigin/-/plugin-crossorigin-1.1.1.tgz#0e5ffb8013c95470fce79cfbd6a29a9ad58df4c9"
+  integrity sha512-2ryOjsGqgRv6YqSHqHRqvPc6cg0JSYAnqr9OB2bOjZVAQevFpovetHGDXxIKzUtb09MwrrSQvaH9K7uGZtACow==
 
-"@umijs/plugin-dva@0.7.2":
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-dva/-/plugin-dva-0.7.2.tgz#268a6c1d5eaa3f7824496480f4323260bd0d008b"
-  integrity sha512-Ko7tj10I8emtNh9w8aDmdftTT7pBF1edSU5fk5Ab7fXDueecw/BhCgmLfu9mdCMKGuyPxx64ziRu8qiBpfDcYA==
+"@umijs/plugin-dva@0.7.4":
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-dva/-/plugin-dva-0.7.4.tgz#07e1c2dcb466df0187cd9ec483598b267628095c"
+  integrity sha512-kWpfbTEeV0AJcap4xhAL8J6T5W/Y1VZT7EU7H9KcMQ+QLX+jdBwmftxJ4BP9DY0cCee1NYv/UWTkbVw3GJwZHw==
   dependencies:
     babel-plugin-dva-hmr "^0.4.2"
     dva "^2.6.0-beta.20"
@@ -3699,19 +3712,20 @@
   resolved "https://registry.yarnpkg.com/@umijs/plugin-initial-state/-/plugin-initial-state-2.2.1.tgz#cd7592aa90b6b369bd0df297254320088397ff67"
   integrity sha512-qDtWguduISeG+EObgKbImuRX3FyLrNcj3yQtY24HdYkDTGmtsmA4ZKB7Q/N+V/O0Yxep06bCotTK3jFV9KXuEA==
 
-"@umijs/plugin-layout@0.11.7":
-  version "0.11.7"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-layout/-/plugin-layout-0.11.7.tgz#9bb91fdab2d3f024083e5134f47ad93d7fb2444c"
-  integrity sha512-qpmN8ihuclp3fL0St3Mfh69zQs5RntcvWjKQ07gUCOOLnXH3/NYaLBixJAGvOuOzBp5PZ9PNOEaIokQCXBM/8Q==
+"@umijs/plugin-layout@0.11.13":
+  version "0.11.13"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-layout/-/plugin-layout-0.11.13.tgz#4c9e1692b7be4eb28068721a2986bb8ef27e3c12"
+  integrity sha512-Y5STXLxARSyP1DbciD2Boe4fF7V3yNelUhAy0NPsr9DEqOpKoLU0GRVc9cF0RE3/ATbJ86IilBdu3ySJZIVXKw==
   dependencies:
+    "@umijs/route-utils" "^1.0.7"
     antd "^4.1.2"
     lodash "^4.17.15"
     path-to-regexp "1.x"
 
-"@umijs/plugin-locale@0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-locale/-/plugin-locale-0.8.0.tgz#22d32f70908b272fba9892657045cf54f9b4f128"
-  integrity sha512-YpR+GunvtT4m/+FpAQ8RwxGzcx+cGDtMwPuYTdYiC/MC2Sc8RxQfMSnPkdy3SDDfUPt8UtpaCBHT012BDy6ikg==
+"@umijs/plugin-locale@0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-locale/-/plugin-locale-0.9.0.tgz#6f2723877ed914c8042012287613a548d0adc0ff"
+  integrity sha512-zVtbazq7kN8slPWFzUQSpJiyb9wmX19TWL6roMvk5j1ihan2cun+qYxWq7pbBrqrF2trl0g199WEQLAGsknyBA==
   dependencies:
     "@ant-design/icons" "^4.1.0"
     "@formatjs/intl-pluralrules" "^1.5.0"
@@ -3721,19 +3735,19 @@
     react-intl "3.12.0"
     warning "^4.0.3"
 
-"@umijs/plugin-model@2.3.1":
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-model/-/plugin-model-2.3.1.tgz#a485e521656e829fb4845274f86f89f170fb6a96"
-  integrity sha512-6Y6mIfET8Xl+lFO6AtBWi45SeZUU5M057pCS3qy7vhUeNbbBzjg+IRAvw2T3mJ6T/riYGnWRoayEKQ5eyN5c/g==
+"@umijs/plugin-model@2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-model/-/plugin-model-2.5.1.tgz#35f4b18eab1b2d86edbf35e1760f62dab61452c3"
+  integrity sha512-jYdQJeY0yXaGTAAbKhO5wZuuueT3XCuc79WMypnbYl02ftdzB+13jbhe5R6eVWgOLxZi5Q9aPSnO55kqL0wRDw==
   dependencies:
     fast-deep-equal "3.1.1"
 
-"@umijs/plugin-request@2.3.2":
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-request/-/plugin-request-2.3.2.tgz#2343d21ccd09bdbbe39d6aee9340e0f87313fdd4"
-  integrity sha512-Pr8gdQf7LnRDuZEE685Fx+s7zVc+DAMCvZnTkZbcacXD5FieM6EpgZTrYkOfE1ncwvkq3PDm+q0zpwHkyOuhdg==
+"@umijs/plugin-request@2.4.1":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-request/-/plugin-request-2.4.1.tgz#7295749caddd3c52be472eef6623a7b441ed17d6"
+  integrity sha512-mtxBbfW+YnCCpauuYVPKlLsouWyVaZ6ZVzwWJzePknyuLSCSz2ngIFYngd2kttkX2QU/lyYmYDSrrSb9JOuChQ==
   dependencies:
-    "@umijs/use-request" "^1.2.0"
+    "@ahooksjs/use-request" "^2.0.0"
     umi-request "^1.2.14"
 
 "@umijs/plugin-test@1.0.0":
@@ -3820,21 +3834,21 @@
     unist-util-visit-parents "^3.0.1"
 
 "@umijs/preset-react@1.x":
-  version "1.5.8"
-  resolved "https://registry.yarnpkg.com/@umijs/preset-react/-/preset-react-1.5.8.tgz#4604f9f04e1e0bade814b003877b9aeb28fdf087"
-  integrity sha512-PtcTUbFuwncFpjIJ9thaj9kSCXsO0SD6S1J55+jr25QbRUl6KB02/shPsMwcmsGKfcJHiBV5aJWuRku1hY0L3g==
+  version "1.5.19"
+  resolved "https://registry.yarnpkg.com/@umijs/preset-react/-/preset-react-1.5.19.tgz#3b36a3f12c263202765610ffc1ff4a8bea49385e"
+  integrity sha512-mEHRk/9fYvouEyB2l+I6xUa0dSlpg6ZKjnNWavs/jTjEKhcpAbmRa3HZyAvAsWTngj6AXVWGLXBKSem32xmb1Q==
   dependencies:
     "@umijs/plugin-access" "2.3.1"
     "@umijs/plugin-analytics" "0.2.2"
-    "@umijs/plugin-antd" "0.6.0"
-    "@umijs/plugin-crossorigin" "1.1.0"
-    "@umijs/plugin-dva" "0.7.2"
+    "@umijs/plugin-antd" "0.7.0"
+    "@umijs/plugin-crossorigin" "1.1.1"
+    "@umijs/plugin-dva" "0.7.4"
     "@umijs/plugin-helmet" "1.0.2"
     "@umijs/plugin-initial-state" "2.2.1"
-    "@umijs/plugin-layout" "0.11.7"
-    "@umijs/plugin-locale" "0.8.0"
-    "@umijs/plugin-model" "2.3.1"
-    "@umijs/plugin-request" "2.3.2"
+    "@umijs/plugin-layout" "0.11.13"
+    "@umijs/plugin-locale" "0.9.0"
+    "@umijs/plugin-model" "2.5.1"
+    "@umijs/plugin-request" "2.4.1"
     "@umijs/plugin-test" "1.0.0"
 
 "@umijs/renderer-react@3.0.18":
@@ -3849,6 +3863,16 @@
     react "^16.13.1"
     react-dom "^16.13.1"
     react-router-config "5.1.1"
+
+"@umijs/route-utils@^1.0.7":
+  version "1.0.30"
+  resolved "https://registry.yarnpkg.com/@umijs/route-utils/-/route-utils-1.0.30.tgz#4f515872ad36d43ff42feccc527e60e5462f55f3"
+  integrity sha512-EZKtrp2WDzQP8NH5UPrHIyhOcbgU1x/V/VUFYGiZJ9sB0XbpYtqZPYf4W0w1I1WW0PS8/qPOjJOLU4ge75ulLw==
+  dependencies:
+    "@qixian.cs/path-to-regexp" "^6.1.0"
+    hash.js "^1.1.7"
+    lodash.isequal "^4.5.0"
+    memoize-one "^5.1.1"
 
 "@umijs/runtime@3.0.18":
   version "3.0.18"
@@ -3947,15 +3971,6 @@
     "@umijs/server" "3.1.1"
     "@umijs/utils" "3.1.1"
     webpack-chain "6.4.0"
-
-"@umijs/use-request@^1.2.0":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@umijs/use-request/-/use-request-1.3.1.tgz#65cbd30a380ea13e8ca41c0198ff25a2f9c7282e"
-  integrity sha512-WCM1S/W8KfTlVWG9VonKM90oQCnKDQU/PpBHLaAazGvrHlDuGYFzHMUtipr7D7CME5h6ELZ257H695PVaVH7PQ==
-  dependencies:
-    lodash.debounce "^4.0.8"
-    lodash.throttle "^4.1.1"
-    umi-request "^1.2.17"
 
 "@umijs/utils@3.0.18":
   version "3.0.18"
@@ -9555,7 +9570,7 @@ hash-base@^3.0.0:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
-hash.js@^1.0.0, hash.js@^1.0.3:
+hash.js@^1.0.0, hash.js@^1.0.3, hash.js@^1.1.7:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/hash.js/-/hash.js-1.1.7.tgz#0babca538e8d4ee4a0f8988d68866537a003cf42"
   integrity sha512-taOaskGt4z4SOANNseOviYDvjEJinIkRgmp7LbKP2YTTmVxWBl87s/uzK9r+44BclBSp2X7K1hqeNfz9JbBeXA==
@@ -12379,6 +12394,11 @@ mem@^5.0.0:
     map-age-cleaner "^0.1.3"
     mimic-fn "^2.1.0"
     p-is-promise "^2.1.0"
+
+memoize-one@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.1.1.tgz#047b6e3199b508eaec03504de71229b8eb1d75c0"
+  integrity sha512-HKeeBpWvqiVJD57ZUAsJNm71eHTykffzcLZVYWiVfQeI1rJtuEaS7hQiEpWfVVk18donPwJEcFKIkCmPJNOhHA==
 
 memory-fs@^0.4.1:
   version "0.4.1"
@@ -18507,7 +18527,7 @@ uglify-to-browserify@~1.0.0:
   resolved "https://registry.yarnpkg.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
   integrity sha1-bgkk1r2mta/jSeOabWMoUKD4grc=
 
-umi-request@^1.2.14, umi-request@^1.2.17:
+umi-request@^1.2.14:
   version "1.2.19"
   resolved "https://registry.yarnpkg.com/umi-request/-/umi-request-1.2.19.tgz#57ec16322506674f2d6392d553119829cedb1589"
   integrity sha512-gN3OyEJGs+h4Ly2UFBL/5vhFmTM11VJ3OIq2AB3tq3PCVwqwpjY09MAwzCT4rr8Ti02kdxcPaAEUllLP5XvJRQ==
