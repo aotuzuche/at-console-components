@@ -17,7 +17,6 @@ export default defineConfig({
     ['zh-CN', '中文'],
     ['en-US', 'English'],
   ],
-  extraBabelPresets: ['linaria/babel'],
   extraBabelPlugins: [
     [
       'babel-plugin-import',
@@ -37,7 +36,4 @@ export default defineConfig({
       },
     ],
   ],
-  chainWebpack(memo, { env, webpack, createCSSRule }) {
-    memo.module.rule('js').use('linaria').loader('linaria/loader').end()
-  },
 })

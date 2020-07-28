@@ -3,14 +3,12 @@ import { Menu } from 'antd'
 import { FolderOutlined, FileOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import Icon from '@ant-design/compatible/lib/icon'
-import { css } from 'linaria'
 import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint'
 import WrapperContext from '../wrapper/wrapperContext'
 import { IMenu, isHiddenedMenu } from '../utils/menusHandler'
 import Border from './border'
 import Footer from './footer'
 import Logo from './logo'
-import styles from '../styles'
 
 const Aside = () => {
   const { menus, title } = useContext(WrapperContext)
@@ -68,35 +66,20 @@ const Aside = () => {
 
   return (
     <div
-      className={css`
-        position: relative;
-        transition: width 0.3s ${styles.cubicClose} 0s;
-        height: 100%;
-        flex-shrink: 0;
-      `}
+      className="at-cc-aside"
       style={{
         width: collapsed ? 80 : 256,
       }}
     >
       <Logo title={title} />
       <Border onClick={onSetCollapsed} collapsed={collapsed} />
-      <div
-        className={css`
-          position: absolute;
-          top: 60px;
-          left: 0;
-          right: 0;
-          bottom: 80px;
-          overflow-x: hidden;
-          overflow-y: auto;
-        `}
-      >
+      <div className="at-cc-aside-body">
         <Menu
           mode="inline"
           inlineCollapsed={collapsed}
-          className={css`
-            border: none;
-          `}
+          style={{
+            border: 'none',
+          }}
         >
           {renderMenusTree}
         </Menu>

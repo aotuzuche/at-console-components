@@ -1,7 +1,6 @@
 import React from 'react'
 import { Wrapper } from 'at-console-components'
 import { IMenu } from 'at-console-components/lib/utils/menusHandler'
-import { css } from 'linaria'
 import Table from '../../table/demo/base'
 
 const list: IMenu[] = [
@@ -258,10 +257,10 @@ const list: IMenu[] = [
 export default function BaseWrapperDemo() {
   return (
     <div
-      className={css`
-        height: 500px;
-        border: 1px solid #f3f3f3;
-      `}
+      style={{
+        height: 500,
+        border: '1px solid #f3f3f3',
+      }}
     >
       <Wrapper systemCode={list}>
         <Table />

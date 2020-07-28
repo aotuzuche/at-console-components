@@ -1,13 +1,11 @@
 import React, { FC, useEffect } from 'react'
 import { Spin, message, Breadcrumb } from 'antd'
 import { httpConsole } from 'auto-libs'
-import { css } from 'linaria'
 import { useLocation, Link, matchPath } from 'react-router-dom'
 import Aside from '../aside'
 import useStates from '../hooks/useStates'
 import { IMenu, getMenusTree, getMenuPaths } from '../utils/menusHandler'
 import WrapperContext from './wrapperContext'
-import styles from '../styles'
 
 export interface WrapperProps {
   /**
@@ -101,42 +99,12 @@ const Wrapper: FC<WrapperProps> = ({
         title,
       }}
     >
-      <Spin
-        spinning={state.loading}
-        wrapperClassName={css`
-          height: 100%;
-          .ant-spin-container {
-            height: 100%;
-          }
-        `}
-      >
-        <div
-          className={css`
-            display: flex;
-            height: 100%;
-          `}
-        >
+      <Spin spinning={state.loading} wrapperClassName="at-cc-wrapper">
+        <div className="at-cc-wrapper-container">
           <Aside />
-          <div
-            className={css`
-              overflow-y: scroll;
-              overflow-x: hidden;
-              padding: 0px ${styles.padding} ${styles.padding} 32px;
-              min-width: 575px;
-            `}
-          >
+          <div className="at-cc-wrapper-breadcrumbs">
             {state.breadcrumbs?.length !== 0 && (
-              <Breadcrumb
-                className={css`
-                  height: 60px;
-                  padding: 0 ${styles.padding} 0 32px;
-                  font-size: 14px;
-                  display: flex;
-                  align-items: center;
-                  box-shadow: 0 1px 2px 0 rgba(9, 30, 66, 0.25);
-                  margin: 0 -${styles.padding} 0 -32px;
-                `}
-              >
+              <Breadcrumb className="at-cc-wrapper-breadcrumbs-content">
                 {state.breadcrumbs.map(({ url, name }, index) => (
                   <Breadcrumb.Item>
                     {index === state.breadcrumbs.length - 1 || !url ? (
@@ -148,13 +116,7 @@ const Wrapper: FC<WrapperProps> = ({
                 ))}
               </Breadcrumb>
             )}
-            <main
-              className={css`
-                margin-top: 12px;
-              `}
-            >
-              {children}
-            </main>
+            <main className="at-cc-wrapper-body">{children}</main>
           </div>
         </div>
       </Spin>

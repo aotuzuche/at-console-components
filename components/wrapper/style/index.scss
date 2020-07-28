@@ -1,0 +1,35 @@
+@import '../../styles/index';
+
+$wrapperPrefix: $prefix + '-wrapper';
+
+.#{$wrapperPrefix} {
+  height: 100%;
+  .ant-spin-container {
+    height: 100%;
+  }
+
+  &-container {
+    display: flex;
+    height: 100%;
+  }
+
+  &-breadcrumbs {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 0px 24px 24px 32px;
+    min-width: 575px;
+    &-content {
+      height: 60px;
+      padding: 0 24px 0 32px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 1px 2px 0 rgba(9, 30, 66, 0.25);
+      margin: 0 -24px 0 -32px;
+    }
+  }
+
+  &-body {
+    margin-top: 12px;
+  }
+}

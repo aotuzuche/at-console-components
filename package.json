@@ -55,8 +55,7 @@
     "@ant-design/icons": "^4.0.6",
     "auto-libs": "^0.3.0",
     "classnames": "^2.2.6",
-    "lodash": "^4.17.19",
-    "linaria": "^1.3.3"
+    "lodash": "^4.17.19"
   },
   "peerDependencies": {
     "antd": ">=4.0.0",
@@ -85,6 +84,7 @@
     "@types/react-dom": "^16.9.6",
     "@typescript-eslint/eslint-plugin": "^3.0.0",
     "@typescript-eslint/parser": "^3.0.0",
+    "@umijs/plugin-sass": "^1.1.1",
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.1.1",
     "antd": "^4.2.3",
