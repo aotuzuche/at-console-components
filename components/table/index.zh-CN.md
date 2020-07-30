@@ -12,15 +12,29 @@ group:
 
 ### 参数
 
-| 属性     | 描述     | 类型                                    | 默认值 |
-| -------- | -------- | --------------------------------------- | ------ |
-| onSearch | 数据获取 | `() => Promise<TableData> \| TableData` | -      |
+| 属性        | 描述                   | 类型                                                                          | 默认值  |
+| ----------- | ---------------------- | ----------------------------------------------------------------------------- | ------- |
+| onSearch    | 数据获取               | `() => Promise<TableData> \| TableData`                                       | -       |
+| searchProps | 搜索栏参数             | [SearchProps](/components/table#SearchProps) \| [Form](/components/form#参数) | -       |
+| showTools   | 是否显示工具栏（刷新） | `boolean`                                                                     | `false` |
+| isKeepAlive | 是否缓存搜索参数       | `boolean`                                                                     | `false` |
+
+#### SearchProps
+
+| 属性         | 描述               | 类型      | 默认值 |
+| ------------ | ------------------ | --------- | ------ |
+| initialCount | 初始显示个数       | `number`  | 3      |
+| allowTrim    | 是否对搜索参数进行 | `boolean` | false  |
 
 #### TableData
 
-| 属性       | 描述     | 类型     | 默认值 |
-| ---------- | -------- | -------- | ------ |
-| [data]     | 数据源   | `T[]`    | -      |
-| [total]    | 数据总量 | `string` | -      |
-| [pageSize] | 分页大小 | `string` | 20     |
-| [pageNum]  | 当前页   | `string` | -      |
+| 属性         | 描述         | 类型     | 默认值     |
+| ------------ | ------------ | -------- | ---------- |
+| data         | 数据源       | `T[]`    | -          |
+| dataName     | 数据字段名   | `string` | `data`     |
+| total        | 数据总量     | `string` | -          |
+| pageSize     | 分页大小     | `string` | 20         |
+| pageSizeName | 分页字段名   | `string` | `pageSize` |
+| pageNum      | 当前页       | `string` | `1`        |
+| pageNumName  | 当前页字段名 | `string` | `pageNum`  |
+| totalName    | 总条数字段名 | `string` | `total`    |

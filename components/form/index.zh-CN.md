@@ -67,13 +67,16 @@ group:
 
 #### FormItem
 
-| 属性        | 描述                                                         | 类型                                                           | 默认值                       |
-| ----------- | ------------------------------------------------------------ | -------------------------------------------------------------- | ---------------------------- |
-| render      | 编辑模式下渲染方法                                           | `(fieldValue: StoreValue, fieldsValue: Store) => ReactElement` | `() => <Input allowClear />` |
-| renderView  | 只读模式下渲染方法                                           | `(fieldValue: StoreValue, fieldsValue: Store) => ReactNode`    | `fieldValue`                 |
-| isView      | 是否只读                                                     | `boolean`                                                      | Form `isView`                |
-| pipeline    | 输入输出过滤                                                 | `OutputPipeline \| [InputPipeline, OutputPipeline]`            | -                            |
-| isHidden    | 是否隐藏                                                     | `(fieldValue: StoreValue, fieldsValue: Store) => boolean`      | -                            |
-| layoutCol   | 布局                                                         | [ColProps](https://ant.design/components/grid/#Col)            | Form `layoutCol`             |
-| extraNames  | 额外的 name                                                  | `NamePath[]`                                                   | -                            |
-| placeholder | 占位符(View 模式下数据为 `null` `undefined` `''` 显示的文字) | `string`                                                       | `-`                          |
+| 属性        | 描述                                                         | 类型                                                                     | 默认值                       |
+| ----------- | ------------------------------------------------------------ | ------------------------------------------------------------------------ | ---------------------------- |
+| render      | 编辑模式下渲染方法                                           | `(fieldValue: StoreValue, fieldsValue: Store) => ReactElement`           | `() => <Input allowClear />` |
+| renderView  | 只读模式下渲染方法                                           | `(fieldValue: StoreValue, fieldsValue: Store) => ReactNode`              | `fieldValue`                 |
+| isView      | 是否只读                                                     | `boolean`                                                                | Form `isView`                |
+| pipeline    | 输入输出过滤                                                 | `OutputPipeline \| [InputPipeline, OutputPipeline]`                      | -                            |
+| isHidden    | 是否隐藏                                                     | `(fieldValue: StoreValue, fieldsValue: Store) => boolean`                | -                            |
+| layoutCol   | 布局                                                         | [ColProps](https://ant.design/components/grid/#Col)                      | Form `layoutCol`             |
+| extraNames  | 额外的 name                                                  | `NamePath[]`                                                             | -                            |
+| placeholder | 占位符(View 模式下数据为 `null` `undefined` `''` 显示的文字) | `string`                                                                 | `-`                          |
+| type        | 默认类型                                                     | `divider`                                                                | `-`                          |
+| suffix      | 设置后置标签                                                 | `ReactNode \| (fieldValue: StoreValue, fieldsValue: Store) => ReactNode` | `-`                          |
+| tips        | 设置提示标签                                                 | `ReactNode \| (fieldValue: StoreValue, fieldsValue: Store) => ReactNode` | `-`                          |
