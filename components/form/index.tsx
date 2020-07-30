@@ -7,6 +7,9 @@ import React, {
   FormEvent,
   isValidElement,
   cloneElement,
+  useImperativeHandle,
+  forwardRef,
+  ForwardRefRenderFunction,
 } from 'react'
 import {
   Form as AntdForm,
@@ -128,21 +131,24 @@ const RenderChild: FC<Pick<FormItemProps, 'suffix' | 'type' | 'label'>> = ({
 
 const { Item, useForm, List, Provider } = AntdForm
 
-const InternalForm: FC<FormProps> = ({
-  items,
-  children,
-  onFinish: onFinishInternal,
-  onReset: onResetInternal,
-  isView = false,
-  form,
-  layoutCol = { span: 24 },
-  initialValues: initialValuesInternal,
-  placeholder: placeholderInternal = '-',
-  onValuesChange: onValuesChangeInternal,
-  mode,
-  cardProps,
-  ...props
-}) => {
+const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
+  {
+    items,
+    children,
+    onFinish: onFinishInternal,
+    onReset: onResetInternal,
+    isView = false,
+    form,
+    layoutCol = { span: 24 },
+    initialValues: initialValuesInternal,
+    placeholder: placeholderInternal = '-',
+    onValuesChange: onValuesChangeInternal,
+    mode,
+    cardProps,
+    ...props
+  },
+  ref
+) => {
   const [formInsatce] = useForm(form)
   const forceUpdate = useForceUpdate()
   const isLoadinginitialValues = isFunc(initialValuesInternal)
@@ -169,6 +175,8 @@ const InternalForm: FC<FormProps> = ({
       formInsatce.resetFields()
     }
   }
+
+  useImperativeHandle(ref, () => formInsatce)
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
@@ -377,12 +385,12 @@ const InternalForm: FC<FormProps> = ({
   )
 }
 
-type InternalForm = typeof InternalForm
+const WrapperForm = forwardRef<FormInstance, FormProps>(InternalForm)
 
-type Form = InternalForm &
+type Form = typeof WrapperForm &
   Pick<typeof AntdForm, 'Item' | 'List' | 'useForm' | 'Provider'>
 
-const Form: Form = InternalForm as Form
+const Form: Form = WrapperForm as Form
 
 Form.Item = Item
 Form.List = List
