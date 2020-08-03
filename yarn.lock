@@ -10,9 +10,9 @@
     tinycolor2 "^1.4.1"
 
 "@ant-design/compatible@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@ant-design/compatible/-/compatible-1.0.2.tgz#d64fede2dd374451eb5045dec711ea529c3f78da"
-  integrity sha512-zflK4SV7ZnJNBqyxLG2wka+bCV7Fo9S750WPu/osmciMcXH/Z719NfuzDnoRM7y3lPRtJw6s3X3zAfulpmShhQ==
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@ant-design/compatible/-/compatible-1.0.5.tgz#f72a6602ca39e44ceff8b4c09861aa12db9f5ceb"
+  integrity sha512-UrMtEtx0M7blj/0EKvhfE7U/Q6vLd9c1EUsIf2fl8C3CRWogAUu67FwKAJKtcwQZwkinCDCJgTjtscZm1UvX4A==
   dependencies:
     "@ant-design/icons" "^4.0.0"
     classnames "^2.2.6"
