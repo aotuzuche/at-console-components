@@ -302,7 +302,19 @@ function Table<RecordType extends object>(
     return (
       <>
         <Form
-          items={state.isExpand ? items : items.slice(0, initialCount)}
+          items={
+            state.isExpand
+              ? items
+              : items.map((item, index) => {
+                  if (index >= initialCount) {
+                    return {
+                      ...item,
+                      hidden: true,
+                    }
+                  }
+                  return item
+                })
+          }
           form={form}
           layoutCol={{ span: 6 }}
           onReset={onReset}
