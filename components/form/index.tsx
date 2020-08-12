@@ -246,7 +246,7 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
       renderView,
       isView: isItemView = isView,
       isHidden,
-      layoutCol: itemLlayoutCol,
+      layoutCol: itemLayoutCol,
       label,
       tip,
       placeholder = placeholderInternal,
@@ -255,6 +255,7 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
       name,
       type,
       noStyle = !!type,
+      hidden,
       ...itemProps
     }: FormItemProps,
     index: number
@@ -267,8 +268,9 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
       ...getFieldsValue(),
     }
     const fieldValue: StoreValue = get(fieldsValue, name as string)
-    const itemLlayoutColCombination =
-      itemLlayoutCol ?? (type ? { span: 24 } : layoutCol)
+    const itemLayoutColCombination = hidden
+      ? { span: 0 }
+      : itemLayoutCol ?? (type ? { span: 24 } : layoutCol)
 
     if (isFunc(isHidden) && isHidden(fieldValue, fieldsValue)) {
       return null
@@ -312,13 +314,14 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
     }
 
     return (
-      <Col {...itemLlayoutColCombination}>
+      <Col {...itemLayoutColCombination}>
         <Item
           key={key}
           label={type ? undefined : LabelWrap}
           extra={isFunc(extra) ? extra(fieldsValue) : extra}
           name={isItemView ? undefined : name}
           noStyle={noStyle}
+          hidden={hidden}
           {...itemProps}
         >
           <RenderChild
