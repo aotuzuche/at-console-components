@@ -30,15 +30,20 @@ const Aside: FC<{
   }, [screens])
 
   useEffect(() => {
-    const lastBreadcrumb = breadcrumbs.slice(-1)
+    const len = breadcrumbs.length
+    // If last one hidden,should be take the previou
+    const lastBreadcrumbIndex = isHiddenedMenu(breadcrumbs[len - 1]?.icon)
+      ? -2
+      : -1
+    const lastBreadcrumb = breadcrumbs.slice(lastBreadcrumbIndex)[0]
     const defaultOpenKeys: string[] =
-      breadcrumbs.length > 1
+      len > 1
         ? breadcrumbs
-            .slice(0, breadcrumbs.length - 1)
+            .slice(0, len - 1)
             .map((breadcrumb) => String(breadcrumb.id))
         : []
-    const defaultSelectedKeys: string[] = lastBreadcrumb.length
-      ? [String(lastBreadcrumb[0].id)]
+    const defaultSelectedKeys: string[] = lastBreadcrumb
+      ? [String(lastBreadcrumb.id)]
       : []
 
     if (!isEqual(defaultOpenKeys, openKeys)) {
