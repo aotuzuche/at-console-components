@@ -101,10 +101,10 @@ const Wrapper: FC<WrapperProps> = ({
     >
       <Spin spinning={state.loading} wrapperClassName="at-cc-wrapper">
         <div className="at-cc-wrapper-container">
-          <Aside />
-          <div className="at-cc-wrapper-breadcrumbs">
+          <Aside breadcrumbs={state.breadcrumbs} />
+          <div className="at-cc-wrapper-main">
             {state.breadcrumbs?.length !== 0 && (
-              <Breadcrumb className="at-cc-wrapper-breadcrumbs-content">
+              <Breadcrumb className="at-cc-wrapper-breadcrumbs">
                 {state.breadcrumbs.map(({ url, name }, index) => (
                   <Breadcrumb.Item>
                     {index === state.breadcrumbs.length - 1 || !url ? (

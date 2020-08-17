@@ -1,19 +1,25 @@
-import React, { useContext, useMemo, useState, useEffect } from 'react'
+import React, { useContext, useMemo, useState, useEffect, FC } from 'react'
 import { Menu } from 'antd'
 import { FolderOutlined, FileOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import Icon from '@ant-design/compatible/lib/icon'
 import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint'
+import { OpenEventHandler, SelectEventHandler } from 'rc-menu/lib/interface'
+import { isEqual } from 'lodash'
 import WrapperContext from '../wrapper/wrapperContext'
 import { IMenu, isHiddenedMenu } from '../utils/menusHandler'
 import Border from './border'
 import Footer from './footer'
 import Logo from './logo'
 
-const Aside = () => {
+const Aside: FC<{
+  breadcrumbs: IMenu[]
+}> = ({ breadcrumbs }) => {
   const { menus, title } = useContext(WrapperContext)
   const [collapsed, setCollapsed] = useState(false)
   const screens = useBreakpoint()
+  const [openKeys, setOpenKeys] = useState<React.Key[]>([])
+  const [selectedKeys, setSelectedKeys] = useState<React.Key[]>()
 
   useEffect(() => {
     if (screens.lg === false) {
@@ -22,6 +28,27 @@ const Aside = () => {
       setCollapsed(false)
     }
   }, [screens])
+
+  useEffect(() => {
+    const lastBreadcrumb = breadcrumbs.slice(-1)
+    const defaultOpenKeys: string[] =
+      breadcrumbs.length > 1
+        ? breadcrumbs
+            .slice(0, breadcrumbs.length - 1)
+            .map((breadcrumb) => String(breadcrumb.id))
+        : []
+    const defaultSelectedKeys: string[] = lastBreadcrumb.length
+      ? [String(lastBreadcrumb[0].id)]
+      : []
+
+    if (!isEqual(defaultOpenKeys, openKeys)) {
+      setOpenKeys(defaultOpenKeys)
+    }
+
+    if (!isEqual(defaultSelectedKeys, selectedKeys)) {
+      setSelectedKeys(defaultSelectedKeys)
+    }
+  }, [breadcrumbs])
 
   const renderMenusTree = useMemo(() => {
     const isSubmenu = (menu?: IMenu[]) => {
@@ -64,6 +91,14 @@ const Aside = () => {
     setCollapsed((value) => !value)
   }
 
+  const onOpenChange = (keys: React.Key[]) => {
+    setOpenKeys(keys.slice(-1))
+  }
+
+  const onSelect: SelectEventHandler = ({ selectedKeys: keys }) => {
+    setSelectedKeys(keys)
+  }
+
   return (
     <div
       className="at-cc-aside"
@@ -80,6 +115,10 @@ const Aside = () => {
           style={{
             border: 'none',
           }}
+          onOpenChange={onOpenChange as OpenEventHandler}
+          openKeys={openKeys as string[]}
+          onSelect={onSelect as SelectEventHandler}
+          selectedKeys={selectedKeys as string[]}
         >
           {renderMenusTree}
         </Menu>

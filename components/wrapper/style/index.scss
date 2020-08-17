@@ -11,14 +11,16 @@ $wrapperPrefix: $prefix + '-wrapper';
   &-container {
     display: flex;
     height: 100%;
+    overflow: auto;
   }
 
-  &-breadcrumbs {
-    overflow-y: scroll;
+  &-main {
+    overflow-y: auto;
     overflow-x: hidden;
     padding: 0px 24px 24px 32px;
     min-width: 575px;
-    &-content {
+    &-breadcrumb,
+    .ant-breadcrumb {
       height: 60px;
       padding: 0 24px 0 32px;
       font-size: 14px;
@@ -30,6 +32,6 @@ $wrapperPrefix: $prefix + '-wrapper';
   }
 
   &-body {
-    margin-top: 12px;
+    margin-top: 24px;
   }
 }
