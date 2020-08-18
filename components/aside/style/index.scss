@@ -46,9 +46,10 @@ $asidePrefix: $prefix + '-aside';
     position: absolute;
     width: 24px;
     top: 0;
-    right: -24px;
+    right: -12px;
     bottom: 0;
     color: #6b778c;
+    z-index: 1;
     &:hover {
       &::before {
         opacity: 1;
@@ -61,7 +62,7 @@ $asidePrefix: $prefix + '-aside';
       width: 2px;
       position: absolute;
       top: 0;
-      left: 0;
+      left: 12px;
       bottom: 0;
       opacity: 0;
       background: $color;
@@ -83,14 +84,14 @@ $asidePrefix: $prefix + '-aside';
         transparent
       );
       width: 3px;
-      left: -2px;
+      left: 10px;
     }
     &-handle {
       position: absolute;
       width: 24px;
       height: 24px;
-      top: 20px;
-      right: 10px;
+      top: 18px;
+      right: 0px;
       cursor: pointer;
       transition: transform 0.3s;
       text-align: center;
@@ -99,8 +100,9 @@ $asidePrefix: $prefix + '-aside';
         transform: scale(1.2);
       }
       &-icon {
-        font-size: 20px;
+        font-size: 24px;
         background-color: #fff;
+        border-radius: 50%;
         > svg {
           transition: transform 0.3s linear 0s;
         }
