@@ -21,6 +21,9 @@ $contentBackground: #fff;
     overflow-x: hidden;
     min-width: 575px;
     background: $mainBackground;
+    width: 100%;
+    max-width: 100%;
+    word-wrap: break-word;
     &-breadcrumb,
     .ant-breadcrumb {
       height: 60px;
