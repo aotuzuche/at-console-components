@@ -27,7 +27,7 @@ const ModalForm: FC<ModalFormProps> = ({
   onBeforeOk,
   ...props
 }) => {
-  const [form] = useForm()
+  const [form] = useForm(formProps?.form)
   const [loading, setLoading] = useState(false)
 
   const onModalOk: MouseEventHandler = async () => {
