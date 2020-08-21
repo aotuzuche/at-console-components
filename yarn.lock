@@ -4976,9 +4976,9 @@ atob@^2.1.2:
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
 auto-libs@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/auto-libs/-/auto-libs-0.3.0.tgz#d83b4362d975998ca09a2bffb70d221d1150adb3"
-  integrity sha512-rROjUqt9QGZB/TSBA2xn78E70xWbrak8OBFy74ARI/Xhw7QLBqOJW3N8c7qBbGgtenrtFkblUsEfiAXbw/d5FQ==
+  version "0.3.7"
+  resolved "https://registry.yarnpkg.com/auto-libs/-/auto-libs-0.3.7.tgz#068c97b9cf428ea2eb3468d29dbe54dd36ba3142"
+  integrity sha512-pH/jaL0NRPVLGQil76B965EYLHudSs4lIV/r6NU5GUp54B1vdYz4Iw5cmm+PWJMFjzAJZQ+HBjzL1afZ8/VwSg==
   dependencies:
     at-js-sdk "^2.2.60"
     axios "^0.18.0"
@@ -15057,15 +15057,10 @@ qs@6.7.0:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
 
-qs@^6.5.2:
+qs@^6.5.2, qs@^6.9.1:
   version "6.9.4"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.4.tgz#9090b290d1f91728d3c22e54843ca44aea5ab687"
   integrity sha512-A1kFqHekCTM7cz0udomYUoYNWjBebHm/5wzU/XqrBRBNWectVH0QIiN+NEcZ0Dte5hvzHwbr8+XQmguPhJ6WdQ==
-
-qs@^6.9.1:
-  version "6.9.3"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.3.tgz#bfadcd296c2d549f1dffa560619132c977f5008e"
-  integrity sha512-EbZYNarm6138UKKq46tdx08Yo/q9ZhFoAXAI1meAFd2GtbRDhbZY2WQSICskT0c5q99aFzLG1D4nvTk9tqfXIw==
 
 qs@~6.5.2:
   version "6.5.2"
