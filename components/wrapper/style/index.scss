@@ -5,29 +5,22 @@ $mainBackground: #f0f2f5;
 $contentBackground: #fff;
 
 .#{$wrapperPrefix} {
-  height: 100%;
-  .ant-spin-container {
-    height: 100%;
-  }
-
-  &-container {
-    display: flex;
-    height: 100%;
-    overflow: auto;
-  }
-
+  min-height: 100vh;
+  padding-left: 256px;
+  transition: padding 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
   &-main {
-    overflow-y: auto;
-    overflow-x: hidden;
     min-width: 575px;
     background: $mainBackground;
     width: 100%;
     max-width: 100%;
     word-wrap: break-word;
+    padding: 12px 0;
+    min-height: 100vh;
     &-breadcrumb,
     .ant-breadcrumb {
       height: 60px;
-      padding: 0 24px 0 32px;
+      margin: -12px 0 12px;
+      padding: 0 24px 0 12px;
       font-size: 14px;
       display: flex;
       align-items: center;
@@ -39,7 +32,7 @@ $contentBackground: #fff;
   &-body {
     margin-top: 24px;
     background-color: $contentBackground;
-    margin: 12px;
+    margin: 0 12px;
     padding: 24px;
     border-radius: 4px;
   }

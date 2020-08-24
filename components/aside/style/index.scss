@@ -3,19 +3,20 @@
 $asidePrefix: $prefix + '-aside';
 
 .#{$asidePrefix} {
-  position: relative;
+  position: fixed;
   transition: width 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
-  height: 100%;
-  flex-shrink: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow: auto;
+  overflow-x: hidden;
+  background-color: $asideBg;
+  z-index: 1;
+
   &-body {
-    position: absolute;
-    top: 60px;
-    left: 0;
-    right: 0;
-    bottom: 80px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    background-color: $asideBg;
+    min-height: 100vh;
+    margin-bottom: -$asideFooterHeight;
+    padding-bottom: $asideFooterHeight;
   }
 
   // Logo
@@ -35,88 +36,15 @@ $asidePrefix: $prefix + '-aside';
     height: 60px;
     display: flex;
     align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    z-index: 1;
-  }
-
-  // Border
-  &-border {
-    position: absolute;
-    width: 24px;
-    top: 0;
-    right: -12px;
-    bottom: 0;
-    color: #6b778c;
-    z-index: 1;
-    &:hover {
-      &::before {
-        opacity: 1;
-      }
-      cursor: col-resize;
-      color: $color;
-    }
-    &::before {
-      content: '';
-      width: 2px;
-      position: absolute;
-      top: 0;
-      left: 12px;
-      bottom: 0;
-      opacity: 0;
-      background: $color;
-      transition: opacity 0.2s ease 0s;
-    }
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      opacity: 0;
-      transition: opacity 0.2s ease 0s;
-      opacity: 0.5;
-      background: linear-gradient(
-        270deg,
-        rgba(0, 0, 0, 0.2) 0,
-        rgba(0, 0, 0, 0.2) 1px,
-        rgba(0, 0, 0, 0.1) 0,
-        transparent
-      );
-      width: 3px;
-      left: 10px;
-    }
-    &-handle {
-      position: absolute;
-      width: 24px;
-      height: 24px;
-      top: 18px;
-      right: 0px;
-      cursor: pointer;
-      transition: transform 0.3s;
-      text-align: center;
-      z-index: 2;
-      &:hover {
-        transform: scale(1.2);
-      }
-      &-icon {
-        font-size: 24px;
-        background-color: #fff;
-        border-radius: 50%;
-        > svg {
-          transition: transform 0.3s linear 0s;
-        }
-      }
-    }
   }
 
   // Footer
   &-footer {
     background-color: $asideBg;
     padding: 10px 24px 0;
-    height: 80px;
-    position: absolute;
+    height: $asideFooterHeight;
+    position: sticky;
     bottom: 0;
     left: 0;
     width: 100%;

@@ -256,15 +256,8 @@ const list: IMenu[] = [
 
 export default function BaseWrapperDemo() {
   return (
-    <div
-      style={{
-        height: 500,
-        border: '1px solid #f3f3f3',
-      }}
-    >
-      <Wrapper systemCode={list}>
-        <Table />
-      </Wrapper>
-    </div>
+    <Wrapper systemCode={list}>
+      <Table />
+    </Wrapper>
   )
 }

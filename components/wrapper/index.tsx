@@ -1,5 +1,5 @@
-import React, { FC, useEffect } from 'react'
-import { Spin, message, Breadcrumb } from 'antd'
+import React, { FC, useEffect, useState } from 'react'
+import { message, Breadcrumb, Skeleton } from 'antd'
 import { httpConsole } from 'auto-libs'
 import { useLocation, Link, matchPath } from 'react-router-dom'
 import Aside from '../aside'
@@ -37,6 +37,7 @@ const Wrapper: FC<WrapperProps> = ({
     initialMenus: [],
   })
   const localtion = useLocation()
+  const [collapsed, setCollapsed] = useState(false)
 
   const init = async () => {
     try {
@@ -97,10 +98,17 @@ const Wrapper: FC<WrapperProps> = ({
       value={{
         menus: state.menus,
         title,
+        collapsed,
+        setCollapsed,
       }}
     >
-      <Spin spinning={state.loading} wrapperClassName="at-cc-wrapper">
-        <div className="at-cc-wrapper-container">
+      <Skeleton loading={state.loading}>
+        <div
+          className="at-cc-wrapper"
+          style={{
+            paddingLeft: collapsed ? 80 : 256,
+          }}
+        >
           <Aside breadcrumbs={state.breadcrumbs} />
           <div className="at-cc-wrapper-main">
             {state.breadcrumbs?.length !== 0 && (
@@ -119,7 +127,7 @@ const Wrapper: FC<WrapperProps> = ({
             <main className="at-cc-wrapper-body">{children}</main>
           </div>
         </div>
-      </Spin>
+      </Skeleton>
     </WrapperContext.Provider>
   )
 }

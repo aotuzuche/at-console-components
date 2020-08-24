@@ -8,15 +8,13 @@ import { OpenEventHandler, SelectEventHandler } from 'rc-menu/lib/interface'
 import { isEqual } from 'lodash'
 import WrapperContext from '../wrapper/wrapperContext'
 import { IMenu, isHiddenedMenu } from '../utils/menusHandler'
-import Border from './border'
 import Footer from './footer'
 import Logo from './logo'
 
 const Aside: FC<{
   breadcrumbs: IMenu[]
 }> = ({ breadcrumbs }) => {
-  const { menus, title } = useContext(WrapperContext)
-  const [collapsed, setCollapsed] = useState(false)
+  const { menus, title, collapsed, setCollapsed } = useContext(WrapperContext)
   const screens = useBreakpoint()
   const [openKeys, setOpenKeys] = useState<React.Key[]>([])
   const [selectedKeys, setSelectedKeys] = useState<React.Key[]>()
@@ -92,10 +90,6 @@ const Aside: FC<{
     return flatChildren(menus)
   }, [menus])
 
-  const onSetCollapsed = () => {
-    setCollapsed((value) => !value)
-  }
-
   const onOpenChange = (keys: React.Key[]) => {
     setOpenKeys(keys.slice(-1))
   }
@@ -111,9 +105,8 @@ const Aside: FC<{
         width: collapsed ? 80 : 256,
       }}
     >
-      <Logo title={title} />
-      <Border onClick={onSetCollapsed} collapsed={collapsed} />
       <div className="at-cc-aside-body">
+        <Logo title={title} />
         <Menu
           mode="inline"
           inlineCollapsed={collapsed}
