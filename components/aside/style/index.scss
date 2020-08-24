@@ -15,6 +15,7 @@ $asidePrefix: $prefix + '-aside';
     bottom: 80px;
     overflow-x: hidden;
     overflow-y: auto;
+    background-color: $asideBg;
   }
 
   // Logo
@@ -24,7 +25,7 @@ $asidePrefix: $prefix + '-aside';
     margin-right: 15px;
   }
   &-title {
-    background-color: #fff;
+    background-color: $asideBg;
     padding: 0 24px;
     margin: 0;
     color: #666;
@@ -112,7 +113,7 @@ $asidePrefix: $prefix + '-aside';
 
   // Footer
   &-footer {
-    background-color: #fff;
+    background-color: $asideBg;
     padding: 10px 24px 0;
     height: 80px;
     position: absolute;
