@@ -38,6 +38,7 @@ import Form, { FormProps } from '../form'
 import AsyncButton from '../async-button'
 import { isFunc } from '../utils/is'
 import showPlaceHolder from '../utils/showPlaceholder'
+import useWindowSize from './useWindowSize'
 import useStates from '../hooks/useStates'
 import { getHistoryState, setHistoryState } from './historyState'
 
@@ -142,7 +143,7 @@ function Table<RecordType extends object>(
     onSearch: onTableSearch,
     pagination,
     totalName = 'total',
-    pageSize = 10,
+    pageSize = 20,
     pageSizeName = 'pageSize',
     pageNum = 1,
     pageNumName = 'pageNum',
@@ -154,11 +155,13 @@ function Table<RecordType extends object>(
     showTools,
     scroll,
     isKeepAlive = false,
+    sticky,
     ...props
   }: TableProps<RecordType>,
   ref: Ref<TableRef>
 ) {
   const [form] = useForm(tableSearchProps?.form)
+  const { height } = useWindowSize()
   const [state, setState] = useStates<{
     loading: boolean
     isExpand: boolean
@@ -418,8 +421,10 @@ function Table<RecordType extends object>(
         scroll={{
           scrollToFirstRowOnChange: true,
           x: 'max-content',
+          y: sticky ? undefined : height,
           ...scroll,
         }}
+        sticky={sticky}
         columns={renderColumns()}
         onChange={onChange}
         loading={state.loading}

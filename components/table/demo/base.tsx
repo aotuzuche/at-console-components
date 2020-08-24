@@ -91,7 +91,6 @@ export default function BaseDemo() {
       }}
       ref={table}
       isKeepAlive
-      sticky
     />
   )
 }
