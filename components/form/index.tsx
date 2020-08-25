@@ -110,6 +110,9 @@ export interface FormProps extends AntdFormProps, FormCommonProps {
   /** Effective in card mode */
   cardProps?: CardProps
   onFinish?: (values: Store) => void | Promise<unknown>
+  childrenProps?: {
+    single?: boolean
+  }
 }
 
 const RenderChild: FC<Pick<FormItemProps, 'suffix' | 'type' | 'label'>> = ({
@@ -145,6 +148,7 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
     onValuesChange: onValuesChangeInternal,
     mode,
     cardProps,
+    childrenProps,
     ...props
   },
   ref
@@ -350,6 +354,7 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
         <Col
           style={{
             flex: '1',
+            flexBasis: childrenProps?.single ? '100%' : 'auto',
           }}
         >
           <Item label={<span />} colon={false}>

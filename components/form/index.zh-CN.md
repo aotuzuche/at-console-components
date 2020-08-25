@@ -63,7 +63,8 @@ group:
 | isView        | 是否只读                                                     | `boolean`                                           | `false`        |
 | layoutCol     | 布局                                                         | [ColProps](https://ant.design/components/grid/#Col) | `{ span: 24 }` |
 | initialValues | 初始化值，只会触发一次，支持 `Promise` 从接口拿到数据        | `Store \| (() => Promise<Store>)`                   | -              |
-| placeholder   | 占位符(View 模式下数据为 `null` `undefined` `''` 显示的文字) | `string`                                            | `-`            |
+| placeholder   | 占位符(View 模式下数据为 `null` `undefined` `''` 显示的文字) | `string`                                            | -              |
+| childrenProps | children 参数， `single` 是否为单行模式                      | `{single?: boolean}`                                | -              |
 
 #### FormItem
 
