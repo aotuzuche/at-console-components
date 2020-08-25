@@ -24,5 +24,10 @@ module.exports = {
       },
       'lodash',
     ],
+    [
+      'import',
+      { libraryName: '@ant-design/icons', libraryDirectory: '' },
+      '@ant-design/icons',
+    ],
   ],
 }
