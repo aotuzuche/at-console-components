@@ -26,7 +26,11 @@ module.exports = {
     ],
     [
       'import',
-      { libraryName: '@ant-design/icons', libraryDirectory: '' },
+      {
+        libraryName: '@ant-design/icons',
+        libraryDirectory: '',
+        camel2DashComponentName: false,
+      },
       '@ant-design/icons',
     ],
   ],
