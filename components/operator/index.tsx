@@ -34,9 +34,9 @@ const Operator: FC<OperatorProps> = (props) => {
     composition = [
       composition.slice(0, len - 1),
       <Dropdown overlay={overlay} key="at-operator-dropdown">
-        <span>
+        <a>
           更多 <DownOutlined />
-        </span>
+        </a>
       </Dropdown>,
     ]
   }
