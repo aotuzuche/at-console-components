@@ -78,11 +78,10 @@ const Wrapper: FC<WrapperProps> = ({
           exact: true,
         })
     )
-    if (matchMenu) {
-      setState({
-        breadcrumbs: getMenuPaths(matchMenu, state.menus),
-      })
-    }
+    const breadcrumbs = matchMenu ? getMenuPaths(matchMenu, state.menus) : []
+    setState({
+      breadcrumbs,
+    })
   }
 
   useEffect(() => {
