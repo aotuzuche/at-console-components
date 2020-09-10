@@ -15,6 +15,7 @@
     "lint:eslint": "eslint . --ext .js,.jsx,.ts,.tsx,.md",
     "lint:tsc": "tsc --noEmit",
     "build": "dumi build",
+    "deploy": "yarn build",
     "prettier": "prettier '**/*' -c --write",
     "start": "dumi dev",
     "test": "umi-test",
