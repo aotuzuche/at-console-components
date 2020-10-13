@@ -110,7 +110,7 @@ export interface TableOnSearchChangeState<RecordType> {
   isInit?: boolean
 }
 export interface TableProps<RecordType>
-  extends Omit<AntdTableProps<RecordType>, 'title'>,
+  extends Omit<AntdTableProps<RecordType>, 'title' | 'summary'>,
     TablePaginationName,
     TableCommonProps {
   searchProps?: TableSearchProps
@@ -127,7 +127,7 @@ export interface TableProps<RecordType>
   showTools?: boolean
   isKeepAlive?: boolean
   title?: (data: TableData<RecordType>) => ReactNode
-  summary: (data: RecordType[], pageData: TableData<RecordType>) => ReactNode
+  summary?: (data: RecordType[], pageData: TableData<RecordType>) => ReactNode
 }
 
 export interface TableRef {
