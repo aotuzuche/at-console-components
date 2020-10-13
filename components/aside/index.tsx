@@ -91,7 +91,7 @@ const Aside: FC<{
   }, [menus])
 
   const onOpenChange = (keys: React.Key[]) => {
-    setOpenKeys(keys.slice(-1))
+    setOpenKeys(keys)
   }
 
   const onSelect: SelectEventHandler = ({ selectedKeys: keys }) => {

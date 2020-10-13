@@ -1,12 +1,11 @@
 import { groupBy } from 'lodash'
 
 export interface IMenu {
-  icon: string | null
+  icon?: string | null
   id: number
   name: string
-  pid: number
-  systemId: number
-  url: string | null
+  pid?: number
+  url?: string | null
   children?: IMenu[]
 }
 

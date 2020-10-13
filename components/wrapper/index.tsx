@@ -45,9 +45,10 @@ const Wrapper: FC<WrapperProps> = ({
         loading: true,
       })
 
+      // micro frontend menu config
       if (Array.isArray(systemCode)) {
         setState({
-          menus: getMenusTree(systemCode),
+          menus: systemCode,
           initialMenus: systemCode,
         })
       } else {
@@ -86,7 +87,7 @@ const Wrapper: FC<WrapperProps> = ({
 
   useEffect(() => {
     init()
-  }, [])
+  }, [systemCode])
 
   useEffect(() => {
     getBreadcrumbs()
