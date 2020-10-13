@@ -127,6 +127,7 @@ export interface TableProps<RecordType>
   showTools?: boolean
   isKeepAlive?: boolean
   title?: (data: TableData<RecordType>) => ReactNode
+  summary: (data: RecordType[], pageData: TableData<RecordType>) => ReactNode
 }
 
 export interface TableRef {
@@ -156,6 +157,7 @@ function Table<RecordType extends object>(
     scroll,
     isKeepAlive = false,
     sticky,
+    summary,
     ...props
   }: TableProps<RecordType>,
   ref: Ref<TableRef>
@@ -443,6 +445,7 @@ function Table<RecordType extends object>(
               }
         }
         title={isShowTableTitle ? renderTitle : undefined}
+        summary={summary ? (data) => summary(data, state.data) : undefined}
       />
     </div>
   )
