@@ -7,6 +7,7 @@ export interface IMenu {
   pid?: number
   url?: string | null
   children?: IMenu[]
+  systemId?: number
 }
 
 /**
