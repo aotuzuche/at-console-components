@@ -1,9 +1,9 @@
 import React, { FC, useMemo, useContext } from 'react'
-import { Popconfirm, Tooltip, Space } from 'antd'
+import { Popconfirm } from 'antd'
 import {
   PoweroffOutlined,
-  AppstoreOutlined,
-  LeftCircleOutlined,
+  DoubleRightOutlined,
+  DoubleLeftOutlined,
 } from '@ant-design/icons'
 import { toConsoleLogin } from 'auto-libs'
 import getLoginInfo from '../utils/getLoginInfo'
@@ -17,39 +17,42 @@ const Footer: FC<{
   return (
     <div className="at-cc-aside-footer">
       <div className="at-cc-aside-footer-body">
-        {!collapsed && (
-          <Tooltip title={loginName} placement="right">
-            <span className="at-cc-aside-footer-avatar">
-              {loginName.substr(-2)}
-            </span>
-          </Tooltip>
+        {collapsed && (
+          <div
+            className="at-cc-aside-footer-open"
+            onClick={() => {
+              setCollapsed((value) => !value)
+            }}
+          >
+            <DoubleRightOutlined className="at-cc-aside-footer-icon" />
+          </div>
         )}
-        <Space size="middle">
-          {!collapsed && (
-            <Popconfirm
-              title="确认要回到主页么？"
-              onConfirm={() => {
-                window.location.href = '/system'
-              }}
-            >
-              <AppstoreOutlined className="at-cc-aside-footer-icon" />
-            </Popconfirm>
-          )}
-          {!collapsed && (
-            <Popconfirm title="确认要注销么？" onConfirm={toConsoleLogin}>
-              <PoweroffOutlined className="at-cc-aside-footer-icon" />
-            </Popconfirm>
-          )}
-          <Tooltip title={collapsed ? '展开' : '收起'}>
-            <LeftCircleOutlined
-              className="at-cc-aside-footer-icon"
-              rotate={collapsed ? -180 : 0}
-              onClick={() => {
-                setCollapsed((value) => !value)
-              }}
-            />
-          </Tooltip>
-        </Space>
+
+        {!collapsed && (
+          <>
+            <div className="at-cc-aside-footer-img" />
+            <div className="at-cc-aside-footer-info">
+              <h2>{loginName}</h2>
+
+              <div className="at-cc-aside-footer-btns">
+                <Popconfirm title="确认要注销么？" onConfirm={toConsoleLogin}>
+                  <div className="at-cc-aside-footer-btn at-cc-aside-footer-logout">
+                    <PoweroffOutlined className="at-cc-aside-footer-icon" />
+                  </div>
+                </Popconfirm>
+
+                <div
+                  className="at-cc-aside-footer-btn at-cc-aside-footer-collapsed"
+                  onClick={() => {
+                    setCollapsed((value) => !value)
+                  }}
+                >
+                  <DoubleLeftOutlined className="at-cc-aside-footer-icon" />
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   )

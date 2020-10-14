@@ -4,6 +4,7 @@ $asidePrefix: $prefix + '-aside';
 
 .#{$asidePrefix} {
   position: fixed;
+
   transition: width 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
   top: 0;
   left: 0;
@@ -19,61 +20,145 @@ $asidePrefix: $prefix + '-aside';
     padding-bottom: $asideFooterHeight;
   }
 
-  // Logo
   &-logo {
-    width: 42px;
-    border-radius: 10px;
-    margin-right: 15px;
-  }
-  &-title {
-    background-color: $asideBg;
-    padding: 0 24px;
-    margin: 0;
-    color: #666;
-    font-size: 22px;
-    white-space: nowrap;
-    overflow: hidden;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    width: 100%;
+    display: inline-block;
+    vertical-align: middle;
+    height: 36px;
+    border-radius: 50%;
   }
 
-  // Footer
-  &-footer {
-    background-color: $asideBg;
-    padding: 10px 24px 0;
-    height: $asideFooterHeight;
-    position: sticky;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    &::before {
-      content: '';
-      height: 1px;
+  &-title {
+    height: 64px;
+    position: relative;
+    line-height: 64px;
+    padding-left: 20px;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    background: #fff;
+    overflow: hidden;
+    flex-shrink: 0;
+
+    > h1 {
+      color: #001529;
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 18px;
+      margin: 0 0 0 12px;
+      font-weight: normal;
     }
+  }
+
+  &-footer {
+    width: 100%;
+    // height: 50px;
+    border-top: 1px solid #f0f0f0;
+    padding: 10px;
     &-body {
       display: flex;
-      height: 100%;
       align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid #c1c7d0;
     }
-    &-avatar {
-      width: 32px;
-      display: inline-block;
-      height: 32px;
-      text-align: center;
-      line-height: 32px;
-      border-radius: 50%;
+
+    &-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 5px;
+      background: #f5f5f5;
+      margin-right: 10px;
+      transition: all 0.3s ease-in;
       overflow: hidden;
-      background-color: $color;
-      color: #fff;
-      font-size: 12px;
+      background: url('https://cdn.atzuche.com/system/avatar-default.png') 50%
+        100% no-repeat #f3f6f9;
+      background-size: 30px auto;
     }
+
+    &-info {
+      flex: 1;
+      h2 {
+        color: #3f4254;
+        margin-bottom: 0;
+        margin-top: -8px;
+      }
+
+      h3 {
+        color: #b5b5c3;
+        font-size: 12px;
+        margin-bottom: 0;
+      }
+    }
+
+    &-logout {
+      margin-right: 5px;
+      .#{$asidePrefix}-footer-icon {
+        color: #f64e60;
+      }
+
+      &:hover {
+        background-color: #f64e60;
+
+        .#{$asidePrefix}-footer-icon {
+          color: #fff;
+        }
+      }
+    }
+
+    &-collapsed {
+      .#{$asidePrefix}-footer-icon {
+        color: #1bc5bd;
+      }
+
+      &:hover {
+        background-color: #1bc5bd;
+
+        .#{$asidePrefix}-footer-icon {
+          color: #fff;
+        }
+      }
+    }
+
     &-icon {
-      font-size: 18px;
+      font-size: 14px;
+    }
+
+    &-btns {
+      display: flex;
+    }
+
+    &-btn {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f3f6f9;
       cursor: pointer;
+      border-radius: 4px;
+    }
+
+    &-open {
+      width: 60px;
+      height: 60px;
+      border-radius: 5px;
+      transition: all 0.3s ease-in;
+      overflow: hidden;
+      background: #f3f6f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      .#{$asidePrefix}-footer-icon {
+        color: #1bc5bd;
+        display: block;
+        font-size: 30px;
+      }
+
+      &:hover {
+        background-color: #1bc5bd;
+
+        .#{$asidePrefix}-footer-icon {
+          color: #fff;
+        }
+      }
     }
   }
 }
