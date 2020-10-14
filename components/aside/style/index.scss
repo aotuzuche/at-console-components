@@ -53,12 +53,12 @@ $asidePrefix: $prefix + '-aside';
 
   &-footer {
     width: 100%;
+    max-width: 256px;
     border-top: 1px solid #f0f0f0;
     padding: 10px;
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
     background-color: #fff;
     z-index: 9;
 
@@ -144,8 +144,8 @@ $asidePrefix: $prefix + '-aside';
     }
 
     &-open {
-      width: 60px;
-      height: 60px;
+      width: 45px;
+      height: 45px;
       border-radius: 5px;
       transition: all 0.3s ease-in;
       overflow: hidden;
