@@ -120,6 +120,21 @@ $asidePrefix: $prefix + '-aside';
       }
     }
 
+    &-appstore {
+      margin-right: 5px;
+      .#{$asidePrefix}-footer-icon {
+        color: #ffa800;
+      }
+
+      &:hover {
+        background-color: #ffa800;
+
+        .#{$asidePrefix}-footer-icon {
+          color: #fff;
+        }
+      }
+    }
+
     &-icon {
       font-size: 14px;
     }
@@ -144,7 +159,6 @@ $asidePrefix: $prefix + '-aside';
       width: 45px;
       height: 45px;
       border-radius: 5px;
-      transition: all 0.3s ease-in;
       overflow: hidden;
       background: #f3f6f9;
       display: flex;

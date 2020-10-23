@@ -4,6 +4,7 @@ import {
   PoweroffOutlined,
   DoubleRightOutlined,
   DoubleLeftOutlined,
+  AppstoreOutlined,
 } from '@ant-design/icons'
 import { toConsoleLogin } from 'auto-libs'
 import getLoginInfo from '../utils/getLoginInfo'
@@ -40,7 +41,16 @@ const Footer: FC<{
                     <PoweroffOutlined className="at-cc-aside-footer-icon" />
                   </div>
                 </Popconfirm>
-
+                <Popconfirm
+                  title="确认要回到主页么？"
+                  onConfirm={() => {
+                    window.location.href = '/system'
+                  }}
+                >
+                  <div className="at-cc-aside-footer-btn at-cc-aside-footer-appstore">
+                    <AppstoreOutlined className="at-cc-aside-footer-icon" />
+                  </div>
+                </Popconfirm>
                 <div
                   className="at-cc-aside-footer-btn at-cc-aside-footer-collapsed"
                   onClick={() => {
