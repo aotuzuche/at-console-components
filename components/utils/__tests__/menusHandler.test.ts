@@ -3,26 +3,18 @@ import { getMenuPaths } from '../menusHandler'
 describe('MenusHandler', () => {
   describe('getMenuPaths', () => {
     it('empty', () => {
-      expect(
-        getMenuPaths(
-          { id: 0, icon: 'false', systemId: 0, name: '', pid: 0, url: '' },
-          []
-        )
-      ).toEqual([])
+      expect(getMenuPaths('', [])).toEqual([])
     })
 
     it('level 1', () => {
       expect(
-        getMenuPaths(
+        getMenuPaths('/123', [
+          { id: 3, icon: 'false', systemId: 0, name: '', pid: 0, url: '/123' },
+          { id: 2, icon: 'false', systemId: 0, name: '', pid: 0, url: '' },
           { id: 1, icon: 'false', systemId: 0, name: '', pid: 0, url: '' },
-          [
-            { id: 3, icon: 'false', systemId: 0, name: '', pid: 0, url: '' },
-            { id: 2, icon: 'false', systemId: 0, name: '', pid: 0, url: '' },
-            { id: 1, icon: 'false', systemId: 0, name: '', pid: 0, url: '' },
-          ]
-        )
+        ])
       ).toEqual([
-        { id: 1, icon: 'false', systemId: 0, name: '', pid: 0, url: '' },
+        { id: 3, icon: 'false', systemId: 0, name: '', pid: 0, url: '/123' },
       ])
     })
 
@@ -51,7 +43,7 @@ describe('MenusHandler', () => {
               systemId: 0,
               name: '',
               pid: 0,
-              url: '',
+              url: '/123',
             },
             {
               id: 5,
@@ -64,14 +56,16 @@ describe('MenusHandler', () => {
           ],
         },
       ]
-      expect(
-        getMenuPaths(
-          { id: 4, icon: 'false', systemId: 0, name: '', pid: 0, url: '' },
-          menus
-        )
-      ).toEqual([
+      expect(getMenuPaths('/123', menus)).toEqual([
         menus[1],
-        { id: 4, icon: 'false', systemId: 0, name: '', pid: 0, url: '' },
+        {
+          id: 4,
+          icon: 'false',
+          systemId: 0,
+          name: '',
+          pid: 0,
+          url: '/123',
+        },
       ])
     })
 
@@ -124,22 +118,24 @@ describe('MenusHandler', () => {
                   systemId: 0,
                   name: '',
                   pid: 0,
-                  url: '',
+                  url: '/123',
                 },
               ],
             },
           ],
         },
       ]
-      expect(
-        getMenuPaths(
-          { id: 7, icon: 'false', systemId: 0, name: '', pid: 0, url: '' },
-          menus
-        )
-      ).toEqual([
+      expect(getMenuPaths('/123', menus)).toEqual([
         menus[1],
         menus[1]?.children?.[1],
-        { id: 7, icon: 'false', systemId: 0, name: '', pid: 0, url: '' },
+        {
+          id: 7,
+          icon: 'false',
+          systemId: 0,
+          name: '',
+          pid: 0,
+          url: '/123',
+        },
       ])
     })
 
@@ -160,7 +156,7 @@ describe('MenusHandler', () => {
               systemId: 0,
               name: '',
               pid: 0,
-              url: '',
+              url: '/123',
             },
             {
               id: 4,
@@ -199,14 +195,16 @@ describe('MenusHandler', () => {
           ],
         },
       ]
-      expect(
-        getMenuPaths(
-          { id: 3, icon: 'false', systemId: 0, name: '', pid: 0, url: '' },
-          menus
-        )
-      ).toEqual([
+      expect(getMenuPaths('/123', menus)).toEqual([
         menus[1],
-        { id: 3, icon: 'false', systemId: 0, name: '', pid: 0, url: '' },
+        {
+          id: 3,
+          icon: 'false',
+          systemId: 0,
+          name: '',
+          pid: 0,
+          url: '/123',
+        },
       ])
     })
   })
