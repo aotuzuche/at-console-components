@@ -1,13 +1,15 @@
 import { groupBy } from 'lodash'
+import { matchPath } from 'react-router-dom'
 
 export interface IMenu {
   icon?: string | null
   id: number
   name: string
   pid?: number
-  url?: string | null
+  url?: string
   children?: IMenu[]
   systemId?: number
+  code?: string
 }
 
 /**
@@ -59,17 +61,22 @@ export function isHiddenedMenu(icon: any) {
  * [ IMenu, IMenu, IMenu ]
  *
  */
-export function getMenuPaths(menu: IMenu, menus: IMenu[]): IMenu[] {
+export function getMenuPaths(pathname: string, menus: IMenu[]): IMenu[] {
   let result: IMenu[] = []
 
   // eslint-disable-next-line no-restricted-syntax
   for (const iMenu of menus) {
-    if (iMenu.id === menu.id) {
+    if (
+      matchPath(pathname, {
+        path: iMenu.url,
+        exact: true,
+      })
+    ) {
       result = [iMenu]
       break
     }
     if (iMenu.children) {
-      const findChildMenu = getMenuPaths(menu, iMenu.children)
+      const findChildMenu = getMenuPaths(pathname, iMenu.children)
 
       if (findChildMenu.length) {
         result = [iMenu].concat(findChildMenu)

@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import { message, Breadcrumb, Skeleton } from 'antd'
 import { httpConsole } from 'auto-libs'
-import { useLocation, Link, matchPath } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import Aside from '../aside'
 import useStates from '../hooks/useStates'
 import { IMenu, getMenusTree, getMenuPaths } from '../utils/menusHandler'
@@ -71,15 +71,7 @@ const Wrapper: FC<WrapperProps> = ({
   }
 
   const getBreadcrumbs = () => {
-    const matchMenu = state.initialMenus.find(
-      (menus) =>
-        menus.url &&
-        matchPath(localtion.pathname, {
-          path: menus.url,
-          exact: true,
-        })
-    )
-    const breadcrumbs = matchMenu ? getMenuPaths(matchMenu, state.menus) : []
+    const breadcrumbs = getMenuPaths(localtion.pathname, state.menus) || []
     setState({
       breadcrumbs,
     })
