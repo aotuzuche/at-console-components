@@ -56,7 +56,7 @@ const Aside: FC<{
     if (isCanUseWindow()) {
       setTimeout(() => {
         const activeMenu = document.querySelector(
-          '.at-cc-aside .ant-menu-submenu-open .ant-menu-submenu-selected'
+          '.at-cc-aside .ant-menu-submenu-selected'
         )
 
         if (activeMenu && (activeMenu as any).scrollIntoViewIfNeeded) {
