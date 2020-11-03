@@ -10,6 +10,7 @@ import WrapperContext from '../wrapper/wrapperContext'
 import { IMenu, isHiddenedMenu } from '../utils/menusHandler'
 import Footer from './footer'
 import Logo from './logo'
+import { isCanUseWindow } from '../utils/is'
 
 const Aside: FC<{
   breadcrumbs: IMenu[]
@@ -50,6 +51,18 @@ const Aside: FC<{
 
     if (!isEqual(defaultSelectedKeys, selectedKeys)) {
       setSelectedKeys(defaultSelectedKeys)
+    }
+
+    if (isCanUseWindow()) {
+      setTimeout(() => {
+        const activeMenu = document.querySelector(
+          '.at-cc-aside .ant-menu-submenu-open .ant-menu-submenu-selected'
+        )
+
+        if (activeMenu && (activeMenu as any).scrollIntoViewIfNeeded) {
+          ;(activeMenu as any).scrollIntoViewIfNeeded()
+        }
+      }, 0)
     }
   }, [breadcrumbs])
 
