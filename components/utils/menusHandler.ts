@@ -10,6 +10,7 @@ export interface IMenu {
   children?: IMenu[]
   systemId?: number
   code?: string
+  isMfe?: boolean
 }
 
 /**

@@ -77,11 +77,18 @@ const Aside: FC<{
       }
 
       return childrenMenes
-        .map(({ icon, name, id, url, children }) => {
+        .map(({ icon, name, id, url, children, isMfe }) => {
           if (isHiddenedMenu(icon)) return null
 
           const subMenuIcon = icon ? <Icon type={icon} /> : <FolderOutlined />
           const menuIcon = icon ? <Icon type={icon} /> : <FileOutlined />
+          const AnchorCom =
+            url && isMfe ? (
+              <Link to={url}>{name}</Link>
+            ) : (
+              <a href={url}>{name}</a>
+            )
+          const menuItem = url ? AnchorCom : name
 
           return isSubmenu(children) ? (
             <Menu.SubMenu
@@ -93,7 +100,7 @@ const Aside: FC<{
             </Menu.SubMenu>
           ) : (
             <Menu.Item key={id} icon={isChildren ? undefined : menuIcon}>
-              {url ? <Link to={url}>{name}</Link> : name}
+              {menuItem}
             </Menu.Item>
           )
         })
