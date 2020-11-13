@@ -145,7 +145,7 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
     layoutCol = { span: 24 },
     initialValues: initialValuesInternal,
     placeholder: placeholderInternal = '-',
-    onValuesChange: onValuesChangeInternal,
+    onFieldsChange: onFieldsChangeInternal,
     mode,
     cardProps,
     childrenProps,
@@ -341,10 +341,10 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
     )
   }
 
-  const onValuesChange = (changeValues: Store, values: Store) => {
+  const onFieldsChange = (changedFields: any[], allFields: any[]) => {
     forceUpdate()
-    isFunc(onValuesChangeInternal) &&
-      onValuesChangeInternal(changeValues, values)
+    isFunc(onFieldsChangeInternal) &&
+      onFieldsChangeInternal(changedFields, allFields)
   }
 
   const FormChildren = (
@@ -372,7 +372,7 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
         form={formInsatce}
         onFinish={onFinish}
         onReset={onReset}
-        onValuesChange={onValuesChange}
+        onFieldsChange={onFieldsChange}
         initialValues={initialStates.initialValues}
         {...props}
       >
