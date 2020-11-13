@@ -86,7 +86,9 @@ const Aside: FC<{
             url && isMfe ? (
               <Link to={url}>{name}</Link>
             ) : (
-              <a href={url}>{name}</a>
+              <a href={`/system${url}`} target="_blank" rel="noreferrer">
+                {name}
+              </a>
             )
           const menuItem = url ? AnchorCom : name
 
