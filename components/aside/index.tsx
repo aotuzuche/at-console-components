@@ -28,6 +28,18 @@ const Aside: FC<{
     }
   }, [screens])
 
+  const setIfChangeCollapsed = () => {
+    const len = breadcrumbs.length
+    const defaultOpenKeys: string[] =
+      len > 1
+        ? breadcrumbs
+            .slice(0, len - 1)
+            .map((breadcrumb) => String(breadcrumb.id))
+        : []
+
+    setOpenKeys(defaultOpenKeys)
+  }
+
   useEffect(() => {
     const len = breadcrumbs.length
     // If last one hidden,should be take the previou
@@ -119,6 +131,12 @@ const Aside: FC<{
   const onSelect: SelectEventHandler = ({ selectedKeys: keys }) => {
     setSelectedKeys(keys)
   }
+
+  useEffect(() => {
+    if (!collapsed) {
+      setIfChangeCollapsed()
+    }
+  }, [collapsed])
 
   return (
     <div
