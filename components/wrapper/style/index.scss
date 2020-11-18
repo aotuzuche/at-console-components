@@ -16,6 +16,7 @@ $contentBackground: #fff;
     word-wrap: break-word;
     padding: 12px 0;
     min-height: 100vh;
+    position: relative;
     &-breadcrumb,
     .ant-breadcrumb {
       margin: -12px 0 12px;
