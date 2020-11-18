@@ -77,7 +77,7 @@ const Aside: FC<{
       }
 
       return childrenMenes
-        .map(({ icon, name, id, url, children, isMfe }) => {
+        .map(({ icon, name, id, url, children, isMfe = true }) => {
           if (isHiddenedMenu(icon)) return null
 
           const subMenuIcon = icon ? <Icon type={icon} /> : <FolderOutlined />
