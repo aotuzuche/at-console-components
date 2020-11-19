@@ -7,7 +7,9 @@ $contentBackground: #fff;
 .#{$wrapperPrefix} {
   min-height: 100vh;
   padding-left: 256px;
-  transition: padding 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
+  &-animation {
+    transition: padding 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
+  }
   &-main {
     min-width: 575px;
     background: $mainBackground;

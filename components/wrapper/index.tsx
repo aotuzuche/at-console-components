@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useLayoutEffect, useState } from 'react'
 import { message, Breadcrumb, Skeleton } from 'antd'
 import { httpConsole } from 'auto-libs'
 import { useLocation, Link } from 'react-router-dom'
@@ -38,6 +38,7 @@ const Wrapper: FC<WrapperProps> = ({
   })
   const localtion = useLocation()
   const [collapsed, setCollapsed] = useState(false)
+  const [isLoaded, setLoaded] = useState(false)
 
   const init = async () => {
     try {
@@ -85,6 +86,10 @@ const Wrapper: FC<WrapperProps> = ({
     getBreadcrumbs()
   }, [localtion.pathname, state.menus])
 
+  useLayoutEffect(() => {
+    setLoaded(true)
+  }, [])
+
   return (
     <WrapperContext.Provider
       value={{
@@ -96,7 +101,9 @@ const Wrapper: FC<WrapperProps> = ({
     >
       <Skeleton loading={state.loading}>
         <div
-          className="at-cc-wrapper"
+          className={
+            isLoaded ? 'at-cc-wrapper at-cc-wrapper-animation' : 'at-cc-wrapper'
+          }
           style={{
             paddingLeft: collapsed ? 80 : 256,
           }}
