@@ -6,12 +6,13 @@ import Aside from '../aside'
 import useStates from '../hooks/useStates'
 import { IMenu, getMenusTree, getMenuPaths } from '../utils/menusHandler'
 import WrapperContext from './wrapperContext'
+import { isFunc } from '../utils/is'
 
 export interface WrapperProps {
   /**
    * System code
    */
-  systemCode: string | IMenu[]
+  systemCode: string | IMenu[] | (() => Promise<IMenu[]>)
   title?: string
 }
 
@@ -51,6 +52,12 @@ const Wrapper: FC<WrapperProps> = ({
         setState({
           menus: systemCode,
           initialMenus: systemCode,
+        })
+      } else if (isFunc(systemCode)) {
+        const menus = await systemCode()
+        setState({
+          menus,
+          initialMenus: menus,
         })
       } else {
         const result: any = await httpConsole.get(
