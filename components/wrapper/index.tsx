@@ -14,6 +14,7 @@ export interface WrapperProps {
    */
   systemCode: string | IMenu[] | (() => Promise<IMenu[]>)
   title?: string
+  showMenuSearch?: boolean
 }
 
 /**
@@ -23,23 +24,23 @@ const Wrapper: FC<WrapperProps> = ({
   title = '凹凸租车',
   systemCode,
   children,
+  showMenuSearch,
 }) => {
   const [state, setState] = useStates<{
     loading: boolean
     collapsed: boolean
-    menus: IMenu[]
     initialMenus: IMenu[]
     breadcrumbs: IMenu[]
   }>({
     loading: true,
     collapsed: false,
-    menus: [],
     breadcrumbs: [],
     initialMenus: [],
   })
   const localtion = useLocation()
   const [collapsed, setCollapsed] = useState(false)
   const [isLoaded, setLoaded] = useState(false)
+  const [menus, setMenus] = useState<IMenu[]>([])
 
   const init = async () => {
     try {
@@ -49,23 +50,24 @@ const Wrapper: FC<WrapperProps> = ({
 
       // micro frontend menu config
       if (Array.isArray(systemCode)) {
+        setMenus(systemCode)
         setState({
-          menus: systemCode,
           initialMenus: systemCode,
         })
       } else if (isFunc(systemCode)) {
-        const menus = await systemCode()
+        const result = await systemCode()
+        setMenus(result)
         setState({
-          menus,
-          initialMenus: menus,
+          initialMenus: result,
         })
       } else {
         const result: any = await httpConsole.get(
           `/apigateway/auth/console/auth/menu/${systemCode}`
         )
 
+        setMenus(getMenusTree(result?.list))
+
         setState({
-          menus: getMenusTree(result?.list),
           initialMenus: result?.list,
         })
       }
@@ -79,7 +81,7 @@ const Wrapper: FC<WrapperProps> = ({
   }
 
   const getBreadcrumbs = () => {
-    const breadcrumbs = getMenuPaths(localtion.pathname, state.menus) || []
+    const breadcrumbs = getMenuPaths(localtion.pathname, menus) || []
     setState({
       breadcrumbs,
     })
@@ -91,7 +93,7 @@ const Wrapper: FC<WrapperProps> = ({
 
   useEffect(() => {
     getBreadcrumbs()
-  }, [localtion.pathname, state.menus])
+  }, [localtion.pathname, menus])
 
   useLayoutEffect(() => {
     setLoaded(true)
@@ -100,10 +102,12 @@ const Wrapper: FC<WrapperProps> = ({
   return (
     <WrapperContext.Provider
       value={{
-        menus: state.menus,
+        menus,
         title,
         collapsed,
         setCollapsed,
+        setMenus,
+        initialMenus: state.initialMenus,
       }}
     >
       <Skeleton loading={state.loading}>
@@ -115,7 +119,7 @@ const Wrapper: FC<WrapperProps> = ({
             paddingLeft: collapsed ? 80 : 256,
           }}
         >
-          <Aside breadcrumbs={state.breadcrumbs} />
+          <Aside breadcrumbs={state.breadcrumbs} showSearch={showMenuSearch} />
           <div className="at-cc-wrapper-main">
             {state.breadcrumbs?.length !== 0 && (
               <Breadcrumb className="at-cc-wrapper-breadcrumbs">

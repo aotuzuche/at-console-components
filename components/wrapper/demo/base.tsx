@@ -256,7 +256,7 @@ const list: IMenu[] = [
 
 export default function BaseWrapperDemo() {
   return (
-    <Wrapper systemCode={list}>
+    <Wrapper systemCode={list} showMenuSearch>
       <Table />
     </Wrapper>
   )

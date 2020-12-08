@@ -30,6 +30,15 @@ $asidePrefix: $prefix + '-aside';
     border-radius: 50%;
   }
 
+  &-search {
+    position: sticky;
+    top: 0;
+    padding: 10px 16px 10px 24px;
+    background-color: $asideBg;
+    z-index: 2;
+    border-bottom: 1px solid #f3f3f3;
+  }
+
   &-title {
     height: 64px;
     position: relative;
@@ -180,6 +189,13 @@ $asidePrefix: $prefix + '-aside';
           color: #fff;
         }
       }
+    }
+  }
+
+  .ant-menu-item {
+    .#{$asidePrefix}-item-highlight {
+      color: red;
+      font-weight: 900;
     }
   }
 }

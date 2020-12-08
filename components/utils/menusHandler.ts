@@ -11,6 +11,7 @@ export interface IMenu {
   systemId?: number
   code?: string
   isMfe?: boolean
+  isEmpty?: boolean
 }
 
 /**
@@ -86,4 +87,36 @@ export function getMenuPaths(pathname: string, menus: IMenu[]): IMenu[] {
   }
 
   return result
+}
+
+export function filterMenusByKeyword(
+  menus: IMenu[],
+  keyword: string,
+  openKeys: string[] = []
+): { filteredMenus: IMenu[]; filteredOpenKeys: string[] } {
+  const filteredOpenKeys: string[] = openKeys
+
+  const filteredMenus = menus?.filter(({ name, children, id, icon }) => {
+    // eslint-disable-next-line no-nested-ternary
+    let isInclude = true
+
+    if (isHiddenedMenu(icon)) {
+      isInclude = false
+    } else {
+      // eslint-disable-next-line no-nested-ternary
+      isInclude = new RegExp(keyword, 'i').test(name)
+        ? true
+        : children?.length
+        ? // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          !!filterMenusByKeyword(children, keyword, filteredOpenKeys)
+            .filteredMenus.length
+        : false
+    }
+
+    isInclude && filteredOpenKeys.push(String(id))
+
+    return isInclude
+  })
+
+  return { filteredMenus, filteredOpenKeys }
 }

@@ -1,5 +1,5 @@
 import React, { useContext, useMemo, useState, useEffect, FC } from 'react'
-import { Menu } from 'antd'
+import { Input, Menu } from 'antd'
 import { FolderOutlined, FileOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import Icon from '@ant-design/compatible/lib/icon'
@@ -7,18 +7,33 @@ import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint'
 import { OpenEventHandler, SelectEventHandler } from 'rc-menu/lib/interface'
 import { isEqual } from 'lodash'
 import WrapperContext from '../wrapper/wrapperContext'
-import { IMenu, isHiddenedMenu } from '../utils/menusHandler'
+import {
+  filterMenusByKeyword,
+  IMenu,
+  isHiddenedMenu,
+} from '../utils/menusHandler'
 import Footer from './footer'
 import Logo from './logo'
 import { isCanUseWindow } from '../utils/is'
 
-const Aside: FC<{
+interface AsideProps {
   breadcrumbs: IMenu[]
-}> = ({ breadcrumbs }) => {
-  const { menus, title, collapsed, setCollapsed } = useContext(WrapperContext)
+  showSearch?: boolean
+}
+
+const Aside: FC<AsideProps> = ({ breadcrumbs, showSearch }) => {
+  const {
+    menus,
+    title,
+    collapsed,
+    setCollapsed,
+    initialMenus,
+    setMenus,
+  } = useContext(WrapperContext)
   const screens = useBreakpoint()
   const [openKeys, setOpenKeys] = useState<React.Key[]>([])
   const [selectedKeys, setSelectedKeys] = useState<React.Key[]>()
+  const [searchValue, setSearchValue] = useState('')
 
   useEffect(() => {
     if (screens.lg === false) {
@@ -57,7 +72,7 @@ const Aside: FC<{
       ? [String(lastBreadcrumb.id)]
       : []
 
-    if (!isEqual(defaultOpenKeys, openKeys)) {
+    if (!isEqual(defaultOpenKeys, openKeys) && !searchValue) {
       setOpenKeys(defaultOpenKeys)
     }
 
@@ -89,30 +104,51 @@ const Aside: FC<{
       }
 
       return childrenMenes
-        .map(({ icon, name, id, url, children, isMfe = true }) => {
-          if (isHiddenedMenu(icon)) return null
+        .map((currentMenu) => {
+          const { icon, name, id, url, children, isMfe = true } = currentMenu
+          if (isHiddenedMenu(icon)) {
+            return null
+          }
+
+          const isSubmeuFlag = isSubmenu(children)
 
           const subMenuIcon = icon ? <Icon type={icon} /> : <FolderOutlined />
           const menuIcon = icon ? <Icon type={icon} /> : <FileOutlined />
+          const highlightName = searchValue ? (
+            <span
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{
+                __html: name.replace(
+                  new RegExp(searchValue, 'i'),
+                  '<span class="at-cc-aside-item-highlight">$&</span>'
+                ),
+              }}
+            />
+          ) : (
+            name
+          )
           const AnchorCom =
             url && isMfe ? (
-              <Link to={url}>{name}</Link>
+              <Link to={url}>{highlightName}</Link>
             ) : (
               <a href={`/system${url}`} target="_blank" rel="noreferrer">
-                {name}
+                {highlightName}
               </a>
             )
-          const menuItem = url ? AnchorCom : name
+          const menuItem = url ? AnchorCom : highlightName
 
-          return isSubmenu(children) ? (
-            <Menu.SubMenu
-              title={name}
-              key={id}
-              icon={isChildren ? undefined : subMenuIcon}
-            >
-              {flatChildren(children, true)}
-            </Menu.SubMenu>
-          ) : (
+          if (isSubmeuFlag) {
+            return (
+              <Menu.SubMenu
+                title={highlightName}
+                key={id}
+                icon={isChildren ? undefined : subMenuIcon}
+              >
+                {flatChildren(children, true)}
+              </Menu.SubMenu>
+            )
+          }
+          return (
             <Menu.Item key={id} icon={isChildren ? undefined : menuIcon}>
               {menuItem}
             </Menu.Item>
@@ -122,7 +158,7 @@ const Aside: FC<{
     }
 
     return flatChildren(menus)
-  }, [menus])
+  }, [menus, searchValue])
 
   const onOpenChange = (keys: React.Key[]) => {
     setOpenKeys(keys)
@@ -130,6 +166,24 @@ const Aside: FC<{
 
   const onSelect: SelectEventHandler = ({ selectedKeys: keys }) => {
     setSelectedKeys(keys)
+  }
+
+  const onSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target
+
+    setSearchValue(value)
+
+    if (!value) {
+      setMenus(initialMenus)
+      return
+    }
+    const { filteredMenus, filteredOpenKeys } = filterMenusByKeyword(
+      initialMenus,
+      value
+    )
+
+    setMenus(filteredMenus)
+    setOpenKeys(filteredOpenKeys)
   }
 
   useEffect(() => {
@@ -147,6 +201,11 @@ const Aside: FC<{
     >
       <div className="at-cc-aside-body">
         <Logo title={title} />
+        {showSearch && (
+          <div className="at-cc-aside-search">
+            <Input allowClear placeholder="请输入......" onChange={onSearch} />
+          </div>
+        )}
         <Menu
           mode="inline"
           inlineCollapsed={collapsed}
