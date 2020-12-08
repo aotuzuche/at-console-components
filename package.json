@@ -7,8 +7,8 @@
   "license": "MIT",
   "scripts": {
     "compile": "yarn clean && yarn build:lib && yarn build:es && yarn build:cp",
-    "build:es": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ./.babelrc.js components --out-dir es --ignore **/*.test.tsx,**/demo/* --extensions \".ts,.tsx\" && tsc -p tsconfig.build.json --outDir es",
-    "build:lib": "cross-env NODE_ENV=production babel --config-file ./.babelrc.js components --out-dir lib --ignore **/*.test.tsx,**/demo/* --extensions \".ts,.tsx\" && tsc -p tsconfig.build.json --outDir lib",
+    "build:es": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ./.babelrc.js components --out-dir es --ignore **/__tests__/*,**/demo/* --extensions \".ts,.tsx\" && tsc -p tsconfig.build.json --outDir es",
+    "build:lib": "cross-env NODE_ENV=production babel --config-file ./.babelrc.js components --out-dir lib --ignore **/__tests__/*,**/demo/* --extensions \".ts,.tsx\" && tsc -p tsconfig.build.json --outDir lib",
     "build:cp": "cpy '**/*.scss' '../lib' --cwd=components --parents && cpy '**/*.scss' '../es' --cwd=components --parents",
     "clean": "rimraf es && rimraf lib",
     "lint": "yarn lint:eslint && yarn lint:tsc",
