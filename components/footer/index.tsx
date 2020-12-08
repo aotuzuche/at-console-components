@@ -4,8 +4,8 @@ import { Layout } from 'antd'
 
 const { Footer } = Layout
 
-const FooterView = () => {
-  return <Footer className="at-footer">Created By Atzuche</Footer>
-}
+const FooterView = () => (
+  <Footer className="at-footer">Created By Atzuche</Footer>
+)
 
 export default FooterView

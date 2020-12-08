@@ -58,5 +58,7 @@ module.exports = {
     'no-restricted-globals': 0,
     'no-console': 2,
     'prettier/prettier': 'error',
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': ['error'],
   },
 }

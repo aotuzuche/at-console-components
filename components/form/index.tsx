@@ -121,8 +121,8 @@ const RenderChild: FC<Pick<FormItemProps, 'suffix' | 'type' | 'label'>> = ({
   type,
   label,
   ...props
-}) => {
-  return type === 'divider' ? (
+}) =>
+  type === 'divider' ? (
     <Divider orientation="left">{label}</Divider>
   ) : (
     <>
@@ -130,7 +130,6 @@ const RenderChild: FC<Pick<FormItemProps, 'suffix' | 'type' | 'label'>> = ({
       {suffix}
     </>
   )
-}
 
 const { Item, useForm, List, Provider } = AntdForm
 

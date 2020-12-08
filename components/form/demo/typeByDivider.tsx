@@ -28,7 +28,7 @@ export default function BaseDemo() {
           setTimeout(() => {
             // eslint-disable-next-line no-console
             console.log('BaseDemo', values)
-            resolve()
+            resolve(values)
           }, 1000)
         )
       }

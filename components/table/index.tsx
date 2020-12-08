@@ -280,8 +280,8 @@ function Table<RecordType extends object>(
     }
   }
 
-  const renderColumns: () => ColumnsType<RecordType> | undefined = () => {
-    return columns?.map(
+  const renderColumns: () => ColumnsType<RecordType> | undefined = () =>
+    columns?.map(
       ({ placeholder = tablePlaceholder, render, ...columnProps }) => ({
         ...columnProps,
         render: (text, record, index) => {
@@ -294,7 +294,6 @@ function Table<RecordType extends object>(
         },
       })
     )
-  }
 
   const renderSearchColumns = () => {
     if (!tableSearchProps) {
@@ -366,26 +365,24 @@ function Table<RecordType extends object>(
     )
   }
 
-  const renderTitle = () => {
-    return (
-      <Row justify="space-between">
-        <Col>{title && title(state.data)}</Col>
-        {showTools && (
-          <Col>
-            <Tooltip title="刷新">
-              <RedoOutlined
-                onClick={() => refresh()}
-                spin={state.loading}
-                style={{
-                  fontSize: 18,
-                }}
-              />
-            </Tooltip>
-          </Col>
-        )}
-      </Row>
-    )
-  }
+  const renderTitle = () => (
+    <Row justify="space-between">
+      <Col>{title && title(state.data)}</Col>
+      {showTools && (
+        <Col>
+          <Tooltip title="刷新">
+            <RedoOutlined
+              onClick={() => refresh()}
+              spin={state.loading}
+              style={{
+                fontSize: 18,
+              }}
+            />
+          </Tooltip>
+        </Col>
+      )}
+    </Row>
+  )
 
   const onInit = () => {
     const histroyState = isKeepAlive ? getHistoryState() : {}

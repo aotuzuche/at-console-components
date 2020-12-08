@@ -21,9 +21,7 @@ export default function useRafState<T>(
     })
   }, [])
 
-  useEffect(() => {
-    return () => cancelAnimationFrame(frame.current)
-  })
+  useEffect(() => () => cancelAnimationFrame(frame.current))
 
   return [state, setRafState]
 }

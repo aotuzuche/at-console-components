@@ -20,9 +20,7 @@ export default function IsHiddenDemo() {
       name: 'age',
       label: '年龄',
       suffix: '姓名为 bob 时隐藏',
-      isHidden: (value: StoreValue, values: Store) => {
-        return values.name === 'bob'
-      },
+      isHidden: (value: StoreValue, values: Store) => values.name === 'bob',
     },
   ]
 

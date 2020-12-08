@@ -94,9 +94,8 @@ const Aside: FC<AsideProps> = ({ breadcrumbs, showSearch }) => {
   }, [breadcrumbs])
 
   const renderMenusTree = useMemo(() => {
-    const isSubmenu = (menu?: IMenu[]) => {
-      return menu?.length && menu.every(({ icon }) => !isHiddenedMenu(icon))
-    }
+    const isSubmenu = (menu?: IMenu[]) =>
+      menu?.length && menu.every(({ icon }) => !isHiddenedMenu(icon))
 
     const flatChildren = (childrenMenes?: IMenu[], isChildren?: boolean) => {
       if (!childrenMenes) {

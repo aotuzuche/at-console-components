@@ -6,8 +6,8 @@ const key = '_query'
 const { history, location } = window
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const handler = (values: any, isSet?: boolean): any => {
-  return mapValues(values, (value) => {
+const handler = (values: any, isSet?: boolean): any =>
+  mapValues(values, (value) => {
     if (value && value._isAMomentObject) {
       return isSet
         ? {
@@ -42,7 +42,6 @@ const handler = (values: any, isSet?: boolean): any => {
     }
     return value
   })
-}
 
 export function getHistoryState() {
   const { state = {} } = history
