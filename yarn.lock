@@ -3217,10 +3217,10 @@
   dependencies:
     fast-deep-equal "3.1.1"
 
-"@umijs/plugin-request@2.5.1":
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-request/-/plugin-request-2.5.1.tgz#5e40856a90c58661fc65b3abf8e7fd7d1215c574"
-  integrity sha512-U/um6TuVlaDYBjRe8KD/+INSOcfn2k/mlQE07OQV+4zy6ny06IK1jkzW1MUQanrKn0YLkcv9Xmtz0r21c3SBzQ==
+"@umijs/plugin-request@2.5.2":
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-request/-/plugin-request-2.5.2.tgz#8fb20654b8b45f4b57a8c0f7829e128c47c0be71"
+  integrity sha512-EiLP/tzfcVhC2hj23AgGsxP0aFCY3SUF67q9EvBbj7J/Vs63iwo/ZiKfSgz+yPOsnk2DpHmIUJKhyUfrDpcGBA==
   dependencies:
     "@ahooksjs/use-request" "^2.0.0"
     umi-request "^1.2.14"
@@ -3326,10 +3326,10 @@
     unist-util-visit "^2.0.1"
     unist-util-visit-parents "^3.0.1"
 
-"@umijs/preset-react@1.7.6":
-  version "1.7.6"
-  resolved "https://registry.yarnpkg.com/@umijs/preset-react/-/preset-react-1.7.6.tgz#0de8868185dd15ccd106540b14f6f8d839d8e6ff"
-  integrity sha512-9cOpXjlvLDV6w/2PsBtE910caBD/jYBrCaJO3dhFFGn6BGBRf9smeOtg21zZ66N/8vW1YjKpB7+JWlD2p1XR6A==
+"@umijs/preset-react@1.7.7":
+  version "1.7.7"
+  resolved "https://registry.yarnpkg.com/@umijs/preset-react/-/preset-react-1.7.7.tgz#112d47569100af4eb34b62b767495bf761b4e039"
+  integrity sha512-txFVzYpHJtNTocbev4bXcv54hZAcbjEgTXS6WrvLpH/HICO1laM7sJshv00HmjxJGBil4EkVHfKw2T4nDoOvzQ==
   dependencies:
     "@umijs/plugin-access" "2.3.2"
     "@umijs/plugin-analytics" "0.2.2"
@@ -3341,7 +3341,7 @@
     "@umijs/plugin-layout" "0.13.3"
     "@umijs/plugin-locale" "0.10.5"
     "@umijs/plugin-model" "2.5.6"
-    "@umijs/plugin-request" "2.5.1"
+    "@umijs/plugin-request" "2.5.2"
     "@umijs/plugin-test" "1.0.0"
 
 "@umijs/renderer-mpa@3.3.0":
