@@ -4247,9 +4247,9 @@ atob@^2.1.2:
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
 auto-libs@^0.3.0:
-  version "0.3.22"
-  resolved "https://registry.yarnpkg.com/auto-libs/-/auto-libs-0.3.22.tgz#f7f6207745bbd96b3fe04d0750b2552b70903e66"
-  integrity sha512-R6KoIu6F4b1tr2HUpUstlBIUDscZ8XoHIn2meVvzcCFzP/Aj7AOs8gmjd5TxnLTmK4nW5PDf3HPSyaiHn+HBAQ==
+  version "0.3.23"
+  resolved "https://registry.yarnpkg.com/auto-libs/-/auto-libs-0.3.23.tgz#2fd4f64b7685908480969e3fbd86435ee3b92293"
+  integrity sha512-lVHoO+ShIjLraSObisPzwu2Pi+rKy9W3e5FP3/VyAi5oJuGR20xr12yjng1gRTBNkA38+/vfhaiNge76RUE8FA==
   dependencies:
     at-js-bridge "^1.0.22"
     axios "^0.18.0"
