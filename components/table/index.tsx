@@ -104,7 +104,7 @@ export type TableColumnsType<RecordType> = TableCommonProps &
 
 export interface TableOnSearchChangeState<RecordType> {
   paginationConfig?: TablePaginationConfig
-  filters?: Record<string, Key[] | null>
+  filters?: Record<string, (Key | boolean)[] | null>
   sorter?: SorterResult<RecordType> | SorterResult<RecordType>[]
   extra?: TableCurrentDataSource<RecordType>
   isInit?: boolean
@@ -253,7 +253,7 @@ function Table<RecordType extends object>(
 
   const onChange = (
     paginationConfig: TablePaginationConfig,
-    filters: Record<string, Key[] | null>,
+    filters: Record<string, (Key | boolean)[] | null>,
     sorter: SorterResult<RecordType> | SorterResult<RecordType>[],
     extra: TableCurrentDataSource<RecordType>
   ) => {
