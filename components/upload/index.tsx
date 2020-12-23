@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Upload as AntUpload, message, Button } from 'antd'
 import { httpConsole } from 'auto-libs'
 import { UploadOutlined } from '@ant-design/icons'
@@ -11,8 +11,13 @@ interface UploadProps {
   max?: number
 }
 
-interface UploadState {
-  OSSData: any
+export interface IOssData {
+  accessId: string
+  policy: string
+  signature: string
+  dir: string
+  host: string
+  expire: number
 }
 
 /**
@@ -36,112 +41,95 @@ interface UploadState {
       signature: 'ZGFob25nc2hhbw==',
     }
  */
-export default class Upload extends React.Component<UploadProps, UploadState> {
-  constructor(props: UploadProps) {
-    super(props)
-    this.state = {
-      OSSData: {},
-    }
-  }
+const Upload: FC<UploadProps> = ({
+  ticket,
+  max = -1,
+  value,
+  onChange: onInitialOnChange,
+  children,
+  ...otherProps
+}) => {
+  const [OSSData, setOssData] = useState<IOssData>({
+    accessId: '',
+    policy: '',
+    signature: '',
+    dir: '',
+    host: '',
+    expire: 0,
+  })
 
-  async componentDidMount() {
-    await this.init()
-  }
-
-  init = async () => {
+  const init = async () => {
     try {
-      const { ticket } = this.props
-      const OSSData = await httpConsole.get(ticket)
+      const result = await httpConsole.get(ticket)
 
-      this.setState({
-        OSSData,
-      })
+      setOssData((result as unknown) as IOssData)
     } catch (error) {
       message.error(error)
     }
   }
 
-  onChange = (obj: any) => {
-    const { onChange } = this.props
+  useEffect(() => {
+    init()
+  }, [ticket])
+
+  const onChange = (obj: any) => {
     const { fileList } = obj
-    if (onChange) {
-      onChange([...fileList])
+    if (onInitialOnChange) {
+      onInitialOnChange([...fileList])
     }
   }
 
-  onRemove = (file: any) => {
-    const { value, onChange } = this.props
-
+  const onRemove = (file: any) => {
     const files = value.filter((v: any) => v.url !== file.url)
-
-    if (onChange) {
-      onChange(files)
+    if (onInitialOnChange) {
+      onInitialOnChange(files)
     }
   }
 
-  transformFile = (file: any) => {
-    const { OSSData } = this.state
-
+  const transformFile = (file: any) => {
     const suffix = file.name.slice(file.name.lastIndexOf('.'))
     const filename = Date.now() + suffix
     file.url = OSSData.dir + filename
-
     return file
   }
 
-  getExtraData = (file: any) => {
-    const { OSSData } = this.state
+  const getExtraData = (file: any) => ({
+    key: file.url,
+    OSSAccessKeyId: OSSData.accessId,
+    policy: OSSData.policy,
+    Signature: OSSData.signature,
+  })
 
-    return {
-      key: file.url,
-      OSSAccessKeyId: OSSData.accessId,
-      policy: OSSData.policy,
-      Signature: OSSData.signature,
-    }
-  }
-
-  beforeUpload = async () => {
-    const { OSSData } = this.state
+  const beforeUpload = async () => {
     const expire = OSSData.expire * 1000
-
     if (expire < Date.now()) {
-      await this.init()
+      await init()
     }
   }
 
-  render() {
-    const {
-      value,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      onChange,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      ticket,
-      children,
-      max = -1,
-      ...otherProps
-    } = this.props
-    const { OSSData } = this.state
-    const props = {
-      name: 'file',
-      fileList: value,
-      action: OSSData.host,
-      onChange: this.onChange,
-      onRemove: this.onRemove,
-      transformFile: this.transformFile,
-      data: this.getExtraData,
-      beforeUpload: this.beforeUpload,
-      ...otherProps,
-    }
-    return (
-      <AntUpload {...props}>
-        {value?.length === max
-          ? null
-          : children || (
-              <Button>
-                <UploadOutlined /> 上传
-              </Button>
-            )}
-      </AntUpload>
-    )
+  const props = {
+    name: 'file',
+    fileList: value,
+    action: OSSData.host,
+    onChange,
+    onRemove,
+    transformFile,
+    data: getExtraData,
+    beforeUpload,
+    ...otherProps,
   }
+
+  return (
+    <AntUpload {...props}>
+      {value?.length === max
+        ? null
+        : children || (
+            <Button>
+              <UploadOutlined /> 上传
+            </Button>
+          )}
+    </AntUpload>
+  )
 }
+
+export default Upload
