@@ -60,6 +60,9 @@ const Upload: FC<UploadProps> = ({
 
   const init = async () => {
     try {
+      if (!ticket) {
+        return
+      }
       const result = await httpConsole.get(ticket)
 
       setOssData((result as unknown) as IOssData)

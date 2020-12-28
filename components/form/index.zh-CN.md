@@ -55,10 +55,6 @@ group:
 
 <code src="./demo/typeByDivider.tsx" />
 
-#### 动态 Rules
-
-<code src="./demo/dynamicRules.tsx" />
-
 ### 参数
 
 | 属性          | 描述                                                         | 类型                                                | 默认值         |

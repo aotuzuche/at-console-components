@@ -26,7 +26,6 @@ import {
   FormProps as AntdFormProps,
   FormItemProps as AntdFormItemProps,
   FormInstance,
-  Rule,
 } from 'antd/lib/form'
 import { StoreValue, Store } from 'antd/lib/form/interface'
 import { ColProps } from 'antd/lib/col'
@@ -64,7 +63,7 @@ interface FormCommonProps {
 }
 
 export interface FormItemProps
-  extends Omit<AntdFormItemProps, 'children' | 'rules'>,
+  extends Omit<AntdFormItemProps, 'children'>,
     FormCommonProps {
   /**
    * @example () => <Input />
@@ -96,7 +95,6 @@ export interface FormItemProps
       ) => ReactNode)
   extra?: ReactNode | ((fieldsValue: Store) => ReactNode)
   suffix?: ReactNode | ((fieldsValue: Store) => ReactNode)
-  rules?: Rule[] | ((fieldValue: StoreValue, fieldsValue: Store) => Rule[])
 
   // Default render
   type?: 'divider'
@@ -261,7 +259,6 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
       type,
       noStyle = !!type,
       hidden,
-      rules,
       ...itemProps
     }: FormItemProps,
     index: number
@@ -328,7 +325,6 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
           name={isItemView ? undefined : name}
           noStyle={noStyle}
           hidden={hidden}
-          rules={isFunc(rules) ? rules(fieldValue, fieldsValue) : rules}
           {...itemProps}
         >
           <RenderChild
