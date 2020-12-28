@@ -1,10 +1,11 @@
 /* eslint-disable no-param-reassign */
 import React, { FC, useEffect, useState } from 'react'
-import { Upload as AntUpload, message, Button } from 'antd'
+import { Upload as AntdUpload, message, Button } from 'antd'
 import { httpConsole } from 'auto-libs'
 import { UploadOutlined } from '@ant-design/icons'
+import { UploadProps as AntdUploadProps } from 'antd/lib/upload'
 
-interface UploadProps {
+export interface UploadProps extends AntdUploadProps {
   ticket: string
   value?: any
   onChange?: (params: any) => void
@@ -67,7 +68,7 @@ const Upload: FC<UploadProps> = ({
 
       setOssData((result as unknown) as IOssData)
     } catch (error) {
-      message.error(error)
+      message.error(error.msg || error.message)
     }
   }
 
@@ -123,7 +124,7 @@ const Upload: FC<UploadProps> = ({
   }
 
   return (
-    <AntUpload {...props}>
+    <AntdUpload {...props}>
       {value?.length === max
         ? null
         : children || (
@@ -131,7 +132,7 @@ const Upload: FC<UploadProps> = ({
               <UploadOutlined /> 上传
             </Button>
           )}
-    </AntUpload>
+    </AntdUpload>
   )
 }
 
