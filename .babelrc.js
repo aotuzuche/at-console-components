@@ -13,6 +13,12 @@ module.exports = {
     ['@babel/preset-typescript', { isTSX: true, allExtensions: true }],
   ],
   plugins: [
+    [
+      '@babel/plugin-transform-runtime',
+      {
+        useESModules: env === 'es' ? true : false,
+      },
+    ],
     'transform-class-properties',
     ['import', { libraryName: 'antd' }, 'antd'],
     [
