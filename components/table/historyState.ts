@@ -7,7 +7,7 @@ const { history, location } = window
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const handler = (values: any, isSet?: boolean): any =>
-  mapValues(values, (value) => {
+  mapValues(values, value => {
     if (value && value._isAMomentObject) {
       return isSet
         ? {
@@ -67,6 +67,6 @@ export function setHistoryState(query: { [key: string]: any }) {
       [key]: handler(query, true),
     },
     '',
-    pathname + search
+    pathname + search,
   )
 }

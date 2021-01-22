@@ -27,11 +27,8 @@ export interface IMenu {
  * {..., children: IMenu:[]}
  * ]
  */
-function transformToMenusTree(
-  menus: IMenu[],
-  gruopMenus: { [key: number]: IMenu[] }
-): IMenu[] {
-  return menus.map((menu) => {
+function transformToMenusTree(menus: IMenu[], gruopMenus: { [key: number]: IMenu[] }): IMenu[] {
+  return menus.map(menu => {
     if (gruopMenus[menu.id]) {
       return {
         ...menu,
@@ -46,7 +43,7 @@ export function getMenusTree(menus: IMenu[]) {
   if (!menus?.length) {
     return []
   }
-  const gruopMenus = groupBy(menus, (menu) => menu.pid)
+  const gruopMenus = groupBy(menus, menu => menu.pid)
 
   return transformToMenusTree(gruopMenus[0], gruopMenus)
 }
@@ -92,7 +89,7 @@ export function getMenuPaths(pathname: string, menus: IMenu[]): IMenu[] {
 export function filterMenusByKeyword(
   menus: IMenu[],
   keyword: string,
-  openKeys: string[] = []
+  openKeys: string[] = [],
 ): { filteredMenus: IMenu[]; filteredOpenKeys: string[] } {
   const filteredOpenKeys: string[] = openKeys
 
@@ -108,8 +105,7 @@ export function filterMenusByKeyword(
         ? true
         : children?.length
         ? // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          !!filterMenusByKeyword(children, keyword, filteredOpenKeys)
-            .filteredMenus.length
+          !!filterMenusByKeyword(children, keyword, filteredOpenKeys).filteredMenus.length
         : false
     }
 

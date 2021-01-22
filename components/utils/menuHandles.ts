@@ -26,7 +26,7 @@ const findMenuInfo = (value: any, menuTree: any, key = 'id'): any => {
 
 // 获取所有父集节点
 const getMenuPathInfos = (ids = [], menuTree: any) => {
-  const menuPathInfos = ids.map((id) => findMenuInfo(id, menuTree))
+  const menuPathInfos = ids.map(id => findMenuInfo(id, menuTree))
   return menuPathInfos
 }
 

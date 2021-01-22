@@ -7,7 +7,7 @@ export interface OperatorProps {
   len?: number
 }
 
-const Operator: FC<OperatorProps> = (props) => {
+const Operator: FC<OperatorProps> = props => {
   const { len = 2, children } = props
 
   let composition: ReactNode[] = toArray(children)

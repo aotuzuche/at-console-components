@@ -1,5 +1,4 @@
 import React from 'react'
-// eslint-disable-next-line import/no-extraneous-dependencies
 import moment from 'moment'
 import { Form } from 'at-console-components'
 
@@ -23,7 +22,7 @@ export default function ViewModeDemo() {
     <Form
       items={viewModeItems}
       initialValues={() =>
-        new Promise((resolve) =>
+        new Promise(resolve => {
           setTimeout(() => {
             resolve({
               name: 'Ant Design Admin',
@@ -32,7 +31,7 @@ export default function ViewModeDemo() {
               hasJob: 1,
             })
           }, 3000)
-        )
+        })
       }
       isView
     />

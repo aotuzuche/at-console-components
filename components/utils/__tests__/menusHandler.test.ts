@@ -12,10 +12,8 @@ describe('MenusHandler', () => {
           { id: 3, icon: 'false', systemId: 0, name: '', pid: 0, url: '/123' },
           { id: 2, icon: 'false', systemId: 0, name: '', pid: 0, url: '' },
           { id: 1, icon: 'false', systemId: 0, name: '', pid: 0, url: '' },
-        ])
-      ).toEqual([
-        { id: 3, icon: 'false', systemId: 0, name: '', pid: 0, url: '/123' },
-      ])
+        ]),
+      ).toEqual([{ id: 3, icon: 'false', systemId: 0, name: '', pid: 0, url: '/123' }])
     })
 
     it('level 2', () => {

@@ -110,17 +110,10 @@ class HeaderView extends React.PureComponent<IProps, IState> {
       <Layout.Header className={className}>
         {breakpoint && (
           <div className="at-header-logo">
-            <img
-              src="https://cdn.atzuche.com/static/images/icon-logo-green.png"
-              alt="logo"
-            />
+            <img src="https://cdn.atzuche.com/static/images/icon-logo-green.png" alt="logo" />
           </div>
         )}
-        <Icon
-          type={'menu-' + state.triggerIcon}
-          onClick={this.onTrigger}
-          className="at-trigger"
-        />
+        <Icon type={'menu-' + state.triggerIcon} onClick={this.onTrigger} className="at-trigger" />
         <div className="at-userInfo">
           <p>
             {this.state.hello}

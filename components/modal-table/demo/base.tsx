@@ -58,7 +58,7 @@ export default function ModalFormDemo() {
   ]
 
   const onSetShow = () => {
-    setShow((value) => !value)
+    setShow(value => !value)
   }
   return (
     <>

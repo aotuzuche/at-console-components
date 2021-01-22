@@ -62,7 +62,7 @@ const Wrapper: FC<WrapperProps> = ({
         })
       } else {
         const result: any = await httpConsole.get(
-          `/apigateway/auth/console/auth/menu/${systemCode}`
+          `/apigateway/auth/console/auth/menu/${systemCode}`,
         )
 
         setMenus(getMenusTree(result?.list))
@@ -112,9 +112,7 @@ const Wrapper: FC<WrapperProps> = ({
     >
       <Skeleton loading={state.loading}>
         <div
-          className={
-            isLoaded ? 'at-cc-wrapper at-cc-wrapper-animation' : 'at-cc-wrapper'
-          }
+          className={isLoaded ? 'at-cc-wrapper at-cc-wrapper-animation' : 'at-cc-wrapper'}
           style={{
             paddingLeft: collapsed ? 80 : 256,
           }}
@@ -124,7 +122,7 @@ const Wrapper: FC<WrapperProps> = ({
             {state.breadcrumbs?.length !== 0 && (
               <Breadcrumb className="at-cc-wrapper-breadcrumbs">
                 {state.breadcrumbs.map(({ url, name }, index) => (
-                  <Breadcrumb.Item>
+                  <Breadcrumb.Item key={index}>
                     {index === state.breadcrumbs.length - 1 || !url ? (
                       name
                     ) : (

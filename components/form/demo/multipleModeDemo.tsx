@@ -11,10 +11,7 @@ export default function MultipleModeDemo() {
   ]
 
   return (
-    <Form
-      initialValues={{ name: 'Ant Design Admin', age: 8 }}
-      items={multipleModeItems}
-    >
+    <Form initialValues={{ name: 'Ant Design Admin', age: 8 }} items={multipleModeItems}>
       <Button type="primary" htmlType="submit">
         提交
       </Button>

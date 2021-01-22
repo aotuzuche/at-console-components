@@ -22,7 +22,7 @@ const Footer: FC<{
           <div
             className="at-cc-aside-footer-open"
             onClick={() => {
-              setCollapsed((value) => !value)
+              setCollapsed(value => !value)
             }}
           >
             <DoubleRightOutlined className="at-cc-aside-footer-icon" />
@@ -54,7 +54,7 @@ const Footer: FC<{
                 <div
                   className="at-cc-aside-footer-btn at-cc-aside-footer-collapsed"
                   onClick={() => {
-                    setCollapsed((value) => !value)
+                    setCollapsed(value => !value)
                   }}
                 >
                   <DoubleLeftOutlined className="at-cc-aside-footer-icon" />

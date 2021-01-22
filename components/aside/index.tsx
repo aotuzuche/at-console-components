@@ -7,11 +7,7 @@ import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint'
 import { OpenEventHandler, SelectEventHandler } from 'rc-menu/lib/interface'
 import { isEqual } from 'lodash'
 import WrapperContext from '../wrapper/wrapperContext'
-import {
-  filterMenusByKeyword,
-  IMenu,
-  isHiddenedMenu,
-} from '../utils/menusHandler'
+import { filterMenusByKeyword, IMenu, isHiddenedMenu } from '../utils/menusHandler'
 import Footer from './footer'
 import Logo from './logo'
 import { isCanUseWindow } from '../utils/is'
@@ -22,14 +18,9 @@ interface AsideProps {
 }
 
 const Aside: FC<AsideProps> = ({ breadcrumbs, showSearch }) => {
-  const {
-    menus,
-    title,
-    collapsed,
-    setCollapsed,
-    initialMenus,
-    setMenus,
-  } = useContext(WrapperContext)
+  const { menus, title, collapsed, setCollapsed, initialMenus, setMenus } = useContext(
+    WrapperContext,
+  )
   const screens = useBreakpoint()
   const [openKeys, setOpenKeys] = useState<React.Key[]>([])
   const [selectedKeys, setSelectedKeys] = useState<React.Key[]>()
@@ -46,11 +37,7 @@ const Aside: FC<AsideProps> = ({ breadcrumbs, showSearch }) => {
   const setIfChangeCollapsed = () => {
     const len = breadcrumbs.length
     const defaultOpenKeys: string[] =
-      len > 1
-        ? breadcrumbs
-            .slice(0, len - 1)
-            .map((breadcrumb) => String(breadcrumb.id))
-        : []
+      len > 1 ? breadcrumbs.slice(0, len - 1).map(breadcrumb => String(breadcrumb.id)) : []
 
     setOpenKeys(defaultOpenKeys)
   }
@@ -58,19 +45,11 @@ const Aside: FC<AsideProps> = ({ breadcrumbs, showSearch }) => {
   useEffect(() => {
     const len = breadcrumbs.length
     // If last one hidden,should be take the previou
-    const lastBreadcrumbIndex = isHiddenedMenu(breadcrumbs[len - 1]?.icon)
-      ? -2
-      : -1
+    const lastBreadcrumbIndex = isHiddenedMenu(breadcrumbs[len - 1]?.icon) ? -2 : -1
     const lastBreadcrumb = breadcrumbs.slice(lastBreadcrumbIndex)[0]
     const defaultOpenKeys: string[] =
-      len > 1
-        ? breadcrumbs
-            .slice(0, len - 1)
-            .map((breadcrumb) => String(breadcrumb.id))
-        : []
-    const defaultSelectedKeys: string[] = lastBreadcrumb
-      ? [String(lastBreadcrumb.id)]
-      : []
+      len > 1 ? breadcrumbs.slice(0, len - 1).map(breadcrumb => String(breadcrumb.id)) : []
+    const defaultSelectedKeys: string[] = lastBreadcrumb ? [String(lastBreadcrumb.id)] : []
 
     if (!isEqual(defaultOpenKeys, openKeys) && !searchValue) {
       setOpenKeys(defaultOpenKeys)
@@ -82,9 +61,7 @@ const Aside: FC<AsideProps> = ({ breadcrumbs, showSearch }) => {
 
     if (isCanUseWindow()) {
       setTimeout(() => {
-        const activeMenu = document.querySelector(
-          '.at-cc-aside .ant-menu-submenu-selected'
-        )
+        const activeMenu = document.querySelector('.at-cc-aside .ant-menu-submenu-selected')
 
         if (activeMenu && (activeMenu as any).scrollIntoViewIfNeeded) {
           ;(activeMenu as any).scrollIntoViewIfNeeded()
@@ -103,7 +80,7 @@ const Aside: FC<AsideProps> = ({ breadcrumbs, showSearch }) => {
       }
 
       return childrenMenes
-        .map((currentMenu) => {
+        .map(currentMenu => {
           const { icon, name, id, url, children, isMfe = true } = currentMenu
           if (isHiddenedMenu(icon)) {
             return null
@@ -119,7 +96,7 @@ const Aside: FC<AsideProps> = ({ breadcrumbs, showSearch }) => {
               dangerouslySetInnerHTML={{
                 __html: name.replace(
                   new RegExp(searchValue, 'i'),
-                  '<span class="at-cc-aside-item-highlight">$&</span>'
+                  '<span class="at-cc-aside-item-highlight">$&</span>',
                 ),
               }}
             />
@@ -176,10 +153,7 @@ const Aside: FC<AsideProps> = ({ breadcrumbs, showSearch }) => {
       setMenus(initialMenus)
       return
     }
-    const { filteredMenus, filteredOpenKeys } = filterMenusByKeyword(
-      initialMenus,
-      value
-    )
+    const { filteredMenus, filteredOpenKeys } = filterMenusByKeyword(initialMenus, value)
 
     setMenus(filteredMenus)
     setOpenKeys(filteredOpenKeys)

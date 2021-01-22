@@ -11,17 +11,7 @@ import React, {
   forwardRef,
   ForwardRefRenderFunction,
 } from 'react'
-import {
-  Form as AntdForm,
-  Input,
-  Row,
-  Col,
-  Skeleton,
-  Popover,
-  Card,
-  Spin,
-  Divider,
-} from 'antd'
+import { Form as AntdForm, Input, Row, Col, Skeleton, Popover, Card, Spin, Divider } from 'antd'
 import {
   FormProps as AntdFormProps,
   FormItemProps as AntdFormItemProps,
@@ -62,37 +52,21 @@ interface FormCommonProps {
   layoutCol?: ColProps
 }
 
-export interface FormItemProps
-  extends Omit<AntdFormItemProps, 'children'>,
-    FormCommonProps {
+export interface FormItemProps extends Omit<AntdFormItemProps, 'children'>, FormCommonProps {
   /**
    * @example () => <Input />
    */
-  render?: (
-    fieldValue: StoreValue,
-    fieldsValue: Store,
-    form: FormInstance
-  ) => ReactElement
+  render?: (fieldValue: StoreValue, fieldsValue: Store, form: FormInstance) => ReactElement
   /**
    * @example (fieldValue) => fieldValue + 1
    */
-  renderView?: (
-    fieldValue: StoreValue,
-    fieldsValue: Store,
-    form: FormInstance
-  ) => ReactNode
+  renderView?: (fieldValue: StoreValue, fieldsValue: Store, form: FormInstance) => ReactNode
   /**
    * Hide Form item by condition
    * @example (fieldValue) => !!fieldValue
    */
   isHidden?: (fieldValue: StoreValue, fieldsValue: Store) => boolean
-  tip?:
-    | ReactNode
-    | ((
-        fieldValue: StoreValue,
-        fieldsValue: Store,
-        form: FormInstance
-      ) => ReactNode)
+  tip?: ReactNode | ((fieldValue: StoreValue, fieldsValue: Store, form: FormInstance) => ReactNode)
   extra?: ReactNode | ((fieldsValue: Store) => ReactNode)
   suffix?: ReactNode | ((fieldsValue: Store) => ReactNode)
 
@@ -109,7 +83,7 @@ export interface FormProps extends AntdFormProps, FormCommonProps {
   mode?: 'card'
   /** Effective in card mode */
   cardProps?: CardProps
-  onFinish?: (values: Store) => void | Promise<unknown>
+  onFinish?: (values: Store) => Promise<unknown> | any
   childrenProps?: {
     single?: boolean
   }
@@ -150,7 +124,7 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
     childrenProps,
     ...props
   },
-  ref
+  ref,
 ) => {
   const [formInsatce] = useForm(form)
   const forceUpdate = useForceUpdate()
@@ -208,10 +182,7 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
   }, [initialStates])
 
   useEffect(() => {
-    if (
-      !isLoadinginitialValues &&
-      !isEqual(prevFormInitialValues, initialValuesInternal)
-    ) {
+    if (!isLoadinginitialValues && !isEqual(prevFormInitialValues, initialValuesInternal)) {
       formInsatce.setFieldsValue(initialValuesInternal as Store)
       setInitialStates({
         initialValues: initialValuesInternal,
@@ -261,7 +232,7 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
       hidden,
       ...itemProps
     }: FormItemProps,
-    index: number
+    index: number,
   ) => {
     let Comp: ReactNode
     const { getFieldsValue } = formInsatce
@@ -284,11 +255,7 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
     const LabelWrap = tip ? (
       <>
         {label}
-        <Popover
-          content={
-            isFunc(tip) ? () => tip(fieldValue, fieldsValue, formInsatce) : tip
-          }
-        >
+        <Popover content={isFunc(tip) ? () => tip(fieldValue, fieldsValue, formInsatce) : tip}>
           <QuestionCircleOutlined
             style={{
               marginLeft: 4,
@@ -305,7 +272,7 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
         renderView && isFunc(renderView)
           ? renderView(fieldValue, fieldsValue, formInsatce)
           : fieldValue,
-        name ? placeholder : undefined
+        name ? placeholder : undefined,
       )
     } else {
       Comp =
@@ -342,8 +309,7 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
 
   const onValuesChange = (changeValues: Store, values: Store) => {
     forceUpdate()
-    isFunc(onValuesChangeInternal) &&
-      onValuesChangeInternal(changeValues, values)
+    isFunc(onValuesChangeInternal) && onValuesChangeInternal(changeValues, values)
   }
 
   const FormChildren = (
@@ -394,8 +360,7 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
 
 const WrapperForm = forwardRef<FormInstance, FormProps>(InternalForm)
 
-type Form = typeof WrapperForm &
-  Pick<typeof AntdForm, 'Item' | 'List' | 'useForm' | 'Provider'>
+type Form = typeof WrapperForm & Pick<typeof AntdForm, 'Item' | 'List' | 'useForm' | 'Provider'>
 
 const Form: Form = WrapperForm as Form
 

@@ -1,14 +1,7 @@
-import {
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-  SetStateAction,
-  Dispatch,
-} from 'react'
+import { useEffect, useRef, useState, useCallback, SetStateAction, Dispatch } from 'react'
 
 export default function useRafState<T>(
-  initialState: T | (() => T)
+  initialState: T | (() => T),
 ): [T, Dispatch<SetStateAction<T>>] {
   const frame = useRef(0)
   const [state, setState] = useState(initialState)

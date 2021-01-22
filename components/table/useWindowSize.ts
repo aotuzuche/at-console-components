@@ -10,7 +10,7 @@ export default function useWindowSize(): { width: number; height: number } {
     height: window.innerHeight - 213,
   })
 
-  useEffect((): (() => void) | void => {
+  useEffect((): (() => void) | any => {
     const handler = () => {
       setState({
         width: window.innerWidth,

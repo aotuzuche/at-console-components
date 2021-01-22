@@ -21,4 +21,6 @@ import { AsyncButton } from 'at-console-components'
 function Demo(params) {
   return <AsyncButton />
 }
+
+export default Demo
 ```

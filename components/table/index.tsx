@@ -118,7 +118,7 @@ export interface TableProps<RecordType>
     | RecordType[]
     | ((
         params: Store,
-        changeState?: TableOnSearchChangeState<RecordType>
+        changeState?: TableOnSearchChangeState<RecordType>,
       ) => TableData<RecordType> | Promise<TableData<RecordType>>)
   columns?: TableColumnsType<RecordType>[]
   /**
@@ -160,7 +160,7 @@ function Table<RecordType extends object>(
     summary,
     ...props
   }: TableProps<RecordType>,
-  ref: Ref<TableRef>
+  ref: Ref<TableRef>,
 ) {
   const [form] = useForm(tableSearchProps?.form)
   const { height } = useWindowSize()
@@ -182,7 +182,7 @@ function Table<RecordType extends object>(
   // get data source
   const onSearch = async (
     params: Store = {},
-    changeState: TableOnSearchChangeState<RecordType> = {}
+    changeState: TableOnSearchChangeState<RecordType> = {},
   ) => {
     try {
       if (!isFunc(onTableSearch)) {
@@ -204,18 +204,18 @@ function Table<RecordType extends object>(
           ...params,
           ...searchValues,
         },
-        (param) => param !== '' && param !== undefined && param !== null
+        param => param !== '' && param !== undefined && param !== null,
       )
 
       const cloneTableSearchParams = cloneDeep(searchParams)
 
       const result = await onTableSearch(
         tableSearchProps?.allowTrim
-          ? mapValues(cloneTableSearchParams, (value) =>
-              typeof value === 'string' ? value.trim() : value
+          ? mapValues(cloneTableSearchParams, value =>
+              typeof value === 'string' ? value.trim() : value,
             )
           : cloneTableSearchParams,
-        changeState
+        changeState,
       )
 
       setState({
@@ -255,7 +255,7 @@ function Table<RecordType extends object>(
     paginationConfig: TablePaginationConfig,
     filters: Record<string, (Key | boolean)[] | null>,
     sorter: SorterResult<RecordType> | SorterResult<RecordType>[],
-    extra: TableCurrentDataSource<RecordType>
+    extra: TableCurrentDataSource<RecordType>,
   ) => {
     setState({
       pageNum: paginationConfig.current,
@@ -272,7 +272,7 @@ function Table<RecordType extends object>(
         filters,
         sorter,
         extra,
-      }
+      },
     )
 
     if (isFunc(onTableChange)) {
@@ -281,19 +281,17 @@ function Table<RecordType extends object>(
   }
 
   const renderColumns: () => ColumnsType<RecordType> | undefined = () =>
-    columns?.map(
-      ({ placeholder = tablePlaceholder, render, ...columnProps }) => ({
-        ...columnProps,
-        render: (text, record, index) => {
-          if (isFunc(render)) {
-            const result = render(text, record, index)
-            return showPlaceHolder(result, placeholder)
-          }
+    columns?.map(({ placeholder = tablePlaceholder, render, ...columnProps }) => ({
+      ...columnProps,
+      render: (text, record, index) => {
+        if (isFunc(render)) {
+          const result = render(text, record, index)
+          return showPlaceHolder(result, placeholder)
+        }
 
-          return showPlaceHolder(text, placeholder)
-        },
-      })
-    )
+        return showPlaceHolder(text, placeholder)
+      },
+    }))
 
   const renderSearchColumns = () => {
     if (!tableSearchProps) {
@@ -332,11 +330,7 @@ function Table<RecordType extends object>(
           <Form.Item noStyle>
             <Row justify="end">
               <Space>
-                <AsyncButton
-                  onClick={onClickSearch}
-                  type="primary"
-                  icon={<SearchOutlined />}
-                >
+                <AsyncButton onClick={onClickSearch} type="primary" icon={<SearchOutlined />}>
                   搜索
                 </AsyncButton>
                 <Button htmlType="reset">重置</Button>
@@ -400,7 +394,7 @@ function Table<RecordType extends object>(
       },
       {
         isInit: true,
-      }
+      },
     )
   }
 
@@ -427,14 +421,12 @@ function Table<RecordType extends object>(
         columns={renderColumns()}
         onChange={onChange}
         loading={state.loading}
-        dataSource={
-          isFunc(onTableSearch) ? get(state.data, dataName) : onTableSearch
-        }
+        dataSource={isFunc(onTableSearch) ? get(state.data, dataName) : onTableSearch}
         pagination={
           pagination === false
             ? pagination
             : {
-                showTotal: (total) => `共 ${total} 条`,
+                showTotal: total => `共 ${total} 条`,
                 total: get(state.data, totalName),
                 current: state.pageNum,
                 pageSize: state.pageSize,
@@ -442,7 +434,7 @@ function Table<RecordType extends object>(
               }
         }
         title={isShowTableTitle ? renderTitle : undefined}
-        summary={summary ? (data) => summary(data, state.data) : undefined}
+        summary={summary ? data => summary(data, state.data) : undefined}
       />
     </div>
   )
@@ -450,5 +442,5 @@ function Table<RecordType extends object>(
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export default forwardRef(Table) as <RecordType extends object>(
-  p: TableProps<RecordType> & { ref?: Ref<TableRef> }
+  p: TableProps<RecordType> & { ref?: Ref<TableRef> },
 ) => ReactElement

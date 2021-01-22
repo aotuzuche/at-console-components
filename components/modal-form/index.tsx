@@ -12,21 +12,15 @@ export interface ModalFormProps extends ModalProps {
   /**
    * Trigger after form finish, return false can prevent Modal cancel
    */
-  onOk?: (values: Store) => Promise<unknown> | false | void
+  onOk?: (values: Store) => Promise<unknown> | false
   onCancel?: () => void
   /**
    * Trigger before form finish, return reject can prevent form finish
    */
-  onBeforeOk?: (values: Store) => Promise<unknown> | void
+  onBeforeOk?: (values: Store) => Promise<unknown>
 }
 
-const ModalForm: FC<ModalFormProps> = ({
-  formProps,
-  onOk,
-  visible,
-  onBeforeOk,
-  ...props
-}) => {
+const ModalForm: FC<ModalFormProps> = ({ formProps, onOk, visible, onBeforeOk, ...props }) => {
   const [form] = useForm(formProps?.form)
   const [loading, setLoading] = useState(false)
 
@@ -59,13 +53,7 @@ const ModalForm: FC<ModalFormProps> = ({
   }
 
   return (
-    <Modal
-      onOk={onModalOk}
-      confirmLoading={loading}
-      visible={visible}
-      destroyOnClose
-      {...props}
-    >
+    <Modal onOk={onModalOk} confirmLoading={loading} visible={visible} destroyOnClose {...props}>
       <Form {...formProps} form={form} onFinish={onModalFormFinish} />
     </Modal>
   )

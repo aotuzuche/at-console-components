@@ -24,13 +24,13 @@ export default function BaseDemo() {
       form={form}
       // eslint-disable-next-line no-console
       onFinish={(values: Store) =>
-        new Promise((resolve) =>
+        new Promise(resolve => {
           setTimeout(() => {
             // eslint-disable-next-line no-console
             console.log('BaseDemo', values)
             resolve(values)
           }, 1000)
-        )
+        })
       }
     />
   )

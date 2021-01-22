@@ -75,7 +75,7 @@ export default function BaseDemo() {
     <Table<User>
       columns={columns}
       onSearch={(params: Store) =>
-        new Promise((resolve) => {
+        new Promise(resolve => {
           console.log('params: ', params)
           setTimeout(() => {
             resolve(data)

@@ -17,7 +17,7 @@ export default function ModalFormDemo() {
   ]
 
   const onSetShow = () => {
-    setShow((value) => !value)
+    setShow(value => !value)
   }
   return (
     <>
@@ -26,7 +26,8 @@ export default function ModalFormDemo() {
         title="Modal Form Demo"
         formProps={{
           items: baseItems,
-          onFinish: () => new Promise((resolve) => setTimeout(resolve, 2000)),
+          // eslint-disable-next-line no-promise-executor-return
+          onFinish: () => new Promise(resolve => setTimeout(resolve, 2000)),
         }}
         visible={isShow}
         onCancel={onSetShow}

@@ -4,7 +4,7 @@ import { ButtonProps } from 'antd/lib/button'
 
 export interface AsyncButtonProps extends ButtonProps {
   loading?: boolean
-  onClick?: (e: MouseEvent) => void | Promise<unknown>
+  onClick?: (e: MouseEvent) => Promise<unknown> | any
 }
 
 const AsyncButton: FC<AsyncButtonProps> = ({

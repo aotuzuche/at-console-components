@@ -21,7 +21,7 @@ describe('AsyncButton', () => {
     expect(wrapper.find('Button').prop('loading')).toBe(false)
   })
 
-  it('AsyncButton onClick Loading with error', (done) => {
+  it('AsyncButton onClick Loading with error', done => {
     let wrapper: ReactWrapper
     const onClickMock = jest.fn(async () => {
       try {
