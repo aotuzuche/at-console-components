@@ -6,32 +6,19 @@ import {
   DoubleLeftOutlined,
   AppstoreOutlined,
 } from '@ant-design/icons'
-import { toConsoleLogin, clearConsoleToken } from 'auto-libs'
+import { toConsoleLogin } from 'auto-libs'
 import getLoginInfo from '../utils/getLoginInfo'
 import WrapperContext from '../wrapper/wrapperContext'
 
 const Footer: FC<{
   collapsed: boolean
-  loginUrl: string
-  homeUrl: string
-}> = ({ collapsed, loginUrl, homeUrl }) => {
+  logOut: () => void
+  backHome: () => void
+  showHome: boolean
+}> = ({ collapsed, logOut, backHome, showHome }) => {
   const { loginName = 'unknow' } = useMemo(getLoginInfo, [])
   const { setCollapsed } = useContext(WrapperContext)
-  const logOut = () => {
-    if (loginUrl) {
-      clearConsoleToken()
-      window.location.href = loginUrl
-    } else {
-      toConsoleLogin()
-    }
-  }
-  const backHome = () => {
-    if (homeUrl) {
-      window.location.href = homeUrl
-    } else {
-      window.location.href = '/system'
-    }
-  }
+
   return (
     <div className="at-cc-aside-footer">
       <div className="at-cc-aside-footer-body">
@@ -53,16 +40,23 @@ const Footer: FC<{
               <h2>{loginName}</h2>
 
               <div className="at-cc-aside-footer-btns">
-                <Popconfirm title="确认要注销么？" onConfirm={logOut}>
+                <Popconfirm title="确认要注销么？" onConfirm={logOut || toConsoleLogin}>
                   <div className="at-cc-aside-footer-btn at-cc-aside-footer-logout">
                     <PoweroffOutlined className="at-cc-aside-footer-icon" />
                   </div>
                 </Popconfirm>
-                <Popconfirm title="确认要回到主页么？" onConfirm={backHome}>
-                  <div className="at-cc-aside-footer-btn at-cc-aside-footer-appstore">
-                    <AppstoreOutlined className="at-cc-aside-footer-icon" />
-                  </div>
-                </Popconfirm>
+                {showHome && (
+                  <Popconfirm
+                    title="确认要回到主页么？"
+                    onConfirm={() => {
+                      backHome || (window.location.href = '/system')
+                    }}
+                  >
+                    <div className="at-cc-aside-footer-btn at-cc-aside-footer-appstore">
+                      <AppstoreOutlined className="at-cc-aside-footer-icon" />
+                    </div>
+                  </Popconfirm>
+                )}
                 <div
                   className="at-cc-aside-footer-btn at-cc-aside-footer-collapsed"
                   onClick={() => {

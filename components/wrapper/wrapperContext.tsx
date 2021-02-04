@@ -5,8 +5,9 @@ const WrapperContext = createContext<{
   menus: IMenu[]
   initialMenus: IMenu[]
   title: string
-  loginUrl?: string
-  homeUrl?: string
+  logOut: () => void
+  backHome: () => void
+  showHome: boolean
   collapsed: boolean
   setCollapsed: Dispatch<SetStateAction<boolean>>
   setMenus: Dispatch<SetStateAction<IMenu[]>>
@@ -14,8 +15,9 @@ const WrapperContext = createContext<{
   menus: [],
   initialMenus: [],
   title: '',
-  loginUrl: '',
-  homeUrl: '',
+  logOut: () => {},
+  backHome: () => {},
+  showHome: true,
   collapsed: false,
   setCollapsed: () => undefined,
   setMenus: () => undefined,

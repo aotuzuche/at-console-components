@@ -25,8 +25,9 @@ const Aside: FC<AsideProps> = ({ breadcrumbs, showSearch }) => {
     setCollapsed,
     initialMenus,
     setMenus,
-    loginUrl,
-    homeUrl,
+    logOut,
+    backHome,
+    showHome,
   } = useContext(WrapperContext)
   const screens = useBreakpoint()
   const [openKeys, setOpenKeys] = useState<React.Key[]>([])
@@ -200,7 +201,7 @@ const Aside: FC<AsideProps> = ({ breadcrumbs, showSearch }) => {
           {renderMenusTree}
         </Menu>
       </div>
-      <Footer collapsed={collapsed} loginUrl={loginUrl} homeUrl={homeUrl} />
+      <Footer collapsed={collapsed} logOut={logOut} backHome={backHome} showHome={showHome} />
     </div>
   )
 }
