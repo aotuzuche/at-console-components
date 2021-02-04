@@ -15,6 +15,9 @@ export interface WrapperProps {
   systemCode: string | IMenu[] | (() => Promise<IMenu[]>)
   title?: string
   showMenuSearch?: boolean
+  logOut?: () => void
+  backHome?: () => void
+  showHome?: boolean
 }
 
 /**
@@ -25,6 +28,9 @@ const Wrapper: FC<WrapperProps> = ({
   systemCode,
   children,
   showMenuSearch,
+  logOut,
+  backHome,
+  showHome = true,
 }) => {
   const [state, setState] = useStates<{
     loading: boolean
@@ -108,6 +114,9 @@ const Wrapper: FC<WrapperProps> = ({
         setCollapsed,
         setMenus,
         initialMenus: state.initialMenus,
+        logOut,
+        backHome,
+        showHome,
       }}
     >
       <Skeleton loading={state.loading}>

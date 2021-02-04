@@ -25,3 +25,6 @@ export default () => <Demo />
 | systemCode     | 系统码或者菜单数据 | `string` \｜ `(() => Promise<IMenu[]>)` |          |
 | title          | 标题               | `string`                                | 凹凸租车 |
 | showMenuSearch | 显示菜单搜索框     | `boolean`                               | false    |
+| logOut         | 注销事件          | `() => void`                            | `-`    |
+| backHome       | 回到首页事件       | `() => void`                            | `-`  |
+| showHome       | 是否展示回到首页按钮     | `boolean`                               | true    |

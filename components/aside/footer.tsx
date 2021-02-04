@@ -14,7 +14,8 @@ const Footer: FC<{
   collapsed: boolean
 }> = ({ collapsed }) => {
   const { loginName = 'unknow' } = useMemo(getLoginInfo, [])
-  const { setCollapsed } = useContext(WrapperContext)
+  const { setCollapsed, logOut, backHome, showHome } = useContext(WrapperContext)
+
   return (
     <div className="at-cc-aside-footer">
       <div className="at-cc-aside-footer-body">
@@ -36,21 +37,26 @@ const Footer: FC<{
               <h2>{loginName}</h2>
 
               <div className="at-cc-aside-footer-btns">
-                <Popconfirm title="确认要注销么？" onConfirm={toConsoleLogin}>
+                <Popconfirm title="确认要注销么？" onConfirm={logOut || toConsoleLogin}>
                   <div className="at-cc-aside-footer-btn at-cc-aside-footer-logout">
                     <PoweroffOutlined className="at-cc-aside-footer-icon" />
                   </div>
                 </Popconfirm>
-                <Popconfirm
-                  title="确认要回到主页么？"
-                  onConfirm={() => {
-                    window.location.href = '/system'
-                  }}
-                >
-                  <div className="at-cc-aside-footer-btn at-cc-aside-footer-appstore">
-                    <AppstoreOutlined className="at-cc-aside-footer-icon" />
-                  </div>
-                </Popconfirm>
+                {showHome && (
+                  <Popconfirm
+                    title="确认要回到主页么？"
+                    onConfirm={
+                      backHome ||
+                      (() => {
+                        window.location.href = '/system'
+                      })
+                    }
+                  >
+                    <div className="at-cc-aside-footer-btn at-cc-aside-footer-appstore">
+                      <AppstoreOutlined className="at-cc-aside-footer-icon" />
+                    </div>
+                  </Popconfirm>
+                )}
                 <div
                   className="at-cc-aside-footer-btn at-cc-aside-footer-collapsed"
                   onClick={() => {
