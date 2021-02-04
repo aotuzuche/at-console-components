@@ -45,9 +45,12 @@ const Footer: FC<{
                 {showHome && (
                   <Popconfirm
                     title="确认要回到主页么？"
-                    onConfirm={() => {
-                      backHome || (window.location.href = '/system')
-                    }}
+                    onConfirm={
+                      backHome ||
+                      (() => {
+                        window.location.href = '/system'
+                      })
+                    }
                   >
                     <div className="at-cc-aside-footer-btn at-cc-aside-footer-appstore">
                       <AppstoreOutlined className="at-cc-aside-footer-icon" />

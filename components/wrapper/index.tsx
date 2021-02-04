@@ -28,8 +28,8 @@ const Wrapper: FC<WrapperProps> = ({
   systemCode,
   children,
   showMenuSearch,
-  logOut = () => {},
-  backHome = () => {},
+  logOut,
+  backHome,
   showHome = true,
 }) => {
   const [state, setState] = useStates<{
