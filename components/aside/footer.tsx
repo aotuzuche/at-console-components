@@ -12,12 +12,9 @@ import WrapperContext from '../wrapper/wrapperContext'
 
 const Footer: FC<{
   collapsed: boolean
-  logOut: () => void
-  backHome: () => void
-  showHome: boolean
-}> = ({ collapsed, logOut, backHome, showHome }) => {
+}> = ({ collapsed }) => {
   const { loginName = 'unknow' } = useMemo(getLoginInfo, [])
-  const { setCollapsed } = useContext(WrapperContext)
+  const { setCollapsed, logOut, backHome, showHome } = useContext(WrapperContext)
 
   return (
     <div className="at-cc-aside-footer">
