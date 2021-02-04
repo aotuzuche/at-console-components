@@ -6,15 +6,32 @@ import {
   DoubleLeftOutlined,
   AppstoreOutlined,
 } from '@ant-design/icons'
-import { toConsoleLogin } from 'auto-libs'
+import { toConsoleLogin, clearConsoleToken } from 'auto-libs'
 import getLoginInfo from '../utils/getLoginInfo'
 import WrapperContext from '../wrapper/wrapperContext'
 
 const Footer: FC<{
   collapsed: boolean
-}> = ({ collapsed }) => {
+  loginUrl: string
+  homeUrl: string
+}> = ({ collapsed, loginUrl, homeUrl }) => {
   const { loginName = 'unknow' } = useMemo(getLoginInfo, [])
   const { setCollapsed } = useContext(WrapperContext)
+  const logOut = () => {
+    if (loginUrl) {
+      clearConsoleToken()
+      window.location.href = loginUrl
+    } else {
+      toConsoleLogin()
+    }
+  }
+  const backHome = () => {
+    if (homeUrl) {
+      window.location.href = homeUrl
+    } else {
+      window.location.href = '/system'
+    }
+  }
   return (
     <div className="at-cc-aside-footer">
       <div className="at-cc-aside-footer-body">
@@ -36,17 +53,12 @@ const Footer: FC<{
               <h2>{loginName}</h2>
 
               <div className="at-cc-aside-footer-btns">
-                <Popconfirm title="确认要注销么？" onConfirm={toConsoleLogin}>
+                <Popconfirm title="确认要注销么？" onConfirm={logOut}>
                   <div className="at-cc-aside-footer-btn at-cc-aside-footer-logout">
                     <PoweroffOutlined className="at-cc-aside-footer-icon" />
                   </div>
                 </Popconfirm>
-                <Popconfirm
-                  title="确认要回到主页么？"
-                  onConfirm={() => {
-                    window.location.href = '/system'
-                  }}
-                >
+                <Popconfirm title="确认要回到主页么？" onConfirm={backHome}>
                   <div className="at-cc-aside-footer-btn at-cc-aside-footer-appstore">
                     <AppstoreOutlined className="at-cc-aside-footer-icon" />
                   </div>
