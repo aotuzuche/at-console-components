@@ -361,7 +361,7 @@ function Table<RecordType extends object>(
 
   const renderTitle = () => (
     <Row justify="space-between">
-      <Col>{title && title(state.data)}</Col>
+      <Col flex={1}>{title && title(state.data)}</Col>
       {showTools && (
         <Col>
           <Tooltip title="刷新">
