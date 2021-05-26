@@ -101,7 +101,7 @@
     "enzyme-adapter-react-16": "^1.15.5",
     "eslint": "^7.15.0",
     "eslint-config-atzuche": "^3.0.0",
-    "eslint-plugin-markdown": "^1.0.2",
+    "eslint-plugin-markdown": "^2.2.0",
     "father-build": "^1.19.1",
     "git-cz": "^4.7.6",
     "husky": "^4.3.5",
