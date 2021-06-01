@@ -17,6 +17,7 @@ group:
 | onSearch    | 数据获取               | `() => Promise<TableData> \| TableData`                                       | -       |
 | searchProps | 搜索栏参数             | [SearchProps](/components/table#SearchProps) \| [Form](/components/form#参数) | -       |
 | showTools   | 是否显示工具栏（刷新） | `boolean`                                                                     | `false` |
+| columns     | 表格列的配置描述       | `Array`                                                                       |         |
 | isKeepAlive | 是否缓存搜索参数       | `boolean`                                                                     | `false` |
 
 #### SearchProps
