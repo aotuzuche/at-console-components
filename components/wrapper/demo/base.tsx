@@ -252,6 +252,36 @@ const list: IMenu[] = [
     pid: 389,
     systemId: 37,
   },
+  {
+    id: 31,
+    name: '财务数据系统',
+    icon: null,
+    url: '',
+    children: [
+      {
+        id: 32,
+        name: '资金管理',
+        icon: null,
+        url: '',
+        pid: 0,
+        systemId: 31,
+        children: [
+          {
+            id: 33,
+            name: '基础资金管理',
+            icon: null,
+            url: '',
+            pid: 32,
+            systemId: 31,
+            children: [
+              { id: 34, name: '基础资金明细', icon: 'false', url: '', pid: 33, systemId: 31 },
+              { id: 35, name: '资金导入', icon: null, url: '', pid: 33, systemId: 31 },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 ]
 
 export default function BaseWrapperDemo() {
