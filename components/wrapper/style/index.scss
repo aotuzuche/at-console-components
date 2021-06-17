@@ -37,5 +37,11 @@ $contentBackground: #fff;
     margin: 0 12px;
     padding: 24px;
     border-radius: 4px;
+
+    .ant-table-wrapper {
+      th, td {
+        white-space: nowrap;
+      }
+    }
   }
 }
