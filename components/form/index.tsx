@@ -1,3 +1,16 @@
+import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined'
+import { Card, Col, Divider, Form as AntdForm, Input, Popover, Row, Skeleton, Spin } from 'antd'
+import { CardProps } from 'antd/lib/card'
+import { ColProps } from 'antd/lib/col'
+import { Store, StoreValue } from 'antd/lib/form/interface'
+import get from 'lodash/get'
+import isEqual from 'lodash/isEqual'
+import useForceUpdate from '../hooks/useForceUpdate'
+import useStates from '../hooks/useStates'
+import { isFunc } from '../utils/is'
+import showDesensitize, { DesensitizeType } from '../utils/showDesensitize'
+import showPlaceHolder from '../utils/showPlaceholder'
+import usePrevious from './usePrevious'
 import React, {
   ReactElement,
   FC,
@@ -11,23 +24,11 @@ import React, {
   forwardRef,
   ForwardRefRenderFunction,
 } from 'react'
-import { Form as AntdForm, Input, Row, Col, Skeleton, Popover, Card, Spin, Divider } from 'antd'
 import {
   FormProps as AntdFormProps,
   FormItemProps as AntdFormItemProps,
   FormInstance,
 } from 'antd/lib/form'
-import { StoreValue, Store } from 'antd/lib/form/interface'
-import { ColProps } from 'antd/lib/col'
-import { CardProps } from 'antd/lib/card'
-import get from 'lodash/get'
-import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined'
-import isEqual from 'lodash/isEqual'
-import { isFunc } from '../utils/is'
-import useForceUpdate from '../hooks/useForceUpdate'
-import useStates from '../hooks/useStates'
-import showPlaceHolder from '../utils/showPlaceholder'
-import usePrevious from './usePrevious'
 
 export type OutputPipeline = (fieldValue: StoreValue) => StoreValue
 export type InputPipeline = (fieldValue: StoreValue) => StoreValue
@@ -50,6 +51,9 @@ interface FormCommonProps {
    * @see https://ant.design/components/grid/#Col
    */
   layoutCol?: ColProps
+
+  // 信息脱敏
+  desensitize?: DesensitizeType | string
 }
 
 export interface FormItemProps extends Omit<AntdFormItemProps, 'children'>, FormCommonProps {
@@ -230,6 +234,7 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
       type,
       noStyle = !!type,
       hidden,
+      desensitize,
       ...itemProps
     }: FormItemProps,
     index: number,
@@ -271,6 +276,8 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
       Comp = showPlaceHolder(
         renderView && isFunc(renderView)
           ? renderView(fieldValue, fieldsValue, formInsatce)
+          : desensitize
+          ? showDesensitize(fieldValue, desensitize)
           : fieldValue,
         name ? placeholder : undefined,
       )

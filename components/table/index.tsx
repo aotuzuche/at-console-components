@@ -11,6 +11,7 @@ import AsyncButton from '../async-button'
 import Form, { FormProps } from '../form'
 import useStates from '../hooks/useStates'
 import { isFunc } from '../utils/is'
+import showDesensitize, { DesensitizeType } from '../utils/showDesensitize'
 import showPlaceHolder from '../utils/showPlaceholder'
 import { getHistoryState, setHistoryState } from './historyState'
 import useWindowSize from './useWindowSize'
@@ -50,6 +51,9 @@ interface TableCommonProps {
    * @default -
    */
   placeholder?: string
+
+  // 信息脱敏
+  desensitize?: DesensitizeType | string
 }
 
 export interface TableSearchProps extends FormProps {
@@ -281,12 +285,16 @@ function Table<RecordType extends object>(
   }
 
   const renderColumns: () => ColumnsType<RecordType> | undefined = () =>
-    columns?.map(({ placeholder = tablePlaceholder, render, ...columnProps }) => ({
+    columns?.map(({ placeholder = tablePlaceholder, desensitize, render, ...columnProps }) => ({
       ...columnProps,
       render: (text, record, index) => {
         if (isFunc(render)) {
           const result = render(text, record, index)
           return showPlaceHolder(result, placeholder)
+        }
+
+        if (desensitize) {
+          return showPlaceHolder(showDesensitize(text, desensitize), placeholder)
         }
 
         return showPlaceHolder(text, placeholder)

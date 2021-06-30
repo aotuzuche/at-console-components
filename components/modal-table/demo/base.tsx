@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { Button } from 'antd'
-import { ColumnsType } from 'antd/lib/table'
 import ModalTable from '..'
+import { Button } from 'antd'
+import { TableColumnsType } from 'at-console-components/lib/table'
+import React, { useState } from 'react'
 
 interface User {
   key: number
@@ -15,10 +15,11 @@ interface User {
 export default function ModalFormDemo() {
   const [isShow, setShow] = useState(false)
 
-  const columns: ColumnsType<User> = [
+  const columns: TableColumnsType<User>[] = [
     {
       title: '姓名',
       dataIndex: 'name',
+      desensitize: 'name',
     },
     {
       title: '年龄',

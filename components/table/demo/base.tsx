@@ -28,6 +28,11 @@ export default function BaseDemo() {
       dataIndex: 'name',
     },
     {
+      title: '电话',
+      dataIndex: 'mobile',
+      desensitize: 'mobile',
+    },
+    {
       title: '年龄',
       dataIndex: 'age',
       sorter: true,
@@ -48,10 +53,11 @@ export default function BaseDemo() {
   ]
 
   const data = mock({
-    'data|10-100': [
+    'data|60-100': [
       {
         name: '@first',
         age: '@integer(10, 30)',
+        mobile: '@integer(13500000000, 19900000000)',
         birthday: '@date',
         'hobby|+1': ['篮球', '乒乓球', undefined, '', null],
         'grade|+1': ['初一', '初二', '初三'],
@@ -65,6 +71,7 @@ export default function BaseDemo() {
 
   const items = [
     { name: 'name', label: '姓名' },
+    { name: 'mobile', label: '电话' },
     { name: 'age', label: '年龄' },
     { name: 'birthday', label: '生日', render: () => <DatePicker /> },
     { name: 'hobby', label: '爱好' },
