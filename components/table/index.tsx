@@ -66,6 +66,7 @@ export interface TableSearchProps extends FormProps {
    * Support search form string value trim
    */
   allowTrim?: boolean
+  addonButtons?: React.ReactNode
 }
 
 interface TablePaginationName {
@@ -305,7 +306,7 @@ function Table<RecordType extends object>(
     if (!tableSearchProps) {
       return null
     }
-    const { initialCount = 3, items, ...searchProps } = tableSearchProps
+    const { initialCount = 3, items, addonButtons, ...searchProps } = tableSearchProps
 
     return (
       <>
@@ -342,6 +343,7 @@ function Table<RecordType extends object>(
                   搜索
                 </AsyncButton>
                 <Button htmlType="reset">重置</Button>
+                {addonButtons}
                 {items.length > initialCount && (
                   <Button
                     type="link"
