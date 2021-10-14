@@ -22,10 +22,11 @@ group:
 
 #### SearchProps
 
-| 属性         | 描述               | 类型      | 默认值 |
-| ------------ | ------------------ | --------- | ------ |
-| initialCount | 初始显示个数       | `number`  | 3      |
-| allowTrim    | 是否对搜索参数进行 | `boolean` | false  |
+| 属性         | 描述                   | 类型              | 默认值 |
+| ------------ | ---------------------- | ----------------- | ------ |
+| initialCount | 初始显示个数           | `number`          | 3      |
+| allowTrim    | 是否对搜索参数进行     | `boolean`         | false  |
+| addonButtons | 搜索栏处添加额外的按钮 | `React.ReactNode` | null   |
 
 #### TableData
 
@@ -39,3 +40,9 @@ group:
 | pageNum      | 当前页       | `string` | `1`        |
 | pageNumName  | 当前页字段名 | `string` | `pageNum`  |
 | totalName    | 总条数字段名 | `string` | `total`    |
+
+#### Table Instance Methods
+
+| 属性 | 描述 | 类型 | 默认值 |
+| refresh | 刷新 table 数据 | function | void |
+| getSearchBarFieldsValue | function | any |

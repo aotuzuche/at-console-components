@@ -140,6 +140,7 @@ export interface TableRef {
    * Refresh Table data with existing search params
    */
   refresh: () => Promise<unknown>
+  getSearchBarFieldsValue: () => any
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -236,6 +237,8 @@ function Table<RecordType extends object>(
   }
 
   const refresh = () => onSearch()
+
+  const getSearchBarFieldsValue = () => form.getFieldsValue(true)
 
   const onClickSearch = () => {
     setState({
@@ -414,6 +417,7 @@ function Table<RecordType extends object>(
 
   useImperativeHandle(ref, () => ({
     refresh,
+    getSearchBarFieldsValue,
   }))
 
   return (
