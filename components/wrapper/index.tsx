@@ -141,7 +141,18 @@ const Wrapper: FC<WrapperProps> = ({
                 ))}
               </Breadcrumb>
             )}
-            <main className="at-cc-wrapper-body">{children}</main>
+            <main className="at-cc-wrapper-body">
+              {children ? (
+                children
+              ) : (
+                <>
+                  <Skeleton active />
+                  <Skeleton active />
+                  <Skeleton active />
+                  <Skeleton active />
+                </>
+              )}
+            </main>
           </div>
         </div>
       </Skeleton>
