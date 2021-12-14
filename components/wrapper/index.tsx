@@ -14,6 +14,7 @@ export interface WrapperProps {
    */
   systemCode: string | IMenu[] | (() => Promise<IMenu[]>)
   title?: string
+  hasRemoteRoutes: boolean
   showMenuSearch?: boolean
   logOut?: () => void
   backHome?: () => void
@@ -30,6 +31,7 @@ const Wrapper: FC<WrapperProps> = ({
   showMenuSearch,
   logOut,
   backHome,
+  hasRemoteRoutes = false,
   showHome = true,
 }) => {
   const [state, setState] = useStates<{
@@ -142,7 +144,7 @@ const Wrapper: FC<WrapperProps> = ({
               </Breadcrumb>
             )}
             <main className="at-cc-wrapper-body">
-              {children ? (
+              {hasRemoteRoutes ? (
                 children
               ) : (
                 <>

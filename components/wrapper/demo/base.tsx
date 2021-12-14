@@ -286,7 +286,7 @@ const list: IMenu[] = [
 
 export default function BaseWrapperDemo() {
   return (
-    <Wrapper systemCode={list} showMenuSearch>
+    <Wrapper systemCode={list} showMenuSearch hasRemoteRoutes>
       <Table />
     </Wrapper>
   )
