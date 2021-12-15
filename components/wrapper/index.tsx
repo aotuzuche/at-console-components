@@ -79,7 +79,7 @@ const Wrapper: FC<WrapperProps> = ({
           initialMenus: result?.list,
         })
       }
-    } catch (error) {
+    } catch (error: any) {
       message.error(error.msg || '初始菜单信息失败')
     } finally {
       setState({

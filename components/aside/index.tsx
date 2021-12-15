@@ -4,6 +4,7 @@ import { FolderOutlined, FileOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import Icon from '@ant-design/compatible/lib/icon'
 import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint'
+// @ts-ignore
 import { OpenEventHandler, SelectEventHandler } from 'rc-menu/lib/interface'
 import { isEqual } from 'lodash'
 import WrapperContext from '../wrapper/wrapperContext'

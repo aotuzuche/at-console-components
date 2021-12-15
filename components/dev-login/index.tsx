@@ -61,6 +61,7 @@ class View extends React.PureComponent<IProps, IState> {
       this.props.history.replace('/')
       window.location.reload()
     } catch (e) {
+      // @ts-ignore
       message.error(e.message || '系统异常')
     } finally {
       this.setState({

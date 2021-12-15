@@ -448,6 +448,7 @@ function Table<RecordType extends object>(
               }
         }
         title={isShowTableTitle ? renderTitle : undefined}
+        // @ts-ignore
         summary={summary ? data => summary(data, state.data) : undefined}
       />
     </div>

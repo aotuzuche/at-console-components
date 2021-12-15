@@ -3,6 +3,7 @@ import React from 'react'
 import { clearConsoleToken } from 'auto-libs'
 import { Layout } from 'antd'
 import Icon from '@ant-design/compatible/lib/icon'
+// @ts-ignore
 import cn from 'classnames'
 
 interface IProps {

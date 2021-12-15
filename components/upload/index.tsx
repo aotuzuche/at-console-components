@@ -67,7 +67,7 @@ const Upload: FC<UploadProps> = ({
       const result = await httpConsole.get(ticket)
 
       setOssData((result as unknown) as IOssData)
-    } catch (error) {
+    } catch (error: any) {
       message.error(error.msg || error.message)
     }
   }
