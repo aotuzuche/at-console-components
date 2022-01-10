@@ -86,7 +86,7 @@ export default function BaseDemo() {
           console.log('params: ', params)
           setTimeout(() => {
             resolve(data)
-          }, 1000)
+          }, 2000)
         })
       }
       onChange={(p, f, s) => {
