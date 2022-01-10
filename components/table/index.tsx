@@ -67,6 +67,8 @@ export interface TableSearchProps extends FormProps {
    */
   allowTrim?: boolean
   addonButtons?: React.ReactNode
+  disabledSearchBtn?: boolean
+  disabledSearchBtnAddonAfter?: React.ReactNode // 隐藏搜索按钮之后，替代组件
 }
 
 interface TablePaginationName {
@@ -311,6 +313,8 @@ function Table<RecordType extends object>(
     }
     const { initialCount = 3, items, addonButtons, ...searchProps } = tableSearchProps
 
+    const { disabledSearchBtn, disabledSearchBtnAddonAfter } = searchProps
+
     return (
       <>
         <Form
@@ -342,9 +346,13 @@ function Table<RecordType extends object>(
           <Form.Item noStyle>
             <Row justify="end">
               <Space>
-                <AsyncButton onClick={onClickSearch} type="primary" icon={<SearchOutlined />}>
-                  搜索
-                </AsyncButton>
+                {disabledSearchBtn ? (
+                  disabledSearchBtnAddonAfter
+                ) : (
+                  <AsyncButton onClick={onClickSearch} type="primary" icon={<SearchOutlined />}>
+                    搜索
+                  </AsyncButton>
+                )}
                 <Button htmlType="reset">重置</Button>
                 {addonButtons}
                 {items.length > initialCount && (
