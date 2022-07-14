@@ -291,9 +291,8 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
     }
 
     return (
-      <Col {...itemLayoutColCombination}>
+      <Col key={key} {...itemLayoutColCombination}>
         <Item
-          key={key}
           label={type ? undefined : LabelWrap}
           extra={isFunc(extra) ? extra(fieldsValue) : extra}
           name={isItemView ? undefined : name}
