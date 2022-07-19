@@ -43,6 +43,8 @@ group:
 
 #### Table Instance Methods
 
-| 属性 | 描述 | 类型 | 默认值 |
-| refresh | 刷新 table 数据 | function | void |
-| getSearchBarFieldsValue | function | any |
+| 属性                    | 描述            | 类型     | 默认值 |
+| ----------------------- | --------------- | -------- | ------ |
+| refresh                 | 刷新 table 数据 | function | void   |
+| getSearchBarFieldsValue | 获取搜索框的值  | function | any    |
+| setSearchBarFieldsValue | 设置搜索框的值  | function | any    |
