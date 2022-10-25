@@ -17,8 +17,14 @@ export * from './async-button'
 export { default as ModalForm } from './modal-form'
 export * from './modal-form'
 
+export { default as DrawerForm } from './drawer-form'
+export * from './drawer-form'
+
 export { default as ModalTable } from './modal-table'
 export * from './modal-table'
+
+export { default as DrawerTable } from './drawer-table'
+export * from './drawer-table'
 
 export { default as Operator } from './operator'
 

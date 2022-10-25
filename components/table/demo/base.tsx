@@ -1,5 +1,5 @@
 import { TableColumnsType, TableRef } from '..'
-import { DatePicker } from 'antd'
+import { Button, DatePicker, Space } from 'antd'
 import { Store } from 'antd/lib/form/interface'
 import { Table } from 'at-console-components'
 import { mock } from 'mockjs'
@@ -97,6 +97,14 @@ export default function BaseDemo() {
         items,
       }}
       ref={table}
+      toolbar={() => {
+        return (
+          <Space>
+            <Button>排序</Button>
+            <Button type="primary">新增</Button>
+          </Space>
+        )
+      }}
       isKeepAlive
       sticky
     />

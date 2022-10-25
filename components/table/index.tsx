@@ -1,6 +1,7 @@
 import DownOutlined from '@ant-design/icons/DownOutlined'
 import RedoOutlined from '@ant-design/icons/RedoOutlined'
 import SearchOutlined from '@ant-design/icons/SearchOutlined'
+import { Button, Col, Form as AntdForm, Row, Space, Table as AntdTable, Tooltip } from 'antd'
 import { Store } from 'antd/lib/form/interface'
 import { TableProps as AntdTableProps } from 'antd/lib/table'
 import cloneDeep from 'lodash/cloneDeep'
@@ -23,16 +24,6 @@ import React, {
   useImperativeHandle,
   ReactNode,
 } from 'react'
-import {
-  Table as AntdTable,
-  Space,
-  Row,
-  Divider,
-  Form as AntdForm,
-  Col,
-  Tooltip,
-  Button,
-} from 'antd'
 import {
   SorterResult,
   TableCurrentDataSource,
@@ -134,6 +125,7 @@ export interface TableProps<RecordType>
   showTools?: boolean
   isKeepAlive?: boolean
   title?: (data: TableData<RecordType>) => ReactNode
+  toolbar?: (data: TableData<RecordType>) => ReactNode
   summary?: (data: RecordType[], pageData: TableData<RecordType>) => ReactNode
 }
 
@@ -161,6 +153,7 @@ function Table<RecordType extends object>(
     onChange: onTableChange,
     columns,
     placeholder: tablePlaceholder = '-',
+    toolbar,
     title,
     showTools,
     scroll,
@@ -186,7 +179,7 @@ function Table<RecordType extends object>(
     pageNum,
     pageSize,
   })
-  const isShowTableTitle = !!(title || showTools)
+  const isShowTableTool = !!(toolbar || showTools)
 
   // get data source
   const onSearch = async (
@@ -378,24 +371,25 @@ function Table<RecordType extends object>(
             </Row>
           </Form.Item>
         </Form>
-        {isShowTableTitle && <Divider style={{ margin: 0 }} />}
+        {isShowTableTool && <div style={{ height: '16px' }} />}
       </>
     )
   }
 
-  const renderTitle = () => (
-    <Row justify="space-between">
-      <Col flex={1}>{title && title(state.data)}</Col>
+  const renderTool = () => (
+    <Row justify="space-between" style={{ marginBottom: '16px' }}>
+      <Col flex={1}>{toolbar && toolbar(state.data)}</Col>
       {showTools && (
         <Col>
           <Tooltip title="刷新">
-            <RedoOutlined
-              onClick={() => refresh()}
-              spin={state.loading}
-              style={{
-                fontSize: 18,
-              }}
-            />
+            <Button onClick={() => refresh()}>
+              <RedoOutlined
+                spin={state.loading}
+                style={{
+                  fontSize: 18,
+                }}
+              />
+            </Button>
           </Tooltip>
         </Col>
       )}
@@ -435,6 +429,7 @@ function Table<RecordType extends object>(
   return (
     <div>
       {renderSearchColumns()}
+      {isShowTableTool ? renderTool() : undefined}
       <AntdTable<RecordType>
         {...props}
         scroll={{
@@ -459,7 +454,7 @@ function Table<RecordType extends object>(
                 ...pagination,
               }
         }
-        title={isShowTableTitle ? renderTitle : undefined}
+        title={title ? () => title(state.data) : void 0}
         // @ts-ignore
         summary={summary ? data => summary(data, state.data) : undefined}
       />
