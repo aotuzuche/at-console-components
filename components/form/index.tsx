@@ -243,6 +243,11 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
     }: FormItemProps,
     index: number,
   ) => {
+    // 补充缺失的rules
+    if (itemProps.required && !itemProps.rules) {
+      itemProps.rules = [{ required: true, message: label + '不能为空' }]
+    }
+
     let Comp: ReactNode
     const { getFieldsValue } = formInsatce
     const fieldsValue = {

@@ -11,11 +11,11 @@ export default function BaseDemo() {
     {
       name: 'name',
       label: '姓名',
+      required: true,
     },
     {
       name: 'age',
       label: '年龄',
-      disabled: true,
     },
     { name: 'birthday', label: '出生年月', render: () => <DatePicker /> },
     { name: 'hasJob', label: '已就业', render: () => <Switch /> },
