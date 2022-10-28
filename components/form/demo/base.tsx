@@ -1,7 +1,7 @@
-import React from 'react'
-import { DatePicker, Switch, Button } from 'antd'
-import { Form } from 'at-console-components'
+import { Button, DatePicker, Switch } from 'antd'
 import { Store } from 'antd/lib/form/interface'
+import { Form } from 'at-console-components'
+import React from 'react'
 
 const { useForm } = Form
 
@@ -15,6 +15,7 @@ export default function BaseDemo() {
     {
       name: 'age',
       label: '年龄',
+      disabled: true,
     },
     { name: 'birthday', label: '出生年月', render: () => <DatePicker /> },
     { name: 'hasJob', label: '已就业', render: () => <Switch /> },

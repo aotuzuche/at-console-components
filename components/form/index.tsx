@@ -76,6 +76,9 @@ export interface FormItemProps extends Omit<AntdFormItemProps, 'children'>, Form
 
   // Default render
   type?: 'divider'
+
+  // disabled
+  disabled?: boolean
 }
 
 export interface FormProps extends AntdFormProps, FormCommonProps {
@@ -93,7 +96,7 @@ export interface FormProps extends AntdFormProps, FormCommonProps {
   }
 }
 
-const RenderChild: FC<Pick<FormItemProps, 'suffix' | 'type' | 'label'>> = ({
+const RenderChild: FC<Pick<FormItemProps, 'suffix' | 'type' | 'label' | 'disabled'>> = ({
   suffix,
   children,
   type,
@@ -235,6 +238,7 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
       noStyle = !!type,
       hidden,
       desensitize,
+      disabled,
       ...itemProps
     }: FormItemProps,
     index: number,
@@ -301,9 +305,10 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
           {...itemProps}
         >
           <RenderChild
-            {...(isValidElement(Comp) ? Comp.props : {})}
+            {...(isValidElement(Comp) ? (Comp as any).props : {})}
             suffix={isFunc(suffix) ? suffix(fieldsValue) : suffix}
             type={type}
+            disabled={!!disabled}
             label={LabelWrap}
           >
             {Comp}

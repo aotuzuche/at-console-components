@@ -12,13 +12,14 @@ group:
 
 ### 参数
 
-| 属性        | 描述                   | 类型                                                                          | 默认值  |
-| ----------- | ---------------------- | ----------------------------------------------------------------------------- | ------- |
-| onSearch    | 数据获取               | `() => Promise<TableData> \| TableData`                                       | -       |
-| searchProps | 搜索栏参数             | [SearchProps](/components/table#SearchProps) \| [Form](/components/form#参数) | -       |
-| showTools   | 是否显示工具栏（刷新） | `boolean`                                                                     | `false` |
-| columns     | 表格列的配置描述       | `Array`                                                                       |         |
-| isKeepAlive | 是否缓存搜索参数       | `boolean`                                                                     | `false` |
+| 属性        | 描述                                 | 类型                                                                          | 默认值  |
+| ----------- | ------------------------------------ | ----------------------------------------------------------------------------- | ------- |
+| onSearch    | 数据获取                             | `() => Promise<TableData> \| TableData`                                       | -       |
+| searchProps | 搜索栏参数                           | [SearchProps](/components/table#SearchProps) \| [Form](/components/form#参数) | -       |
+| showTools   | 是否显示工具栏（刷新）               | `boolean`                                                                     | `false` |
+| toolbar     | 自定义工具栏（新增、批量处理按钮等） | `(TableData) => React.ReactNode`                                              | -       |
+| columns     | 表格列的配置描述                     | `Array`                                                                       |         |
+| isKeepAlive | 是否缓存搜索参数                     | `boolean`                                                                     | `false` |
 
 #### SearchProps
 

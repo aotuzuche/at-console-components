@@ -74,6 +74,7 @@ group:
 | renderView  | 只读模式下渲染方法                                           | `(fieldValue: StoreValue, fieldsValue: Store) => ReactNode`              | `fieldValue`                 |
 | isView      | 是否只读                                                     | `boolean`                                                                | Form `isView`                |
 | pipeline    | 输入输出过滤                                                 | `OutputPipeline \| [InputPipeline, OutputPipeline]`                      | -                            |
+| disabled    | 是否禁用                                                     | `boolean`                                                                | false                        |
 | isHidden    | 是否隐藏                                                     | `(fieldValue: StoreValue, fieldsValue: Store) => boolean`                | -                            |
 | layoutCol   | 布局                                                         | [ColProps](https://ant.design/components/grid/#Col)                      | Form `layoutCol`             |
 | extraNames  | 额外的 name                                                  | `NamePath[]`                                                             | -                            |
