@@ -1,26 +1,191 @@
-## [1.12.1](https://github.com/aotuzuche/at-console-components/compare/v1.9.9...v1.12.1) (2021-06-01)
+## [1.13.3](https://github.com/aotuzuche/at-console-components/compare/v1.13.2...v1.13.3) (2022-10-28)
+
+## [1.13.2](https://github.com/aotuzuche/at-console-components/compare/v1.13.1...v1.13.2) (2022-10-28)
+
+### Features
+
+- add default form rules if not ([6a34a9e](https://github.com/aotuzuche/at-console-components/commit/6a34a9e39a7d79ac8f48e68323045c36e62d36ac))
+
+## [1.13.1](https://github.com/aotuzuche/at-console-components/compare/v1.13.0...v1.13.1) (2022-10-28)
+
+### Features
+
+- form 增加字段 ([51765fd](https://github.com/aotuzuche/at-console-components/commit/51765fd9df7586616f5e05a956a2c363be876f3d))
+
+# [1.13.0](https://github.com/aotuzuche/at-console-components/compare/v1.12.16...v1.13.0) (2022-10-25)
+
+### Features
+
+- add drawer form and drawer table ([ba71e6a](https://github.com/aotuzuche/at-console-components/commit/ba71e6a5663ac7cccbca1f0d823e3c8fd9c152f3))
+
+## [1.12.16](https://github.com/aotuzuche/at-console-components/compare/v1.12.15...v1.12.16) (2022-07-19)
+
+### Features
+
+- 🎸 table 添加 setSearchBarFieldsValue ([7cd69ff](https://github.com/aotuzuche/at-console-components/commit/7cd69ff94b83cd41682e3cc5886b61feb7a24ff0))
+
+## [1.12.15](https://github.com/aotuzuche/at-console-components/compare/v1.12.13...v1.12.15) (2022-07-14)
+
+### Features
+
+- fix form key ([6d43c15](https://github.com/aotuzuche/at-console-components/commit/6d43c15dfd70c265455298a2c98e5d5b072ae32f))
+
+## [1.12.13](https://github.com/aotuzuche/at-console-components/compare/v1.12.12...v1.12.13) (2022-01-10)
+
+### Features
+
+- 🎸 table add search props ([74ec530](https://github.com/aotuzuche/at-console-components/commit/74ec5301dbc4b6643ed38785ebc1bbd32104984f))
+
+## [1.12.12](https://github.com/aotuzuche/at-console-components/compare/v1.12.11...v1.12.12) (2021-12-15)
+
+### Bug Fixes
+
+- 🐛 优化 wrapper 显示 ([c60574b](https://github.com/aotuzuche/at-console-components/commit/c60574bdc72aae86396378521eaff44230cbe267))
+
+## [1.12.11](https://github.com/aotuzuche/at-console-components/compare/v1.12.10...v1.12.11) (2021-12-14)
+
+### Bug Fixes
+
+- 🐛 优化 wrapper 骨架屏 ([c6e812b](https://github.com/aotuzuche/at-console-components/commit/c6e812b9cf9504da58a48b08f09099cebfcfa77d))
+
+## [1.12.10](https://github.com/aotuzuche/at-console-components/compare/v1.12.9...v1.12.10) (2021-12-14)
+
+### Bug Fixes
+
+- 🐛 修复 wrapper 骨架屏显示问题 ([f9de482](https://github.com/aotuzuche/at-console-components/commit/f9de48232d8224441c5a7661540535c27feb9e97))
+
+## [1.12.9](https://github.com/aotuzuche/at-console-components/compare/v1.12.8...v1.12.9) (2021-12-14)
+
+### Bug Fixes
+
+- 🐛 修改 wrapper 的骨架屏显示问题 ([97becad](https://github.com/aotuzuche/at-console-components/commit/97becad739afc7b555676593a9c0a2f8cd979305))
+
+## [1.12.8](https://github.com/aotuzuche/at-console-components/compare/v1.12.7...v1.12.8) (2021-10-14)
+
+### Features
+
+- 🎸 table component add getSearchBarFieldsValue method ([6fa3f19](https://github.com/aotuzuche/at-console-components/commit/6fa3f194d09b6c8f0c601b5319c91f3527a88920))
+
+## [1.12.7](https://github.com/aotuzuche/at-console-components/compare/v1.12.6...v1.12.7) (2021-10-13)
+
+### Features
+
+- 🎸 create gh-pages ([a655c17](https://github.com/aotuzuche/at-console-components/commit/a655c17798bc4a79e0e0db2c43d9a723d7541301))
+- 🎸 table component searchProps add addonButtons props ([d352b6f](https://github.com/aotuzuche/at-console-components/commit/d352b6f55c47f2a1cfe4e6496ab08de0961353a4))
+- 添加 push.sh ([b933e71](https://github.com/aotuzuche/at-console-components/commit/b933e71b862556d3781fd4cc6efa8842f379d5c3))
+
+## [1.12.6](https://github.com/aotuzuche/at-console-components/compare/v1.12.5...v1.12.6) (2021-06-30)
+
+### Features
+
+- 🎸 表单与 table 组件的数据支持脱敏功能 ([ac6ca13](https://github.com/aotuzuche/at-console-components/commit/ac6ca13242a13c79c9ae0f2266a810b49867036a))
+
+## [1.12.5](https://github.com/aotuzuche/at-console-components/compare/v1.12.3...v1.12.5) (2021-06-17)
+
+## [1.12.3](https://github.com/aotuzuche/at-console-components/compare/v1.12.2...v1.12.3) (2021-06-01)
+
+## [1.12.2](https://github.com/aotuzuche/at-console-components/compare/v1.12.1...v1.12.2) (2021-06-01)
 
 ### Bug Fixes
 
 - 🐛 fix checking method for submenu check ([b662f09](https://github.com/aotuzuche/at-console-components/commit/b662f09d0fcec6a7a65247efdec5bb9eb15325ea))
-- 🐛 wrapper main add position equal relative ([75f0630](https://github.com/aotuzuche/at-console-components/commit/75f0630d78ff9301b0042e800bc5ee9e22234b64))
-- Aside isMfe compatible ([9d96148](https://github.com/aotuzuche/at-console-components/commit/9d96148e32eea43ffae08ecad5c4771916c86e32))
-- aside mfe url ([9aacb28](https://github.com/aotuzuche/at-console-components/commit/9aacb28fe927b42bf33fb1457974fab4cba738dc))
-- compile ingore tests dir ([c52f534](https://github.com/aotuzuche/at-console-components/commit/c52f534a14e4aeb080c8e7d414a6fa6e70c8e297))
-- improve first wrapper content load transition ([cdf3900](https://github.com/aotuzuche/at-console-components/commit/cdf3900d8002d62c8e14ea2a1c755355e4640527))
-- revert Form rules and resolve Upload ticket undefined ([146ac18](https://github.com/aotuzuche/at-console-components/commit/146ac182c4e949f1f1b178501cf2eb55fe73df42))
-- set aside open menu keys when collapsed change ([3a9531f](https://github.com/aotuzuche/at-console-components/commit/3a9531fd187e4c476146da45d6007bccb76feed6))
-- Table onChange filters type ([5be9eb2](https://github.com/aotuzuche/at-console-components/commit/5be9eb275ec2aed7353c8aa31e1f7c0cf5c7d13f))
+
+## [1.12.1](https://github.com/aotuzuche/at-console-components/compare/v1.12.0...v1.12.1) (2021-03-01)
+
+### Bug Fixes
+
 - Table title default flex value ([e4fb873](https://github.com/aotuzuche/at-console-components/commit/e4fb8739cf9cb77af36ce6f56941c8e91c826451))
+
+# [1.12.0](https://github.com/aotuzuche/at-console-components/compare/v1.11.3...v1.12.0) (2021-02-04)
+
+### Features
+
+- wrapper 组件注销、回到首页支持外部定制 ([#153](https://github.com/aotuzuche/at-console-components/issues/153)) ([751d8e0](https://github.com/aotuzuche/at-console-components/commit/751d8e09a5b3d960b8faeb1617dbfb50727ddfee))
+
+## [1.11.3](https://github.com/aotuzuche/at-console-components/compare/v1.11.2...v1.11.3) (2021-01-11)
+
+## [1.11.2](https://github.com/aotuzuche/at-console-components/compare/v1.11.1...v1.11.2) (2020-12-28)
+
+### Bug Fixes
+
 - Upload init catch error msg ([8df8e2a](https://github.com/aotuzuche/at-console-components/commit/8df8e2a285284ded5f129c3bd02adb911da050f2))
+
+## [1.11.1](https://github.com/aotuzuche/at-console-components/compare/v1.11.0...v1.11.1) (2020-12-28)
+
+### Bug Fixes
+
+- revert Form rules and resolve Upload ticket undefined ([146ac18](https://github.com/aotuzuche/at-console-components/commit/146ac182c4e949f1f1b178501cf2eb55fe73df42))
+
+# [1.11.0](https://github.com/aotuzuche/at-console-components/compare/v1.10.0...v1.11.0) (2020-12-23)
+
+### Bug Fixes
+
+- compile ingore tests dir ([c52f534](https://github.com/aotuzuche/at-console-components/commit/c52f534a14e4aeb080c8e7d414a6fa6e70c8e297))
+- Table onChange filters type ([5be9eb2](https://github.com/aotuzuche/at-console-components/commit/5be9eb275ec2aed7353c8aa31e1f7c0cf5c7d13f))
+
+### Features
+
+- Form Item improve rules function and refactor Upload ([2e8d289](https://github.com/aotuzuche/at-console-components/commit/2e8d289ed8cd8649ef6951b92348e76861b60b30))
+
+# [1.10.0](https://github.com/aotuzuche/at-console-components/compare/v1.9.18...v1.10.0) (2020-12-08)
+
+### Features
+
+- Aside support menu search ([9adcc15](https://github.com/aotuzuche/at-console-components/commit/9adcc15ef6ba061f50c02e118a93c62f883b4fdf))
+
+## [1.9.18](https://github.com/aotuzuche/at-console-components/compare/v1.9.17...v1.9.18) (2020-12-04)
+
+### Features
+
+- Wrapper systemCode systemCode support function ([769c9d2](https://github.com/aotuzuche/at-console-components/commit/769c9d2bf4c51a778907dcdbf349a4c263687014))
+
+## [1.9.17](https://github.com/aotuzuche/at-console-components/compare/v1.9.16...v1.9.17) (2020-11-19)
+
+### Bug Fixes
+
+- improve first wrapper content load transition ([cdf3900](https://github.com/aotuzuche/at-console-components/commit/cdf3900d8002d62c8e14ea2a1c755355e4640527))
+
+## [1.9.16](https://github.com/aotuzuche/at-console-components/compare/v1.9.15...v1.9.16) (2020-11-18)
+
+### Bug Fixes
+
+- set aside open menu keys when collapsed change ([3a9531f](https://github.com/aotuzuche/at-console-components/commit/3a9531fd187e4c476146da45d6007bccb76feed6))
+
+## [1.9.15](https://github.com/aotuzuche/at-console-components/compare/v1.9.14...v1.9.15) (2020-11-18)
+
+### Bug Fixes
+
+- 🐛 wrapper main add position equal relative ([75f0630](https://github.com/aotuzuche/at-console-components/commit/75f0630d78ff9301b0042e800bc5ee9e22234b64))
+
+## [1.9.14](https://github.com/aotuzuche/at-console-components/compare/v1.9.13...v1.9.14) (2020-11-18)
+
+### Bug Fixes
+
+- Aside isMfe compatible ([9d96148](https://github.com/aotuzuche/at-console-components/commit/9d96148e32eea43ffae08ecad5c4771916c86e32))
+
+## [1.9.13](https://github.com/aotuzuche/at-console-components/compare/v1.9.12...v1.9.13) (2020-11-13)
+
+### Bug Fixes
+
+- aside mfe url ([9aacb28](https://github.com/aotuzuche/at-console-components/commit/9aacb28fe927b42bf33fb1457974fab4cba738dc))
+
+## [1.9.12](https://github.com/aotuzuche/at-console-components/compare/v1.9.11...v1.9.12) (2020-11-13)
 
 ### Features
 
 - Aside add mfe mene link render ([a5b87df](https://github.com/aotuzuche/at-console-components/commit/a5b87dfedcf1f6d308b0278426412ce61e34c620))
-- Aside support menu search ([9adcc15](https://github.com/aotuzuche/at-console-components/commit/9adcc15ef6ba061f50c02e118a93c62f883b4fdf))
-- Form Item improve rules function and refactor Upload ([2e8d289](https://github.com/aotuzuche/at-console-components/commit/2e8d289ed8cd8649ef6951b92348e76861b60b30))
-- Wrapper systemCode systemCode support function ([769c9d2](https://github.com/aotuzuche/at-console-components/commit/769c9d2bf4c51a778907dcdbf349a4c263687014))
-- wrapper 组件注销、回到首页支持外部定制 ([#153](https://github.com/aotuzuche/at-console-components/issues/153)) ([751d8e0](https://github.com/aotuzuche/at-console-components/commit/751d8e09a5b3d960b8faeb1617dbfb50727ddfee))
+
+## [1.9.11](https://github.com/aotuzuche/at-console-components/compare/v1.9.10...v1.9.11) (2020-11-13)
+
+### Reverts
+
+- Revert "fix: Form change trigger" ([808dac4](https://github.com/aotuzuche/at-console-components/commit/808dac412c7bda621f69ad6c119a9bd23bcf1f50))
+
+## [1.9.10](https://github.com/aotuzuche/at-console-components/compare/v1.9.9...v1.9.10) (2020-11-13)
+
+### Bug Fixes
+
+- Form change trigger ([d1da4ba](https://github.com/aotuzuche/at-console-components/commit/d1da4bad30b56e9e0f62eb9bcd8699ec78049371))
 
 ## [1.9.9](https://github.com/aotuzuche/at-console-components/compare/v1.9.8...v1.9.9) (2020-11-03)
 
