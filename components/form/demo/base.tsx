@@ -1,16 +1,19 @@
 import { Button, DatePicker, Switch } from 'antd'
 import { Store } from 'antd/lib/form/interface'
-import { Form } from 'at-console-components'
+import { Form, FormItemProps } from 'at-console-components'
 import React from 'react'
 
 const { useForm } = Form
 
 export default function BaseDemo() {
   const [form] = useForm()
-  const baseItems = [
+  const baseItems: FormItemProps[] = [
     {
       name: 'name',
       label: '姓名',
+      inputWidth: 200,
+      inputMaxLength: 10,
+      suffix: 'asdf',
       required: true,
     },
     {

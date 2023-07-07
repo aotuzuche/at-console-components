@@ -1,8 +1,8 @@
 import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined'
-import { Card, Col, Divider, Form as AntdForm, Input, Popover, Row, Skeleton, Spin } from 'antd'
 import { CardProps } from 'antd/lib/card'
 import { ColProps } from 'antd/lib/col'
 import { Store, StoreValue } from 'antd/lib/form/interface'
+import { InputProps } from 'antd/lib/input'
 import get from 'lodash/get'
 import isEqual from 'lodash/isEqual'
 import useForceUpdate from '../hooks/useForceUpdate'
@@ -11,6 +11,18 @@ import { isFunc } from '../utils/is'
 import showDesensitize, { DesensitizeType } from '../utils/showDesensitize'
 import showPlaceHolder from '../utils/showPlaceholder'
 import usePrevious from './usePrevious'
+import {
+  Card,
+  Col,
+  Divider,
+  Form as AntdForm,
+  Input,
+  Popover,
+  Row,
+  Skeleton,
+  Spin,
+  Space,
+} from 'antd'
 import React, {
   ReactElement,
   FC,
@@ -79,6 +91,15 @@ export interface FormItemProps extends Omit<AntdFormItemProps, 'children'>, Form
 
   // disabled
   disabled?: boolean
+
+  // width: width of the default input
+  inputWidth?: number
+
+  // maxLength: maxLength of the default input
+  inputMaxLength?: number
+
+  // inputProps: props of the default input
+  inputProps?: InputProps
 }
 
 export interface FormProps extends AntdFormProps, FormCommonProps {
@@ -102,15 +123,26 @@ const RenderChild: FC<Pick<FormItemProps, 'suffix' | 'type' | 'label' | 'disable
   type,
   label,
   ...props
-}) =>
-  type === 'divider' ? (
-    <Divider orientation="left">{label}</Divider>
-  ) : (
-    <>
-      {isValidElement(children) ? cloneElement(children, props) : children}
-      {suffix}
-    </>
-  )
+}) => {
+  if (type === 'divider') {
+    return <Divider orientation="left">{label}</Divider>
+  }
+
+  if (suffix) {
+    return (
+      <Space>
+        {isValidElement(children) ? cloneElement(children, props) : children}
+        {suffix}
+      </Space>
+    )
+  }
+
+  if (isValidElement(children)) {
+    return cloneElement(children, props)
+  }
+
+  return children as any
+}
 
 const { Item, useForm, List, Provider } = AntdForm
 
@@ -239,6 +271,9 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
       hidden,
       desensitize,
       disabled,
+      inputWidth,
+      inputMaxLength,
+      inputProps = {},
       ...itemProps
     }: FormItemProps,
     index: number,
@@ -295,7 +330,13 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
         render && isFunc(render) ? (
           render(fieldValue, fieldsValue, formInsatce)
         ) : (
-          <Input allowClear placeholder={`请输入${label}`} />
+          <Input
+            allowClear
+            placeholder={`请输入${label}`}
+            style={inputWidth && inputWidth > 0 ? { width: inputWidth } : void 0}
+            maxLength={inputMaxLength}
+            {...inputProps}
+          />
         )
     }
 
