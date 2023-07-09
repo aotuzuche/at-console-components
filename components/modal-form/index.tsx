@@ -1,7 +1,7 @@
-import React, { FC, MouseEventHandler, useState } from 'react'
-import { Modal, Form as AntdForm } from 'antd'
-import { ModalProps } from 'antd/lib/modal'
+import { Form as AntdForm, Modal } from 'antd'
 import { Store } from 'antd/lib/form/interface'
+import { ModalProps } from 'antd/lib/modal'
+import React, { FC, MouseEventHandler, useState } from 'react'
 import Form, { FormProps } from '../form'
 import { isFunc } from '../utils/is'
 
@@ -53,7 +53,13 @@ const ModalForm: FC<ModalFormProps> = ({ formProps, onOk, visible, onBeforeOk, .
   }
 
   return (
-    <Modal onOk={onModalOk} confirmLoading={loading} visible={visible} destroyOnClose {...props}>
+    <Modal
+      onOk={onModalOk}
+      confirmLoading={loading}
+      visible={visible}
+      destroyOnClose={formProps?.form ? false : true}
+      {...props}
+    >
       <Form {...formProps} form={form} onFinish={onModalFormFinish} />
     </Modal>
   )
