@@ -1,9 +1,9 @@
-/* eslint-disable no-param-reassign */
-import React, { FC, useEffect, useState } from 'react'
-import { Upload as AntdUpload, message, Button } from 'antd'
-import { httpConsole } from 'auto-libs'
 import { UploadOutlined } from '@ant-design/icons'
+import { Button, message, Upload as AntdUpload } from 'antd'
 import { UploadProps as AntdUploadProps } from 'antd/lib/upload'
+import { httpConsole } from 'auto-libs'
+import React, { FC, useEffect, useState } from 'react'
+/* eslint-disable no-param-reassign */
 
 export interface UploadProps extends AntdUploadProps {
   ticket: string
@@ -48,6 +48,7 @@ const Upload: FC<UploadProps> = ({
   value,
   onChange: onInitialOnChange,
   children,
+  beforeUpload,
   ...otherProps
 }) => {
   const [OSSData, setOssData] = useState<IOssData>({
@@ -104,10 +105,13 @@ const Upload: FC<UploadProps> = ({
     Signature: OSSData.signature,
   })
 
-  const beforeUpload = async () => {
+  const onBeforeUpload = async (file: any, fileList: any) => {
     const expire = OSSData.expire * 1000
     if (expire < Date.now()) {
       await init()
+    }
+    if (beforeUpload) {
+      return beforeUpload(file, fileList)
     }
   }
 
@@ -119,7 +123,7 @@ const Upload: FC<UploadProps> = ({
     onRemove,
     transformFile,
     data: getExtraData,
-    beforeUpload,
+    beforeUpload: onBeforeUpload as any,
     ...otherProps,
   }
 
