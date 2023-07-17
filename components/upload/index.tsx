@@ -1,9 +1,8 @@
 import { UploadOutlined } from '@ant-design/icons'
 import { Button, message, Upload as AntdUpload } from 'antd'
 import { UploadProps as AntdUploadProps } from 'antd/lib/upload'
-import { httpConsole } from 'auto-libs'
 import React, { FC, useEffect, useState } from 'react'
-/* eslint-disable no-param-reassign */
+import httpConsole from '../utils/httpConsole'
 
 export interface UploadProps extends AntdUploadProps {
   ticket: string

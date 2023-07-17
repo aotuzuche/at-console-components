@@ -1,6 +1,7 @@
+import { Button, Form, Input, message, Spin } from 'antd'
 import React from 'react'
-import { Input, Form, Button, message, Spin } from 'antd'
-import { httpConsole, setConsoleToken } from 'auto-libs'
+import httpConsole from '../utils/httpConsole'
+import { setConsoleToken } from '../utils/token'
 
 interface IProps {
   history: any
@@ -38,13 +39,9 @@ class View extends React.PureComponent<IProps, IState> {
       })
       const { username, password } = values
 
-      const res: any = await httpConsole({
-        url: '/casService/login',
-        method: 'POST',
-        data: {
-          username,
-          password,
-        },
+      const res: any = await httpConsole.post('/casService/login', {
+        username,
+        password,
       })
 
       const { token, ...userInfo } = res

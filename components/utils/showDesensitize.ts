@@ -1,5 +1,5 @@
-import { Desensitize } from 'auto-libs'
 import { ReactNode } from 'react'
+import Desensitize from '../utils/desensitize'
 import { isFunc } from './is'
 
 export type DesensitizeType =

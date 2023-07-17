@@ -1,10 +1,8 @@
-/* eslint-disable prefer-template,react/destructuring-assignment */
-import React from 'react'
-import { clearConsoleToken } from 'auto-libs'
-import { Layout } from 'antd'
 import Icon from '@ant-design/compatible/lib/icon'
-// @ts-ignore
+import { Layout } from 'antd'
 import cn from 'classnames'
+import React from 'react'
+import { clearConsoleToken } from '../utils/token'
 
 interface IProps {
   breakpoint: boolean

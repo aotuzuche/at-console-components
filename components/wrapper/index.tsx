@@ -1,12 +1,12 @@
+import { Breadcrumb, message, Skeleton } from 'antd'
 import React, { FC, useEffect, useLayoutEffect, useState } from 'react'
-import { message, Breadcrumb, Skeleton } from 'antd'
-import { httpConsole } from 'auto-libs'
-import { useLocation, Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Aside from '../aside'
 import useStates from '../hooks/useStates'
-import { IMenu, getMenusTree, getMenuPaths } from '../utils/menusHandler'
-import WrapperContext from './wrapperContext'
+import httpConsole from '../utils/httpConsole'
 import { isFunc } from '../utils/is'
+import { getMenuPaths, getMenusTree, IMenu } from '../utils/menusHandler'
+import WrapperContext from './wrapperContext'
 
 export interface WrapperProps {
   /**

@@ -1,14 +1,14 @@
-import React, { FC, useMemo, useContext } from 'react'
 import { Popconfirm } from 'antd'
+import React, { FC, useContext, useMemo } from 'react'
+import getLoginInfo from '../utils/getLoginInfo'
+import { toConsoleLogin } from '../utils/token'
+import WrapperContext from '../wrapper/wrapperContext'
 import {
   PoweroffOutlined,
   DoubleRightOutlined,
   DoubleLeftOutlined,
   AppstoreOutlined,
 } from '@ant-design/icons'
-import { toConsoleLogin } from 'auto-libs'
-import getLoginInfo from '../utils/getLoginInfo'
-import WrapperContext from '../wrapper/wrapperContext'
 
 const Footer: FC<{
   collapsed: boolean
