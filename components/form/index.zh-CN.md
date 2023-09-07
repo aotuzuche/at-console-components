@@ -55,6 +55,10 @@ group:
 
 <code src="./demo/typeByDivider.tsx" />
 
+##### SubTitle
+
+<code src="./demo/typeBySubTitle.tsx" />
+
 ### 参数
 
 | 属性          | 描述                                                         | 类型                                                | 默认值         |
@@ -79,6 +83,6 @@ group:
 | layoutCol   | 布局                                                         | [ColProps](https://ant.design/components/grid/#Col)                      | Form `layoutCol`             |
 | extraNames  | 额外的 name                                                  | `NamePath[]`                                                             | -                            |
 | placeholder | 占位符(View 模式下数据为 `null` `undefined` `''` 显示的文字) | `string`                                                                 | `-`                          |
-| type        | 默认类型                                                     | `divider`                                                                | `-`                          |
+| type        | 默认类型                                                     | `divider` `subTitle`                                                     | `-`                          |
 | suffix      | 设置后置标签                                                 | `ReactNode \| (fieldValue: StoreValue, fieldsValue: Store) => ReactNode` | `-`                          |
 | tips        | 设置提示标签                                                 | `ReactNode \| (fieldValue: StoreValue, fieldsValue: Store) => ReactNode` | `-`                          |
