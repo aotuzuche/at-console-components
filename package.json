@@ -57,6 +57,7 @@
     "@ant-design/icons": "^4.3.0",
     "@babel/runtime": "^7.12.5",
     "@types/js-cookie": "^3.0.3",
+    "axios": "^1.6.2",
     "classnames": "^2.2.6",
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.19"
