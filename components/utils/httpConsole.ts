@@ -188,6 +188,8 @@ httpConsole.interceptors.response.use(
 
     // reject错误处理
     const { data } = error.response || {}
+
+    // @ts-ignore
     const { message = '系统错误', msg, resMsg } = data || {}
     return Promise.reject(new HttpError(resMsg || msg || message))
   },
