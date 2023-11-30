@@ -354,7 +354,7 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
             {...(isValidElement(Comp) ? (Comp as any).props : {})}
             suffix={isFunc(suffix) ? suffix(fieldsValue) : suffix}
             type={type}
-            disabled={!!disabled}
+            disabled={!disabled ? false : disabled}
             label={LabelWrap}
           >
             {Comp}
