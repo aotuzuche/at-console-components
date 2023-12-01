@@ -66,6 +66,9 @@ interface FormCommonProps {
 
   // 信息脱敏
   desensitize?: DesensitizeType | string
+
+  // 标题
+  title?: string
 }
 
 export interface FormItemProps extends Omit<AntdFormItemProps, 'children'>, FormCommonProps {
@@ -87,7 +90,7 @@ export interface FormItemProps extends Omit<AntdFormItemProps, 'children'>, Form
   suffix?: ReactNode | ((fieldsValue: Store) => ReactNode)
 
   // Default render
-  type?: 'divider'
+  type?: 'divider' | 'subTitle'
 
   // disabled
   disabled?: boolean
@@ -128,6 +131,10 @@ const RenderChild: FC<Pick<FormItemProps, 'suffix' | 'type' | 'label' | 'disable
     return <Divider orientation="left">{label}</Divider>
   }
 
+  if (type === 'subTitle') {
+    return <h3>{label}</h3>
+  }
+
   if (suffix) {
     return (
       <Space>
@@ -154,6 +161,7 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
     onReset: onResetInternal,
     isView = false,
     form,
+    title,
     layoutCol = { span: 24 },
     initialValues: initialValuesInternal,
     placeholder: placeholderInternal = '-',
@@ -390,6 +398,7 @@ const InternalForm: ForwardRefRenderFunction<FormInstance, FormProps> = (
   // Better use Button loading when submit, but we can't control button
   return (
     <Spin spinning={loading}>
+      {title && <h2>{title}</h2>}
       <AntdForm
         form={formInsatce}
         onFinish={onFinish}
