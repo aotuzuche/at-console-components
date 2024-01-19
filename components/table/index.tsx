@@ -254,10 +254,14 @@ function Table<RecordType extends object>(
       pageNum: 1,
     })
     isKeepAlive && setHistoryState({})
-    onTableReset && onTableReset()
-    onSearch({
-      [pageNumName]: 1,
-    })
+    if (onTableReset) {
+      // 外部手动调用search
+      onTableReset()
+    } else {
+      onSearch({
+        [pageNumName]: 1,
+      })
+    }
   }
 
   const onChange = (
