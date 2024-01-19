@@ -112,6 +112,7 @@ export interface TableProps<RecordType>
     TablePaginationName,
     TableCommonProps {
   searchProps?: TableSearchProps
+  onReset?: () => void
   onSearch?:
     | RecordType[]
     | ((
@@ -160,6 +161,7 @@ function Table<RecordType extends object>(
     isKeepAlive = false,
     sticky,
     summary,
+    onReset: onTableReset,
     ...props
   }: TableProps<RecordType>,
   ref: Ref<TableRef>,
@@ -252,6 +254,7 @@ function Table<RecordType extends object>(
       pageNum: 1,
     })
     isKeepAlive && setHistoryState({})
+    onTableReset && onTableReset()
     onSearch({
       [pageNumName]: 1,
     })
