@@ -92,7 +92,7 @@ const Upload: FC<UploadProps> = ({
 
   const transformFile = (file: any) => {
     const suffix = file.name.slice(file.name.lastIndexOf('.'))
-    const filename = Date.now() + suffix
+    const filename = Date.now() + file.uid + suffix
     file.url = OSSData.dir + filename
     return file
   }
