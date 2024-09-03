@@ -132,5 +132,8 @@
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
+  },
+  "resolutions": {
+    "js-cookie": "^2.2.0"
   }
 }

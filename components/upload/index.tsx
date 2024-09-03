@@ -6,7 +6,6 @@ import httpConsole from '../utils/httpConsole'
 
 export interface UploadProps extends AntdUploadProps {
   ticket: string
-  value?: any
   onChange?: (params: any) => void
   max?: number
 }
@@ -44,7 +43,7 @@ export interface IOssData {
 const Upload: FC<UploadProps> = ({
   ticket,
   max = -1,
-  value,
+  fileList = [],
   onChange: onInitialOnChange,
   children,
   beforeUpload,
@@ -84,7 +83,7 @@ const Upload: FC<UploadProps> = ({
   }
 
   const onRemove = (file: any) => {
-    const files = value.filter((v: any) => v.url !== file.url)
+    const files = fileList.filter((v: any) => v.url !== file.url)
     if (onInitialOnChange) {
       onInitialOnChange(files)
     }
@@ -116,7 +115,7 @@ const Upload: FC<UploadProps> = ({
 
   const props = {
     name: 'file',
-    fileList: value,
+    fileList,
     action: OSSData.host,
     onChange,
     onRemove,
@@ -128,7 +127,7 @@ const Upload: FC<UploadProps> = ({
 
   return (
     <AntdUpload {...props}>
-      {value?.length === max
+      {fileList?.length === max
         ? null
         : children || (
             <Button>
